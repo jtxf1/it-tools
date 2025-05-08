@@ -4,17 +4,9 @@
     <img src="./.github/logo-dark.png" alt="logo">
 </picture>
 
-Useful tools for developer and people working in IT. [Have a look !](https://it-tools.tech).
+对开发人员和 IT 工作者来说非常有用的工具。 [看一看](https://it-tools.tech).
 
-## Functionalities and roadmap
-
-Please check the [issues](https://github.com/CorentinTh/it-tools/issues) to see if some feature listed to be implemented.
-
-You have an idea of a tool? Submit a [feature request](https://github.com/CorentinTh/it-tools/issues/new/choose)!
-
-## Self host
-
-Self host solutions for your homelab
+## 自托管
 
 **From docker hub:**
 
@@ -28,7 +20,7 @@ docker run -d --name it-tools --restart unless-stopped -p 8080:80 corentinth/it-
 docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corentinth/it-tools:latest
 ```
 
-**Other solutions:**
+**其他解决方案:**
 
 - [Cloudron](https://www.cloudron.io/store/tech.ittools.cloudron.html)
 - [Tipi](https://www.runtipi.io/docs/apps-available)
@@ -36,16 +28,16 @@ docker run -d --name it-tools --restart unless-stopped -p 8080:80 ghcr.io/corent
 
 ## Contribute
 
-### Recommended IDE Setup
+### 推荐的开发工具设置
 
-[VSCode](https://code.visualstudio.com/) with the following extensions:
+VSCode插件:
 
-- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (并禁用 Vetur)
 - [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [i18n Ally](https://marketplace.visualstudio.com/items?itemName=lokalise.i18n-ally)
 
-with the following settings:
+使用以下设置:
 
 ```json
 {
@@ -58,74 +50,53 @@ with the following settings:
 }
 ```
 
-### Type Support for `.vue` Imports in TS
+### TypeScript 对 `.vue` 导入的支持
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+默认情况下，TypeScript 无法处理 .vue 导入的类型信息，因此我们将 tsc CLI 替换为 vue-tsc 进行类型检查。在编辑器中，我们需要 TypeScript Vue 插件 (Volar) 来使 TypeScript 语言服务能够识别 .vue 类型。
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+如果您觉得独立的 TypeScript 插件不够快，Volar 还实现了性能更高的接管模式 。您可以按照以下步骤启用它：
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+1. 禁用内置 TypeScript 插件
+   1. 从 VSCode 的命令面板运行 `Extensions: Show Built-in Extensions`
+   2. 找到 `TypeScript and JavaScript Language Features` ，右键单击并选择 `Disable (Workspace)`
+2. 通过从命令面板运行 `Developer: Reload Window` 来重新加载 VSCode 窗口。
 
-### Project Setup
+### 安装依赖
 
 ```sh
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### 运行
 
 ```sh
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 编译
 
 ```sh
 pnpm build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### 测试 [Vitest](https://vitest.dev/)
 
 ```sh
 pnpm test
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### 检测 [ESLint](https://eslint.org/)
 
 ```sh
 pnpm lint
 ```
 
-### Create a new tool
+### 创建一个新的工具
 
-To create a new tool, there is a script that generate the boilerplate of the new tool, simply run:
+要创建新工具，有一个脚本可以生成新工具的样板，只需运行：
 
 ```sh
 pnpm run script:create:tool my-tool-name
 ```
 
-It will create a directory in `src/tools` with the correct files, and a the import in `src/tools/index.ts`. You will just need to add the imported tool in the proper category and develop the tool.
-
-## Contributors
-
-Big thanks to all the people who have already contributed!
-
-[![contributors](https://contrib.rocks/image?repo=corentinth/it-tools&refresh=1)](https://github.com/corentinth/it-tools/graphs/contributors)
-
-## Credits
-
-Coded with ❤️ by [Corentin Thomasset](https://corentin.tech?utm_source=it-tools&utm_medium=readme).
-
-This project is continuously deployed using [vercel.com](https://vercel.com).
-
-Contributor graph is generated using [contrib.rocks](https://contrib.rocks/preview?repo=corentinth/it-tools).
-
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=345793&theme=light" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-<a href="https://www.producthunt.com/posts/it-tools?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-it&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=345793&theme=light&period=daily" alt="IT&#0032;Tools - Collection&#0032;of&#0032;handy&#0032;online&#0032;tools&#0032;for&#0032;devs&#0044;&#0032;with&#0032;great&#0032;UX | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-## License
-
-This project is under the [GNU GPLv3](LICENSE).
+它将在 `src/tools` 中创建一个包含正确文件的目录，并在 `src/tools/index.ts` 中导入。你只需要将导入的工具添加到正确的类别中，然后开发该工具即可。

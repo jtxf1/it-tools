@@ -5,7 +5,9 @@ import { createI18n } from 'vue-i18n';
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'en',
+  locale: 'zh',
+  fallbackLocale: 'en', // 回退语言
+  globalInjection: true, // 全局注入$t方法
   messages,
 });
 
