@@ -89,6 +89,9 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 设置最大文件大小为 5 MiB
+      },
     }),
     Components({
       dirs: ['src/'],
