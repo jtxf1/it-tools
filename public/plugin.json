@@ -3,11 +3,11 @@
   "main": "index.html",
   "features": [
     {
-      "code": "test",
+      "code": "it",
       "cmds": [
-        "第一个插件"
+        "it"
       ],
-      "explain": "第一个插件"
+      "explain": "it"
     }
   ]
 }
