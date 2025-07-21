@@ -4,9 +4,9 @@ import {
   capitalCase,
   constantCase,
   dotCase,
-  headerCase,
+  trainCase,
   noCase,
-  paramCase,
+  kebabCase,
   pascalCase,
   pathCase,
   sentenceCase,
@@ -46,16 +46,16 @@ const formats = computed(() => [
     value: dotCase(input.value, baseConfig),
   },
   {
-    label: 'Headercase:',
-    value: headerCase(input.value, baseConfig),
+    label: 'trainCase:',
+    value: trainCase(input.value, baseConfig),
   },
   {
     label: 'Nocase:',
     value: noCase(input.value, baseConfig),
   },
   {
-    label: 'Paramcase:',
-    value: paramCase(input.value, baseConfig),
+    label: 'kebabCase:',
+    value: kebabCase(input.value, baseConfig),
   },
   {
     label: 'Pascalcase:',
