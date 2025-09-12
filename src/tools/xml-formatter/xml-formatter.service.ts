@@ -23,6 +23,7 @@ function isValidXML(rawXml: string): boolean {
     return true;
   }
   catch (e) {
+    console.error(e);
     return false;
   }
 }

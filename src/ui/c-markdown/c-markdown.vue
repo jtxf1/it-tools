@@ -17,5 +17,6 @@ const html = computed(() => DomPurify.sanitize(marked(markdown.value), { ADD_ATT
 </script>
 
 <template>
+  <!-- eslint-disable-next-line vue/no-v-html -->
   <div v-html="html" />
 </template>

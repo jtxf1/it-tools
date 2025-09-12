@@ -11,8 +11,8 @@ declare module '*.md' {
 }
 
 declare module 'iarna-toml-esm' {
-  export const parse: (toml: string) => any;
-  export const stringify: (obj: any) => string;
+  export const parse: (toml: string) => string;
+  export const stringify: (obj: string) => string;
 }
 
 declare module 'emojilib' {

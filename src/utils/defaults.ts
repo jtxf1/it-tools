@@ -5,6 +5,7 @@ function withDefaultOnError<A, B>(cb: () => A, defaultValue: B): A | B {
     return cb();
   }
   catch (_) {
+    console.error(_);
     return defaultValue;
   }
 }
@@ -14,6 +15,7 @@ async function withDefaultOnErrorAsync<A, B>(cb: () => A, defaultValue: B): Prom
     return await cb();
   }
   catch (_) {
+    console.error(_);
     return defaultValue;
   }
 }

@@ -21,6 +21,7 @@ function base64ToText(str: string, { makeUrlSafe = false }: { makeUrlSafe?: bool
     return Base64.decode(cleanStr);
   }
   catch (_) {
+    console.error(_);
     throw new Error('Incorrect base64 string');
   }
 }
@@ -43,6 +44,7 @@ function isValidBase64(str: string, { makeUrlSafe = false }: { makeUrlSafe?: boo
     return reEncodedBase64 === cleanStr.replace(/\s/g, '');
   }
   catch (err) {
+    console.error(err);
     return false;
   }
 }

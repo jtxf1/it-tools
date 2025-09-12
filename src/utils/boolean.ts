@@ -6,6 +6,7 @@ function isNotThrowing(cb: () => unknown): boolean {
     return true;
   }
   catch (_) {
+    console.error(_);
     return false;
   }
 }
