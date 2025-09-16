@@ -90,6 +90,7 @@ export default defineConfig({
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 设置最大文件大小为 5 MiB
+        globPatterns: ['**/*.{html,js,css,ico,png,svg}'],
       },
     }),
     Components({
@@ -121,24 +122,7 @@ export default defineConfig({
         drop_debugger: true, // 移除 debugger
       },
     },
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          // 将大型依赖单独分块
-          if (id.includes('node_modules')) {
-            // 单独拆分 Vue、ElementPlus 等大型依赖
-            if (id.includes('vue')) return 'vendor-vue';
-            if (id.includes('element-plus')) return 'vendor-element-plus';
-            if (id.includes('echarts')) return 'vendor-echarts';
-            if (id.includes('markdown-it')) return 'vendor-markdown-it';
-
-            // 将剩余依赖按包名分组
-            const packageName = id.toString().split('node_modules/')[1].split('/')[0];
-            return `vendor-${packageName}`;
-          }
-        },
-      },
-    },
     target: 'esnext',
+    chunkSizeWarningLimit: 2000,
   },
 });
