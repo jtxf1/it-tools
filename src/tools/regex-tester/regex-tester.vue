@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import RandExp from 'randexp';
-import { render } from '@regexper/render';
-import type { ShadowRootExpose } from 'vue-shadow-dom';
-import { matchRegex } from './regex-tester.service';
-import { useValidation } from '@/composable/validation';
-import { useQueryParamOrStorage } from '@/composable/queryParams';
+import type { ShadowRootExpose } from 'vue-shadow-dom'
+import { render } from '@regexper/render'
+import RandExp from 'randexp'
+import { useQueryParamOrStorage } from '@/composable/queryParams'
+import { useValidation } from '@/composable/validation'
+import { matchRegex } from './regex-tester.service'
 
-const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '' });
-const text = ref('');
-const global = ref(true);
-const ignoreCase = ref(false);
-const multiline = ref(false);
-const dotAll = ref(true);
-const unicode = ref(true);
-const unicodeSets = ref(false);
-const visualizerSVG = ref<ShadowRootExpose>();
+const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '' })
+const text = ref('')
+const global = ref(true)
+const ignoreCase = ref(false)
+const multiline = ref(false)
+const dotAll = ref(true)
+const unicode = ref(true)
+const unicodeSets = ref(false)
+const visualizerSVG = ref<ShadowRootExpose>()
 
 const regexValidation = useValidation({
   source: regex,
@@ -23,71 +23,71 @@ const regexValidation = useValidation({
       message: 'Invalid regex: {0}',
       validator: value => new RegExp(value),
       getErrorMessage: (value) => {
-        const _ = new RegExp(value);
-        return '';
+        const _ = new RegExp(value)
+        return ''
       },
     },
   ],
-});
+})
 const results = computed(() => {
-  let flags = 'd';
+  let flags = 'd'
   if (global.value) {
-    flags += 'g';
+    flags += 'g'
   }
   if (ignoreCase.value) {
-    flags += 'i';
+    flags += 'i'
   }
   if (multiline.value) {
-    flags += 'm';
+    flags += 'm'
   }
   if (dotAll.value) {
-    flags += 's';
+    flags += 's'
   }
   if (unicode.value) {
-    flags += 'u';
+    flags += 'u'
   }
   else if (unicodeSets.value) {
-    flags += 'v';
+    flags += 'v'
   }
 
   try {
-    return matchRegex(regex.value, text.value, flags);
+    return matchRegex(regex.value, text.value, flags)
   }
   catch (_) {
-    return [];
+    return []
   }
-});
+})
 
 const sample = computed(() => {
   try {
-    const randexp = new RandExp(new RegExp(regex.value.replace(/\(\?\<[^\>]*\>/g, '(?:')));
-    return randexp.gen();
+    const randexp = new RandExp(new RegExp(regex.value.replace(/\(\?<[^>]*>/g, '(?:')))
+    return randexp.gen()
   }
   catch (_) {
-    return '';
+    return ''
   }
-});
+})
 
 watchEffect(
   async () => {
-    const regexValue = regex.value;
+    const regexValue = regex.value
     // shadow root is required:
     // @regexper/render append a <defs><style> that broke svg transparency of icons in the whole site
-    const visualizer = visualizerSVG.value?.shadow_root;
+    const visualizer = visualizerSVG.value?.shadow_root
     if (visualizer) {
       while (visualizer.lastChild) {
-        visualizer.removeChild(visualizer.lastChild);
+        visualizer.removeChild(visualizer.lastChild)
       }
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
       try {
-        await render(regexValue, svg);
+        await render(regexValue, svg)
       }
       catch (_) {
       }
-      visualizer.appendChild(svg);
+      visualizer.appendChild(svg)
     }
   },
-);
+)
 </script>
 
 <template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { SignatureInfo } from '../pdf-signature-checker.types';
+import type { SignatureInfo } from '../pdf-signature-checker.types'
 
-const props = defineProps<{ signature: SignatureInfo }>();
-const { signature } = toRefs(props);
+const props = defineProps<{ signature: SignatureInfo }>()
+const { signature } = toRefs(props)
 
 const tableHeaders = {
   validityPeriod: 'Validity period',
   issuedBy: 'Issued by',
   issuedTo: 'Issued to',
   pemCertificate: 'PEM certificate',
-};
+}
 
 const certs = computed(() => signature.value.meta.certs.map((certificate, index) => ({
   ...certificate,
@@ -19,7 +19,7 @@ const certs = computed(() => signature.value.meta.certs.map((certificate, index)
   },
   certificateName: `Certificate ${index + 1}`,
 })),
-);
+)
 </script>
 
 <template>

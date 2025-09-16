@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { DateFormat, ToDateMapper } from './date-time-converter.types'
 import {
   formatISO,
   formatISO9075,
@@ -11,8 +12,9 @@ import {
   isValid,
   parseISO,
   parseJSON,
-} from 'date-fns';
-import type { DateFormat, ToDateMapper } from './date-time-converter.types';
+} from 'date-fns'
+import { useValidation } from '@/composable/validation'
+import { withDefaultOnError } from '@/utils/defaults'
 import {
   dateToExcelFormat,
   excelFormatToDate,
@@ -23,15 +25,13 @@ import {
   isRFC3339DateString,
   isRFC7231DateString,
   isTimestamp,
-  isUTCDateString,
   isUnixTimestamp,
-} from './date-time-converter.models';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useValidation } from '@/composable/validation';
+  isUTCDateString,
+} from './date-time-converter.models'
 
-const inputDate = ref('');
+const inputDate = ref('')
 
-const toDate: ToDateMapper = date => new Date(date);
+const toDate: ToDateMapper = date => new Date(date)
 
 const formats: DateFormat[] = [
   {
@@ -94,30 +94,30 @@ const formats: DateFormat[] = [
     toDate: excelFormatToDate,
     formatMatcher: isExcelFormat,
   },
-];
+]
 
-const formatIndex = ref(6);
-const now = useNow();
+const formatIndex = ref(6)
+const now = useNow()
 
 const normalizedDate = computed(() => {
   if (!inputDate.value) {
-    return now.value;
+    return now.value
   }
 
-  const { toDate } = formats[formatIndex.value];
+  const { toDate } = formats[formatIndex.value]
 
   try {
-    return toDate(inputDate.value);
+    return toDate(inputDate.value)
   }
   catch (_ignored) {
-    return undefined;
+    return undefined
   }
-});
+})
 
 function onDateInputChanged(value: string) {
-  const matchingIndex = formats.findIndex(({ formatMatcher }) => formatMatcher(value));
+  const matchingIndex = formats.findIndex(({ formatMatcher }) => formatMatcher(value))
   if (matchingIndex !== -1) {
-    formatIndex.value = matchingIndex;
+    formatIndex.value = matchingIndex
   }
 }
 
@@ -130,22 +130,22 @@ const validation = useValidation({
       validator: value =>
         withDefaultOnError(() => {
           if (value === '') {
-            return true;
+            return true
           }
 
-          const maybeDate = formats[formatIndex.value].toDate(value);
-          return isDate(maybeDate) && isValid(maybeDate);
+          const maybeDate = formats[formatIndex.value].toDate(value)
+          return isDate(maybeDate) && isValid(maybeDate)
         }, false),
     },
   ],
-});
+})
 
 function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date) {
   if (!date || !validation.isValid) {
-    return '';
+    return ''
   }
 
-  return withDefaultOnError(() => formatter(date), '');
+  return withDefaultOnError(() => formatter(date), '')
 }
 </script>
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
 
-const props = defineProps<{ tokens: { previous: string; current: string; next: string } }>();
-const { copy: copyPrevious, isJustCopied: previousCopied } = useCopy({ createToast: false });
-const { copy: copyCurrent, isJustCopied: currentCopied } = useCopy({ createToast: false });
-const { copy: copyNext, isJustCopied: nextCopied } = useCopy({ createToast: false });
+const props = defineProps<{ tokens: { previous: string, current: string, next: string } }>()
+const { copy: copyPrevious, isJustCopied: previousCopied } = useCopy({ createToast: false })
+const { copy: copyCurrent, isJustCopied: currentCopied } = useCopy({ createToast: false })
+const { copy: copyNext, isJustCopied: nextCopied } = useCopy({ createToast: false })
 
-const { tokens } = toRefs(props);
+const { tokens } = toRefs(props)
 </script>
 
 <template>

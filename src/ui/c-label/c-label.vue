@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { toRefs } from 'vue';
-import type { CLabelProps } from './c-label.types';
+import type { CLabelProps } from './c-label.types'
+import { toRefs } from 'vue'
 
-const props = withDefaults(defineProps<CLabelProps>(), { label: undefined, labelAlign: 'left', labelFor: undefined, labelPosition: 'top', labelWidth: 'auto' });
-const { label, labelAlign, labelFor, labelPosition, labelWidth } = toRefs(props);
+const props = withDefaults(defineProps<CLabelProps>(), { label: undefined, labelAlign: 'left', labelFor: undefined, labelPosition: 'top', labelWidth: 'auto' })
+const { label, labelAlign, labelFor, labelPosition, labelWidth } = toRefs(props)
 </script>
 
 <template>

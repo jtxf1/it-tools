@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import { Plus, Trash } from '@vicons/tabler';
-import { useStorage } from '@vueuse/core';
-import _ from 'lodash';
+import { Plus, Trash } from '@vicons/tabler'
+import { useStorage } from '@vueuse/core'
+import _ from 'lodash'
 
-import { arrayToMarkdownTable, computeAverage, computeVariance } from './benchmark-builder.models';
-import DynamicValues from './dynamic-values.vue';
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
+import { arrayToMarkdownTable, computeAverage, computeVariance } from './benchmark-builder.models'
+import DynamicValues from './dynamic-values.vue'
 
 const suites = useStorage('benchmark-builder:suites', [
   { title: 'Suite 1', data: [5, 10] },
   { title: 'Suite 2', data: [8, 12] },
-]);
+])
 
-const unit = useStorage('benchmark-builder:unit', '');
+const unit = useStorage('benchmark-builder:unit', '')
 
-const round = (v: number) => Math.round(v * 1000) / 1000;
+const round = (v: number) => Math.round(v * 1000) / 1000
 
 const results = computed(() => {
   return suites.value
     .map(({ data: dirtyData, title }) => {
-      const data = dirtyData.filter(_.isNumber);
+      const data = dirtyData.filter(_.isNumber)
 
       return {
         title,
         size: data.length,
         mean: computeAverage({ data }),
         variance: computeVariance({ data }),
-      };
+      }
     })
     .sort((a, b) => a.mean - b.mean)
     .map(({ mean, variance, size, title }, index, suites) => {
-      const cleanUnit = unit.value.trim();
-      const bestMean: number = suites[0].mean;
-      const deltaWithBestMean = mean - bestMean;
-      const ratioWithBestMean = bestMean === 0 ? '∞' : round(mean / bestMean);
+      const cleanUnit = unit.value.trim()
+      const bestMean: number = suites[0].mean
+      const deltaWithBestMean = mean - bestMean
+      const ratioWithBestMean = bestMean === 0 ? '∞' : round(mean / bestMean)
 
       const comparisonValues: string
-        = (index !== 0 && bestMean !== mean) ? ` (+${round(deltaWithBestMean)}${cleanUnit} ; x${ratioWithBestMean})` : '';
+        = (index !== 0 && bestMean !== mean) ? ` (+${round(deltaWithBestMean)}${cleanUnit} ; x${ratioWithBestMean})` : ''
 
       return {
         position: index + 1,
@@ -44,11 +44,11 @@ const results = computed(() => {
         mean: `${round(mean)}${cleanUnit}${comparisonValues}`,
         variance: `${round(variance)}${cleanUnit}${cleanUnit ? '²' : ''}`,
         size,
-      };
-    });
-});
+      }
+    })
+})
 
-const { copy } = useCopy({ createToast: false });
+const { copy } = useCopy({ createToast: false })
 
 const header = {
   position: 'Position',
@@ -56,10 +56,10 @@ const header = {
   size: 'Samples',
   mean: 'Mean',
   variance: 'Variance',
-};
+}
 
 function copyAsMarkdown() {
-  copy(arrayToMarkdownTable({ data: results.value, headerMap: header }));
+  copy(arrayToMarkdownTable({ data: results.value, headerMap: header }))
 }
 
 function copyAsBulletList() {
@@ -70,11 +70,11 @@ function copyAsBulletList() {
         ...Object.entries(sections).map(
           ([key, value]) => `    - ${header[key as keyof typeof header] ?? key}: ${value}`,
         ),
-      ];
+      ]
     })
-    .join('\n');
+    .join('\n')
 
-  copy(bulletList);
+  copy(bulletList)
 }
 </script>
 

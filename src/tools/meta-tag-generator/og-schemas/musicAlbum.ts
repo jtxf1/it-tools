@@ -1,4 +1,4 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType } from '../OGSchemaType.type'
 
 export const musicAlbum: OGSchemaType = {
   name: 'Album details',
@@ -24,4 +24,4 @@ export const musicAlbum: OGSchemaType = {
       placeholder: 'The date the album was released...',
     },
   ],
-};
+}

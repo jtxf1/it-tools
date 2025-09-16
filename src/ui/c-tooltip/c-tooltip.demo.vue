@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const positions = ['top', 'bottom', 'left', 'right'] as const;
+const positions = ['top', 'bottom', 'left', 'right'] as const
 </script>
 
 <template>

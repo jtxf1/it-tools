@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useWindowSize } from '@vueuse/core';
+import { useWindowSize } from '@vueuse/core'
 
-const { width, height } = useWindowSize();
+const { width, height } = useWindowSize()
 
 const sections = [
   {
@@ -54,7 +54,7 @@ const sections = [
       },
     ],
   },
-];
+]
 </script>
 
 <template>

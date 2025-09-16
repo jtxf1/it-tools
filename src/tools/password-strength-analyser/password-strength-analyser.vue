@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { getPasswordCrackTimeEstimation } from './password-strength-analyser.service';
+import { getPasswordCrackTimeEstimation } from './password-strength-analyser.service'
 
-const password = ref('');
-const crackTimeEstimation = computed(() => getPasswordCrackTimeEstimation({ password: password.value }));
+const password = ref('')
+const crackTimeEstimation = computed(() => getPasswordCrackTimeEstimation({ password: password.value }))
 
 const details = computed(() => [
   {
@@ -21,7 +21,7 @@ const details = computed(() => [
     label: 'Score:',
     value: `${Math.round(crackTimeEstimation.value.score * 100)} / 100`,
   },
-]);
+])
 </script>
 
 <template>

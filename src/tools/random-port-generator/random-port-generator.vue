@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { generatePort } from './random-port-generator.model';
-import { computedRefreshable } from '@/composable/computedRefreshable';
-import { useCopy } from '@/composable/copy';
+import { computedRefreshable } from '@/composable/computedRefreshable'
+import { useCopy } from '@/composable/copy'
+import { generatePort } from './random-port-generator.model'
 
-const [port, refreshPort] = computedRefreshable(() => String(generatePort()));
+const [port, refreshPort] = computedRefreshable(() => String(generatePort()))
 
-const { copy } = useCopy({ source: port, text: 'Port copied to the clipboard' });
+const { copy } = useCopy({ source: port, text: 'Port copied to the clipboard' })
 </script>
 
 <template>

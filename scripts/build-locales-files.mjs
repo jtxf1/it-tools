@@ -1,28 +1,28 @@
-import { existsSync, writeFileSync } from 'node:fs';
-import { Glob } from 'bun';
-import _ from 'lodash';
+import { existsSync, writeFileSync } from 'node:fs'
+import { Glob } from 'bun'
+import _ from 'lodash'
 
 async function getPathsFromGlobs({ patterns, onlyFiles = true }) {
-  const filePaths = [];
+  const filePaths = []
 
   for (const pattern of patterns) {
-    const glob = new Glob(pattern);
+    const glob = new Glob(pattern)
 
     for await (const filePath of glob.scan({ onlyFiles, cwd: '.' })) {
-      filePaths.push(filePath);
+      filePaths.push(filePath)
     }
   }
 
-  return { filePaths };
+  return { filePaths }
 }
 
 function getLocaleKey({ filePath }) {
-  const fileName = filePath.split('/').pop();
-  return fileName.replace(/\.yml$/, '');
+  const fileName = filePath.split('/').pop()
+  return fileName.replace(/\.yml$/, '')
 }
 
 async function createMissingLocaleFile({ localeKey }) {
-  const fileName = `${localeKey}.yml`;
+  const fileName = `${localeKey}.yml`
 
   const { filePaths: localesDirs } = await getPathsFromGlobs({
     patterns: [
@@ -30,18 +30,18 @@ async function createMissingLocaleFile({ localeKey }) {
       'src/tools/*/locales',
     ],
     onlyFiles: false,
-  });
+  })
 
   for (const localesDir of localesDirs) {
-    const filePath = `${localesDir}/${fileName}`;
+    const filePath = `${localesDir}/${fileName}`
 
     if (existsSync(filePath)) {
-      console.log(`Locale file already exists: ${filePath}`);
-      continue;
+      console.log(`Locale file already exists: ${filePath}`)
+      continue
     }
 
-    console.log(`Creating missing locale file: ${filePath}`);
-    writeFileSync(filePath, '', 'utf8');
+    console.log(`Creating missing locale file: ${filePath}`)
+    writeFileSync(filePath, '', 'utf8')
   }
 }
 
@@ -50,7 +50,7 @@ const { filePaths } = await getPathsFromGlobs({
     'locales/*.yml',
     'src/tools/*/locales/*.yml',
   ],
-});
+})
 
 await Promise.all(
   _.chain(filePaths)
@@ -58,4 +58,4 @@ await Promise.all(
     .uniq()
     .map(localeKey => createMissingLocaleFile({ localeKey }))
     .value(),
-);
+)

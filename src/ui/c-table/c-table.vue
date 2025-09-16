@@ -1,30 +1,31 @@
 <script lang="ts" setup>
-import _ from 'lodash';
-import type { HeaderConfiguration } from './c-table.types';
+import type { HeaderConfiguration } from './c-table.types'
+import _ from 'lodash'
 
-const props = withDefaults(defineProps<{ data?: Record<string, unknown>[]; headers?: HeaderConfiguration ; hideHeaders?: boolean; description?: string }>(), { data: () => [], headers: undefined, hideHeaders: false, description: 'Data table' });
-const { data, headers: rawHeaders, hideHeaders } = toRefs(props);
+const props = withDefaults(defineProps<{ data?: Record<string, unknown>[], headers?: HeaderConfiguration, hideHeaders?: boolean, description?: string }>(), { data: () => [], headers: undefined, hideHeaders: false, description: 'Data table' })
+const { data, headers: rawHeaders, hideHeaders } = toRefs(props)
 
 const headers = computed(() => {
   if (rawHeaders.value) {
     if (Array.isArray(rawHeaders.value)) {
       return rawHeaders.value.map((value) => {
         if (typeof value === 'string') {
-          return { key: value, label: value };
+          return { key: value, label: value }
         }
 
-        const { key, label } = value;
+        const { key, label } = value
 
         return {
           key,
           label: label ?? key,
-        };
-      });
+        }
+      })
     }
 
     return _.map(rawHeaders.value, (value, key) => ({
-      key, label: value,
-    }));
+      key,
+      label: value,
+    }))
   }
 
   return _.chain(data.value)
@@ -32,8 +33,8 @@ const headers = computed(() => {
     .flatten()
     .uniq()
     .map(key => ({ key, label: key }))
-    .value();
-});
+    .value()
+})
 </script>
 
 <template>

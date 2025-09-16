@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { convertAsciiBinaryToText, convertTextToAsciiBinary } from './text-to-binary.models';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useCopy } from '@/composable/copy';
-import { isNotThrowing } from '@/utils/boolean';
+import { useCopy } from '@/composable/copy'
+import { isNotThrowing } from '@/utils/boolean'
+import { withDefaultOnError } from '@/utils/defaults'
+import { convertAsciiBinaryToText, convertTextToAsciiBinary } from './text-to-binary.models'
 
-const inputText = ref('');
-const binaryFromText = computed(() => convertTextToAsciiBinary(inputText.value));
-const { copy: copyBinary } = useCopy({ source: binaryFromText });
+const inputText = ref('')
+const binaryFromText = computed(() => convertTextToAsciiBinary(inputText.value))
+const { copy: copyBinary } = useCopy({ source: binaryFromText })
 
-const inputBinary = ref('');
-const textFromBinary = computed(() => withDefaultOnError(() => convertAsciiBinaryToText(inputBinary.value), ''));
+const inputBinary = ref('')
+const textFromBinary = computed(() => withDefaultOnError(() => convertAsciiBinaryToText(inputBinary.value), ''))
 const inputBinaryValidationRules = [
   {
     validator: (value: string) => isNotThrowing(() => convertAsciiBinaryToText(value)),
     message: 'Binary should be a valid ASCII binary string with multiples of 8 bits',
   },
-];
-const { copy: copyText } = useCopy({ source: textFromBinary });
+]
+const { copy: copyText } = useCopy({ source: textFromBinary })
 </script>
 
 <template>

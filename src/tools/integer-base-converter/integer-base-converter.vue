@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import InputCopyable from '../../components/InputCopyable.vue';
-import { convertBase } from './integer-base-converter.model';
-import { getErrorMessageIfThrows } from '@/utils/error';
+import { getErrorMessageIfThrows } from '@/utils/error'
+import InputCopyable from '../../components/InputCopyable.vue'
+import { convertBase } from './integer-base-converter.model'
 
 const inputProps = {
   'labelPosition': 'left',
@@ -9,18 +9,18 @@ const inputProps = {
   'labelAlign': 'right',
   'readonly': true,
   'mb-2': '',
-} as const;
+} as const
 
-const input = ref('42');
-const inputBase = ref(10);
-const outputBase = ref(42);
+const input = ref('42')
+const inputBase = ref(10)
+const outputBase = ref(42)
 
 function errorlessConvert(...args: Parameters<typeof convertBase>) {
   try {
-    return convertBase(...args);
+    return convertBase(...args)
   }
   catch (err) {
-    return '';
+    return ''
   }
 }
 
@@ -28,7 +28,7 @@ const error = computed(() =>
   getErrorMessageIfThrows(() =>
     convertBase({ value: input.value, fromBase: inputBase.value, toBase: outputBase.value }),
   ),
-);
+)
 </script>
 
 <template>

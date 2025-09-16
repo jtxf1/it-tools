@@ -1,11 +1,12 @@
-import { type Colord, colord } from 'colord';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useValidation } from '@/composable/validation';
+import type { Colord } from 'colord'
+import { colord } from 'colord'
+import { useValidation } from '@/composable/validation'
+import { withDefaultOnError } from '@/utils/defaults'
 
-export { removeAlphaChannelWhenOpaque, buildColorFormat };
+export { buildColorFormat, removeAlphaChannelWhenOpaque }
 
 function removeAlphaChannelWhenOpaque(hexColor: string) {
-  return hexColor.replace(/^(#(?:[0-9a-f]{3}){1,2})ff$/i, '$1');
+  return hexColor.replace(/^(#(?:[0-9a-f]{3}){1,2})ff$/i, '$1')
 }
 
 function buildColorFormat({
@@ -23,7 +24,7 @@ function buildColorFormat({
   invalidMessage?: string
   type?: 'text' | 'color-picker'
 }) {
-  const value = ref('');
+  const value = ref('')
 
   return {
     type,
@@ -39,14 +40,14 @@ function buildColorFormat({
           message: invalidMessage,
           validator: v => withDefaultOnError(() => {
             if (v === '') {
-              return true;
+              return true
             }
 
-            return parse(v).isValid();
+            return parse(v).isValid()
           }, false),
         },
       ],
     }),
 
-  };
+  }
 }

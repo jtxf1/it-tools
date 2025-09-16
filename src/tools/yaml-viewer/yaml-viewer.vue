@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import yaml from 'yaml';
-import { useStorage } from '@vueuse/core';
-import { formatYaml } from './yaml-models';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useValidation } from '@/composable/validation';
-import TextareaCopyable from '@/components/TextareaCopyable.vue';
+import { useStorage } from '@vueuse/core'
+import yaml from 'yaml'
+import TextareaCopyable from '@/components/TextareaCopyable.vue'
+import { useValidation } from '@/composable/validation'
+import { withDefaultOnError } from '@/utils/defaults'
+import { formatYaml } from './yaml-models'
 
-const inputElement = ref<HTMLElement>();
+const inputElement = ref<HTMLElement>()
 
-const rawYaml = useStorage('yaml-prettify:raw-yaml', '');
-const indentSize = useStorage('yaml-prettify:indent-size', 2);
-const sortKeys = useStorage('yaml-prettify:sort-keys', false);
+const rawYaml = useStorage('yaml-prettify:raw-yaml', '')
+const indentSize = useStorage('yaml-prettify:indent-size', 2)
+const sortKeys = useStorage('yaml-prettify:sort-keys', false)
 
-const cleanYaml = computed(() => withDefaultOnError(() => formatYaml({ rawYaml, indentSize, sortKeys }), ''));
+const cleanYaml = computed(() => withDefaultOnError(() => formatYaml({ rawYaml, indentSize, sortKeys }), ''))
 
 const rawYamlValidation = useValidation({
   source: rawYaml,
@@ -22,7 +22,7 @@ const rawYamlValidation = useValidation({
       message: 'Provided YAML is not valid.',
     },
   ],
-});
+})
 </script>
 
 <template>

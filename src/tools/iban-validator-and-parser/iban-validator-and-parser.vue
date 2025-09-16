@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { extractIBAN, friendlyFormatIBAN, isQRIBAN, validateIBAN } from 'ibantools';
-import { getFriendlyErrors } from './iban-validator-and-parser.service';
-import type { CKeyValueListItems } from '@/ui/c-key-value-list/c-key-value-list.types';
+import type { CKeyValueListItems } from '@/ui/c-key-value-list/c-key-value-list.types'
+import { extractIBAN, friendlyFormatIBAN, isQRIBAN, validateIBAN } from 'ibantools'
+import { getFriendlyErrors } from './iban-validator-and-parser.service'
 
-const rawIban = ref('');
+const rawIban = ref('')
 
 const ibanInfo = computed<CKeyValueListItems>(() => {
-  const iban = rawIban.value.toUpperCase().replace(/\s/g, '').replace(/-/g, '');
+  const iban = rawIban.value.toUpperCase().replace(/\s/g, '').replace(/-/g, '')
 
   if (iban === '') {
-    return [];
+    return []
   }
 
-  const { valid: isIbanValid, errorCodes } = validateIBAN(iban);
-  const { countryCode, bban } = extractIBAN(iban);
-  const errors = getFriendlyErrors(errorCodes);
+  const { valid: isIbanValid, errorCodes } = validateIBAN(iban)
+  const { countryCode, bban } = extractIBAN(iban)
+  const errors = getFriendlyErrors(errorCodes)
 
   return [
 
@@ -46,14 +46,14 @@ const ibanInfo = computed<CKeyValueListItems>(() => {
       label: 'IBAN friendly format',
       value: friendlyFormatIBAN(iban),
     },
-  ];
-});
+  ]
+})
 
 const ibanExamples = [
   'FR7630006000011234567890189',
   'DE89370400440532013000',
   'GB29NWBK60161331926819',
-];
+]
 </script>
 
 <template>

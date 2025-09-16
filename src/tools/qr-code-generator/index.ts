@@ -1,6 +1,6 @@
-import { Qrcode } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { Qrcode } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: translate('tools.qrcode-generator.title'),
@@ -9,4 +9,4 @@ export const tool = defineTool({
   keywords: ['qr', 'code', 'generator', 'square', 'color', 'link', 'low', 'medium', 'quartile', 'high', 'transparent'],
   component: () => import('./qr-code-generator.vue'),
   icon: Qrcode,
-});
+})

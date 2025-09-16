@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { textToNatoAlphabet } from './text-to-nato-alphabet.service';
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
+import { textToNatoAlphabet } from './text-to-nato-alphabet.service'
 
-const input = ref('');
-const natoText = computed(() => textToNatoAlphabet({ text: input.value }));
-const { copy } = useCopy({ source: natoText, text: 'NATO alphabet string copied.' });
+const input = ref('')
+const natoText = computed(() => textToNatoAlphabet({ text: input.value }))
+const { copy } = useCopy({ source: natoText, text: 'NATO alphabet string copied.' })
 </script>
 
 <template>

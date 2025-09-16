@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useObfuscateString } from './string-obfuscator.model';
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
+import { useObfuscateString } from './string-obfuscator.model'
 
-const str = ref('Lorem ipsum dolor sit amet');
-const keepFirst = ref(4);
-const keepLast = ref(4);
-const keepSpace = ref(true);
+const str = ref('Lorem ipsum dolor sit amet')
+const keepFirst = ref(4)
+const keepLast = ref(4)
+const keepSpace = ref(true)
 
-const obfuscatedString = useObfuscateString(str, { keepFirst, keepLast, keepSpace });
-const { copy } = useCopy({ source: obfuscatedString });
+const obfuscatedString = useObfuscateString(str, { keepFirst, keepLast, keepSpace })
+const { copy } = useCopy({ source: obfuscatedString })
 </script>
 
 <template>

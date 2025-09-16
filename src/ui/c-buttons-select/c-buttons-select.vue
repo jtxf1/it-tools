@@ -1,45 +1,45 @@
 <script setup lang="ts" generic="T extends unknown">
-import _ from 'lodash';
-import type { CLabelProps } from '../c-label/c-label.types';
-import type { CButtonSelectOption } from './c-buttons-select.types';
+import type { CLabelProps } from '../c-label/c-label.types'
+import type { CButtonSelectOption } from './c-buttons-select.types'
+import _ from 'lodash'
 
 const props = withDefaults(
   defineProps<{
     options?: CButtonSelectOption<T>[] | string[] | Record<string, T>
     value?: T
     size?: 'small' | 'medium' | 'large'
-  } & CLabelProps >(),
+  } & CLabelProps>(),
   {
     options: () => [],
     value: undefined,
     labelPosition: 'left',
     size: 'medium',
   },
-);
+)
 
-const emits = defineEmits(['update:value']);
+const emits = defineEmits(['update:value'])
 
-const { options: rawOptions, size } = toRefs(props);
+const { options: rawOptions, size } = toRefs(props)
 
 const options = computed<CButtonSelectOption<T>[]>(() => {
   if (_.isArray(rawOptions.value)) {
     return rawOptions.value.map((option: string | CButtonSelectOption<T>) => {
       if (typeof option === 'string') {
-        return { label: option, value: option };
+        return { label: option, value: option }
       }
 
-      return option;
-    }) as CButtonSelectOption<T>[];
+      return option
+    }) as CButtonSelectOption<T>[]
   }
 
-  return _.map(rawOptions.value, (value, label) => ({ label, value })) as CButtonSelectOption<T>[];
-});
+  return _.map(rawOptions.value, (value, label) => ({ label, value })) as CButtonSelectOption<T>[]
+})
 
-const value = useVModel(props, 'value', emits);
+const value = useVModel(props, 'value', emits)
 
 function selectOption(option: CButtonSelectOption<T>) {
   // @ts-expect-error vue template generic is a bit flacky thanks to withDefaults
-  value.value = option.value;
+  value.value = option.value
 }
 </script>
 

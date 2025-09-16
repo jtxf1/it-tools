@@ -13,13 +13,13 @@ import {
   mnemonicToEntropy,
   portugueseWordList,
   spanishWordList,
-} from '@it-tools/bip39';
-import { Copy, Refresh } from '@vicons/tabler';
+} from '@it-tools/bip39'
+import { Copy, Refresh } from '@vicons/tabler'
 
-import { useCopy } from '@/composable/copy';
-import { useValidation } from '@/composable/validation';
-import { isNotThrowing } from '@/utils/boolean';
-import { withDefaultOnError } from '@/utils/defaults';
+import { useCopy } from '@/composable/copy'
+import { useValidation } from '@/composable/validation'
+import { isNotThrowing } from '@/utils/boolean'
+import { withDefaultOnError } from '@/utils/defaults'
 
 const languages = {
   'English': englishWordList,
@@ -32,21 +32,21 @@ const languages = {
   'Korean': koreanWordList,
   'Portuguese': portugueseWordList,
   'Spanish': spanishWordList,
-};
+}
 
-const entropy = ref(generateEntropy());
-const passphraseInput = ref('');
+const entropy = ref(generateEntropy())
+const passphraseInput = ref('')
 
-const language = ref<keyof typeof languages>('English');
+const language = ref<keyof typeof languages>('English')
 const passphrase = computed({
   get() {
-    return withDefaultOnError(() => entropyToMnemonic(entropy.value, languages[language.value]), passphraseInput.value);
+    return withDefaultOnError(() => entropyToMnemonic(entropy.value, languages[language.value]), passphraseInput.value)
   },
   set(value: string) {
-    passphraseInput.value = value;
-    entropy.value = withDefaultOnError(() => mnemonicToEntropy(value, languages[language.value]), '');
+    passphraseInput.value = value
+    entropy.value = withDefaultOnError(() => mnemonicToEntropy(value, languages[language.value]), '')
   },
-});
+})
 
 const entropyValidation = useValidation({
   source: entropy,
@@ -56,11 +56,11 @@ const entropyValidation = useValidation({
       message: 'Entropy length should be >= 16, <= 32 and be a multiple of 4',
     },
     {
-      validator: value => /^[a-fA-F0-9]*$/.test(value),
+      validator: value => /^[a-f0-9]*$/i.test(value),
       message: 'Entropy should be an hexadecimal string',
     },
   ],
-});
+})
 
 const mnemonicValidation = useValidation({
   source: passphrase,
@@ -70,14 +70,14 @@ const mnemonicValidation = useValidation({
       message: 'Invalid mnemonic',
     },
   ],
-});
+})
 
 function refreshEntropy() {
-  entropy.value = generateEntropy();
+  entropy.value = generateEntropy()
 }
 
-const { copy: copyEntropy } = useCopy({ source: entropy, text: 'Entropy copied to the clipboard' });
-const { copy: copyPassphrase } = useCopy({ source: passphrase, text: 'Passphrase copied to the clipboard' });
+const { copy: copyEntropy } = useCopy({ source: entropy, text: 'Entropy copied to the clipboard' })
+const { copy: copyPassphrase } = useCopy({ source: passphrase, text: 'Passphrase copied to the clipboard' })
 </script>
 
 <template>

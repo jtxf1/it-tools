@@ -1,21 +1,21 @@
-import _ from 'lodash';
+import _ from 'lodash'
 
-export { getPasswordCrackTimeEstimation, getCharsetLength };
+export { getCharsetLength, getPasswordCrackTimeEstimation }
 
 function prettifyExponentialNotation(exponentialNotation: number) {
-  const [base, exponent] = exponentialNotation.toString().split('e');
-  const baseAsNumber = Number.parseFloat(base);
-  const prettyBase = baseAsNumber % 1 === 0 ? baseAsNumber.toLocaleString() : baseAsNumber.toFixed(2);
-  return exponent ? `${prettyBase}e${exponent}` : prettyBase;
+  const [base, exponent] = exponentialNotation.toString().split('e')
+  const baseAsNumber = Number.parseFloat(base)
+  const prettyBase = baseAsNumber % 1 === 0 ? baseAsNumber.toLocaleString() : baseAsNumber.toFixed(2)
+  return exponent ? `${prettyBase}e${exponent}` : prettyBase
 }
 
 function getHumanFriendlyDuration({ seconds }: { seconds: number }) {
   if (seconds <= 0.001) {
-    return 'Instantly';
+    return 'Instantly'
   }
 
   if (seconds <= 1) {
-    return 'Less than a second';
+    return 'Less than a second'
   }
 
   const timeUnits = [
@@ -29,37 +29,37 @@ function getHumanFriendlyDuration({ seconds }: { seconds: number }) {
     { unit: 'hour', secondsInUnit: 3600, plural: 'hours' },
     { unit: 'minute', secondsInUnit: 60, plural: 'minutes' },
     { unit: 'second', secondsInUnit: 1, plural: 'seconds' },
-  ];
+  ]
 
   return _.chain(timeUnits)
     .map(({ unit, secondsInUnit, plural, format = _.identity }) => {
-      const quantity = Math.floor(seconds / secondsInUnit);
-      seconds %= secondsInUnit;
+      const quantity = Math.floor(seconds / secondsInUnit)
+      seconds %= secondsInUnit
 
       if (quantity <= 0) {
-        return undefined;
+        return undefined
       }
 
-      const formattedQuantity = format(quantity);
-      return `${formattedQuantity} ${quantity > 1 ? plural : unit}`;
+      const formattedQuantity = format(quantity)
+      return `${formattedQuantity} ${quantity > 1 ? plural : unit}`
     })
     .compact()
     .take(2)
     .join(', ')
-    .value();
+    .value()
 }
 
-function getPasswordCrackTimeEstimation({ password, guessesPerSecond = 1e9 }: { password: string; guessesPerSecond?: number }) {
-  const charsetLength = getCharsetLength({ password });
-  const passwordLength = password.length;
+function getPasswordCrackTimeEstimation({ password, guessesPerSecond = 1e9 }: { password: string, guessesPerSecond?: number }) {
+  const charsetLength = getCharsetLength({ password })
+  const passwordLength = password.length
 
-  const entropy = password === '' ? 0 : Math.log2(charsetLength) * passwordLength;
+  const entropy = password === '' ? 0 : Math.log2(charsetLength) * passwordLength
 
-  const secondsToCrack = 2 ** entropy / guessesPerSecond;
+  const secondsToCrack = 2 ** entropy / guessesPerSecond
 
-  const crackDurationFormatted = getHumanFriendlyDuration({ seconds: secondsToCrack });
+  const crackDurationFormatted = getHumanFriendlyDuration({ seconds: secondsToCrack })
 
-  const score = Math.min(entropy / 128, 1);
+  const score = Math.min(entropy / 128, 1)
 
   return {
     entropy,
@@ -68,29 +68,29 @@ function getPasswordCrackTimeEstimation({ password, guessesPerSecond = 1e9 }: { 
     crackDurationFormatted,
     secondsToCrack,
     score,
-  };
+  }
 }
 
 function getCharsetLength({ password }: { password: string }) {
-  const hasLowercase = /[a-z]/.test(password);
-  const hasUppercase = /[A-Z]/.test(password);
-  const hasDigits = /\d/.test(password);
-  const hasSpecialChars = /\W|_/.test(password);
+  const hasLowercase = /[a-z]/.test(password)
+  const hasUppercase = /[A-Z]/.test(password)
+  const hasDigits = /\d/.test(password)
+  const hasSpecialChars = /\W|_/.test(password)
 
-  let charsetLength = 0;
+  let charsetLength = 0
 
   if (hasLowercase) {
-    charsetLength += 26;
+    charsetLength += 26
   }
   if (hasUppercase) {
-    charsetLength += 26;
+    charsetLength += 26
   }
   if (hasDigits) {
-    charsetLength += 10;
+    charsetLength += 10
   }
   if (hasSpecialChars) {
-    charsetLength += 32;
+    charsetLength += 32
   }
 
-  return charsetLength;
+  return charsetLength
 }

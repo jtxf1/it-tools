@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import slugify from '@sindresorhus/slugify';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useCopy } from '@/composable/copy';
+import slugify from '@sindresorhus/slugify'
+import { useCopy } from '@/composable/copy'
+import { withDefaultOnError } from '@/utils/defaults'
 
-const input = ref('');
-const slug = computed(() => withDefaultOnError(() => slugify(input.value), ''));
-const { copy } = useCopy({ source: slug, text: 'Slug copied to clipboard' });
+const input = ref('')
+const slug = computed(() => withDefaultOnError(() => slugify(input.value), ''))
+const { copy } = useCopy({ source: slug, text: 'Slug copied to clipboard' })
 </script>
 
 <template>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ tooltip?: string; position?: 'top' | 'bottom' | 'left' | 'right' }>(), {
+const props = withDefaults(defineProps<{ tooltip?: string, position?: 'top' | 'bottom' | 'left' | 'right' }>(), {
   tooltip: undefined,
   position: 'top',
-});
-const { tooltip, position } = toRefs(props);
+})
+const { tooltip, position } = toRefs(props)
 
-const targetRef = ref();
-const isTargetHovered = useElementHover(targetRef);
+const targetRef = ref()
+const isTargetHovered = useElementHover(targetRef)
 </script>
 
 <template>

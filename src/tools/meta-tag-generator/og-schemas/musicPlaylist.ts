@@ -1,4 +1,4 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType } from '../OGSchemaType.type'
 
 export const musicPlaylist: OGSchemaType = {
   name: 'Playlist details',
@@ -18,4 +18,4 @@ export const musicPlaylist: OGSchemaType = {
     },
     { type: 'input', label: 'Creator', key: 'music:creator', placeholder: 'The creator of this playlist...' },
   ],
-};
+}

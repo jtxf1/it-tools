@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { generateNumeronym } from './numeronym-generator.service';
+import { generateNumeronym } from './numeronym-generator.service'
 
-const word = ref('');
+const word = ref('')
 
-const numeronym = computed(() => generateNumeronym(word.value));
+const numeronym = computed(() => generateNumeronym(word.value))
 </script>
 
 <template>

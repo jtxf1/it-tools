@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { IconBrandGithub, IconBrandX, IconInfoCircle, IconMoon, IconSun } from '@tabler/icons-vue';
-import { useStyleStore } from '@/stores/style.store';
+import { IconBrandGithub, IconInfoCircle, IconMoon, IconSun } from '@tabler/icons-vue'
+import { useStyleStore } from '@/stores/style.store'
 
-const styleStore = useStyleStore();
-const { isDarkTheme } = toRefs(styleStore);
+const styleStore = useStyleStore()
+const { isDarkTheme } = toRefs(styleStore)
 </script>
 
 <template>

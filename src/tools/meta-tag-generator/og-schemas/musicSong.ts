@@ -1,4 +1,4 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType } from '../OGSchemaType.type'
 
 export const musicSong: OGSchemaType = {
   name: 'Song details',
@@ -19,4 +19,4 @@ export const musicSong: OGSchemaType = {
       key: 'music:musician',
     },
   ],
-};
+}

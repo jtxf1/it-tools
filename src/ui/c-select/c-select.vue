@@ -1,10 +1,10 @@
 <script setup lang="ts" generic="T extends unknown">
-import { useAppTheme } from '../theme/themes';
-import type { CLabelProps } from '../c-label/c-label.types';
-import type { CSelectOption } from './c-select.types';
-import { useTheme } from './c-select.theme';
-import { clamp } from '@/modules/shared/number.models';
-import { useFuzzySearch } from '@/composable/fuzzySearch';
+import type { CLabelProps } from '../c-label/c-label.types'
+import type { CSelectOption } from './c-select.types'
+import { useFuzzySearch } from '@/composable/fuzzySearch'
+import { clamp } from '@/modules/shared/number.models'
+import { useAppTheme } from '../theme/themes'
+import { useTheme } from './c-select.theme'
 
 const props = withDefaults(
   defineProps<{
@@ -13,7 +13,7 @@ const props = withDefaults(
     placeholder?: string
     size?: 'small' | 'medium' | 'large'
     searchable?: boolean
-  } & CLabelProps >(),
+  } & CLabelProps>(),
   {
     options: () => [],
     value: undefined,
@@ -21,58 +21,58 @@ const props = withDefaults(
     size: 'medium',
     searchable: false,
   },
-);
+)
 
-const emits = defineEmits(['update:value']);
+const emits = defineEmits(['update:value'])
 
-const { options: rawOptions, placeholder, size: sizeName, searchable } = toRefs(props);
+const { options: rawOptions, placeholder, size: sizeName, searchable } = toRefs(props)
 
 const options = computed(() => {
   return rawOptions.value.map((option: string | CSelectOption<T>) => {
     if (typeof option === 'string') {
-      return { label: option, value: option };
+      return { label: option, value: option }
     }
 
-    return option;
-  });
-});
+    return option
+  })
+})
 
-const keys = useMagicKeys();
-const value = useVModel(props, 'value', emits);
-const theme = useTheme();
-const appTheme = useAppTheme();
+const keys = useMagicKeys()
+const value = useVModel(props, 'value', emits)
+const theme = useTheme()
+const appTheme = useAppTheme()
 
-const isOpen = ref(false);
-const selectedOption = shallowRef<CSelectOption<T> | undefined>(options.value.find((option: CSelectOption<T>) => option.value === value.value));
-const focusIndex = ref(0);
-const elementRef = ref(null);
+const isOpen = ref(false)
+const selectedOption = shallowRef<CSelectOption<T> | undefined>(options.value.find((option: CSelectOption<T>) => option.value === value.value))
+const focusIndex = ref(0)
+const elementRef = ref(null)
 
-const size = computed(() => theme.value.sizes[sizeName.value as 'small' | 'medium' | 'large']);
+const size = computed(() => theme.value.sizes[sizeName.value as 'small' | 'medium' | 'large'])
 
-const searchQuery = ref('');
-const searchInputRef = ref();
+const searchQuery = ref('')
+const searchInputRef = ref()
 
 whenever(() => !isOpen.value, () => {
-  focusIndex.value = 0;
-  searchQuery.value = '';
-});
+  focusIndex.value = 0
+  searchQuery.value = ''
+})
 
 whenever(() => isOpen.value, () => {
-  nextTick(() => searchInputRef.value?.focus());
-});
+  nextTick(() => searchInputRef.value?.focus())
+})
 
-onClickOutside(elementRef, close);
-whenever(keys.escape, close);
+onClickOutside(elementRef, close)
+whenever(keys.escape, close)
 
 watch(
   value,
   (newValue) => {
-    const option = options.value.find((option: CSelectOption<T>) => option.value === newValue);
+    const option = options.value.find((option: CSelectOption<T>) => option.value === newValue)
     if (option) {
-      selectedOption.value = option;
+      selectedOption.value = option
     }
   },
-);
+)
 
 const { searchResult: filteredOptions } = useFuzzySearch<CSelectOption<T>>({
   search: searchQuery,
@@ -83,57 +83,57 @@ const { searchResult: filteredOptions } = useFuzzySearch<CSelectOption<T>>({
     threshold: 0.3,
     filterEmpty: false,
   },
-});
+})
 
 function close() {
-  isOpen.value = false;
+  isOpen.value = false
 }
 
 function toggleOpen() {
-  isOpen.value = !isOpen.value;
+  isOpen.value = !isOpen.value
 }
 
 function selectOption({ option }: { option: CSelectOption<T> }) {
-  selectedOption.value = option;
+  selectedOption.value = option
   // @ts-expect-error vue template generic is a bit flacky thanks to withDefaults
-  value.value = option.value;
-  isOpen.value = false;
+  value.value = option.value
+  isOpen.value = false
 }
 
 function handleKeydown(event: KeyboardEvent) {
-  const { key } = event;
-  const isEnter = ['Enter'].includes(key);
-  const isArrowUpOrDown = ['ArrowUp', 'ArrowDown'].includes(key);
-  const isArrowDown = key === 'ArrowDown';
+  const { key } = event
+  const isEnter = ['Enter'].includes(key)
+  const isArrowUpOrDown = ['ArrowUp', 'ArrowDown'].includes(key)
+  const isArrowDown = key === 'ArrowDown'
 
   if (isEnter) {
-    const valueCanBeSelected = isOpen.value && focusIndex.value !== -1;
+    const valueCanBeSelected = isOpen.value && focusIndex.value !== -1
 
     if (valueCanBeSelected) {
-      selectOption({ option: filteredOptions.value[focusIndex.value] });
+      selectOption({ option: filteredOptions.value[focusIndex.value] })
     }
     else {
-      toggleOpen();
+      toggleOpen()
     }
 
-    event.preventDefault();
-    return;
+    event.preventDefault()
+    return
   }
 
   if (isArrowUpOrDown) {
-    const increment = isArrowDown ? 1 : -1;
+    const increment = isArrowDown ? 1 : -1
     focusIndex.value = clamp({
       value: focusIndex.value + increment,
       min: 0,
       max: options.value.length - 1,
-    });
+    })
 
-    event.preventDefault();
+    event.preventDefault()
   }
 }
 
 function onSearchInput() {
-  focusIndex.value = 0;
+  focusIndex.value = 0
 }
 </script>
 

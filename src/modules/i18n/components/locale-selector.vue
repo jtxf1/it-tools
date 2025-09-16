@@ -1,17 +1,17 @@
 <script setup lang="ts">
-const { availableLocales, locale } = useI18n();
+const { availableLocales, locale } = useI18n()
 
 const localesLong: Record<string, string> = {
   zh: '中文',
   en: 'English',
-};
+}
 
 const localeOptions = computed(() =>
   availableLocales.map(locale => ({
     label: localesLong[locale] ?? locale,
     value: locale,
   })),
-);
+)
 </script>
 
 <template>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import db from 'oui-data';
-import { macAddressValidationRules } from '@/utils/macAddress';
-import { useCopy } from '@/composable/copy';
+import db from 'oui-data'
+import { useCopy } from '@/composable/copy'
+import { macAddressValidationRules } from '@/utils/macAddress'
 
-const getVendorValue = (address: string) => address.trim().replace(/[.:-]/g, '').toUpperCase().substring(0, 6);
+const getVendorValue = (address: string) => address.trim().replace(/[.:-]/g, '').toUpperCase().substring(0, 6)
 
-const macAddress = ref('20:37:06:12:34:56');
-const details = computed<string | undefined>(() => (db as Record<string, string>)[getVendorValue(macAddress.value)]);
+const macAddress = ref('20:37:06:12:34:56')
+const details = computed<string | undefined>(() => (db as Record<string, string>)[getVendorValue(macAddress.value)])
 
-const { copy } = useCopy({ source: () => details.value ?? '', text: 'Vendor info copied to the clipboard' });
+const { copy } = useCopy({ source: () => details.value ?? '', text: 'Vendor info copied to the clipboard' })
 </script>
 
 <template>

@@ -4,21 +4,21 @@ import {
   capitalCase,
   constantCase,
   dotCase,
-  trainCase,
-  noCase,
   kebabCase,
+  noCase,
   pascalCase,
   pathCase,
   sentenceCase,
   snakeCase,
-} from 'change-case';
-import InputCopyable from '../../components/InputCopyable.vue';
+  trainCase,
+} from 'change-case'
+import InputCopyable from '../../components/InputCopyable.vue'
 
 const baseConfig = {
-  stripRegexp: /[^A-Za-zÀ-ÖØ-öø-ÿ]+/gi,
-};
+  stripRegexp: /[^A-ZØ-öø-ÿ]+/gi,
+}
 
-const input = ref('lorem ipsum dolor sit amet');
+const input = ref('lorem ipsum dolor sit amet')
 
 const formats = computed(() => [
   {
@@ -80,13 +80,13 @@ const formats = computed(() => [
       .map((char, index) => (index % 2 === 0 ? char.toUpperCase() : char.toLowerCase()))
       .join(''),
   },
-]);
+])
 
 const inputLabelAlignmentConfig = {
   labelPosition: 'left',
   labelWidth: '120px',
   labelAlign: 'right',
-};
+}
 </script>
 
 <template>

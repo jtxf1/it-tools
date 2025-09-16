@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { UAParser } from 'ua-parser-js';
-import type { UserAgentResultSection } from './user-agent-parser.types';
+import type { UAParser } from 'ua-parser-js'
+import type { UserAgentResultSection } from './user-agent-parser.types'
 
 const props = defineProps<{
   userAgentInfo?: UAParser.IResult
   sections: UserAgentResultSection[]
-}>();
-const { userAgentInfo, sections } = toRefs(props);
+}>()
+const { userAgentInfo, sections } = toRefs(props)
 </script>
 
 <template>

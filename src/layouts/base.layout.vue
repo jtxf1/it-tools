@@ -1,35 +1,35 @@
 <script lang="ts" setup>
-import { NIcon, useThemeVars } from 'naive-ui';
+import type { ToolCategory } from '@/tools/tools.types'
 
-import { RouterLink } from 'vue-router';
-import { Heart, Home2, Menu2 } from '@vicons/tabler';
+import { Home2, Menu2 } from '@vicons/tabler'
+import { NIcon, useThemeVars } from 'naive-ui'
 
-import { storeToRefs } from 'pinia';
-import HeroGradient from '../assets/hero-gradient.svg?component';
-import MenuLayout from '../components/MenuLayout.vue';
-import NavbarButtons from '../components/NavbarButtons.vue';
-import { useStyleStore } from '@/stores/style.store';
-import { config } from '@/config';
-import type { ToolCategory } from '@/tools/tools.types';
-import { useToolStore } from '@/tools/tools.store';
-import { useTracker } from '@/modules/tracker/tracker.services';
-import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue';
+import { storeToRefs } from 'pinia'
+import { RouterLink } from 'vue-router'
+import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue'
+import { config } from '@/config'
+import { useTracker } from '@/modules/tracker/tracker.services'
+import { useStyleStore } from '@/stores/style.store'
+import { useToolStore } from '@/tools/tools.store'
+import HeroGradient from '../assets/hero-gradient.svg?component'
+import MenuLayout from '../components/MenuLayout.vue'
+import NavbarButtons from '../components/NavbarButtons.vue'
 
-const themeVars = useThemeVars();
-const styleStore = useStyleStore();
-const version = config.app.version;
-const commitSha = config.app.lastCommitSha.slice(0, 7);
+const themeVars = useThemeVars()
+const styleStore = useStyleStore()
+const version = config.app.version
+const commitSha = config.app.lastCommitSha.slice(0, 7)
 
-const { tracker } = useTracker();
-const { t } = useI18n();
+const { tracker } = useTracker()
+const { t } = useI18n()
 
-const toolStore = useToolStore();
-const { favoriteTools, toolsByCategory } = storeToRefs(toolStore);
+const toolStore = useToolStore()
+const { favoriteTools, toolsByCategory } = storeToRefs(toolStore)
 
 const tools = computed<ToolCategory[]>(() => [
   ...(favoriteTools.value.length > 0 ? [{ name: t('tools.categories.favorite-tools'), components: favoriteTools.value }] : []),
   ...toolsByCategory.value,
-]);
+])
 </script>
 
 <template>

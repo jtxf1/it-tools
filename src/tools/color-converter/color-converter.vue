@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import type { Colord } from 'colord';
-import { colord, extend } from 'colord';
-import _ from 'lodash';
-import cmykPlugin from 'colord/plugins/cmyk';
-import hwbPlugin from 'colord/plugins/hwb';
-import namesPlugin from 'colord/plugins/names';
-import lchPlugin from 'colord/plugins/lch';
-import { buildColorFormat } from './color-converter.models';
+import type { Colord } from 'colord'
+import { colord, extend } from 'colord'
+import cmykPlugin from 'colord/plugins/cmyk'
+import hwbPlugin from 'colord/plugins/hwb'
+import lchPlugin from 'colord/plugins/lch'
+import namesPlugin from 'colord/plugins/names'
+import _ from 'lodash'
+import { buildColorFormat } from './color-converter.models'
 
-extend([cmykPlugin, hwbPlugin, namesPlugin, lchPlugin]);
+extend([cmykPlugin, hwbPlugin, namesPlugin, lchPlugin])
 
 const formats = {
   picker: buildColorFormat({
@@ -51,24 +51,24 @@ const formats = {
     format: (v: Colord) => v.toName({ closest: true }) ?? 'Unknown',
     placeholder: 'e.g. red',
   }),
-};
+}
 
-updateColorValue(colord('#1ea54c'));
+updateColorValue(colord('#1ea54c'))
 
 function updateColorValue(value: Colord | undefined, omitLabel?: string) {
   if (value === undefined) {
-    return;
+    return
   }
 
   if (!value.isValid()) {
-    return;
+    return
   }
 
   _.forEach(formats, ({ value: valueRef, format }, key) => {
     if (key !== omitLabel) {
-      valueRef.value = format(value);
+      valueRef.value = format(value)
     }
-  });
+  })
 }
 </script>
 

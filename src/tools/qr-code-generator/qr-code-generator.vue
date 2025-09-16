@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { QRCodeErrorCorrectionLevel } from 'qrcode';
-import { useQRCode } from './useQRCode';
-import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
+import type { QRCodeErrorCorrectionLevel } from 'qrcode'
+import { useDownloadFileFromBase64 } from '@/composable/downloadBase64'
+import { useQRCode } from './useQRCode'
 
-const foreground = ref('#000000ff');
-const background = ref('#ffffffff');
-const errorCorrectionLevel = ref<QRCodeErrorCorrectionLevel>('medium');
+const foreground = ref('#000000ff')
+const background = ref('#ffffffff')
+const errorCorrectionLevel = ref<QRCodeErrorCorrectionLevel>('medium')
 
-const errorCorrectionLevels = ['low', 'medium', 'quartile', 'high'];
+const errorCorrectionLevels = ['low', 'medium', 'quartile', 'high']
 
-const text = ref('https://it-tools.tech');
+const text = ref('https://it-tools.tech')
 const { qrcode } = useQRCode({
   text,
   color: {
@@ -18,9 +18,9 @@ const { qrcode } = useQRCode({
   },
   errorCorrectionLevel,
   options: { width: 1024 },
-});
+})
 
-const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-code.png' });
+const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-code.png' })
 </script>
 
 <template>

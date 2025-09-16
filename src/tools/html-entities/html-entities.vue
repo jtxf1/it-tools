@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { escape, unescape } from 'lodash';
+import { escape, unescape } from 'lodash'
 
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
 
-const escapeInput = ref('<title>IT Tool</title>');
-const escapeOutput = computed(() => escape(escapeInput.value));
-const { copy: copyEscaped } = useCopy({ source: escapeOutput });
+const escapeInput = ref('<title>IT Tool</title>')
+const escapeOutput = computed(() => escape(escapeInput.value))
+const { copy: copyEscaped } = useCopy({ source: escapeOutput })
 
-const unescapeInput = ref('&lt;title&gt;IT Tool&lt;/title&gt;');
-const unescapeOutput = computed(() => unescape(unescapeInput.value));
-const { copy: copyUnescaped } = useCopy({ source: unescapeOutput });
+const unescapeInput = ref('&lt;title&gt;IT Tool&lt;/title&gt;')
+const unescapeOutput = computed(() => unescape(unescapeInput.value))
+const { copy: copyUnescaped } = useCopy({ source: unescapeOutput })
 </script>
 
 <template>

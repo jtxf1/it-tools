@@ -1,29 +1,29 @@
-import { createApp } from 'vue';
-import { createPinia } from 'pinia';
-import { createHead } from '@vueuse/head';
+import { createHead } from '@vueuse/head'
+import { createPinia } from 'pinia'
+import { registerSW } from 'virtual:pwa-register'
 
-import { registerSW } from 'virtual:pwa-register';
-import shadow from 'vue-shadow-dom';
-import { plausible } from './plugins/plausible.plugin';
+import { createApp } from 'vue'
+import shadow from 'vue-shadow-dom'
+import App from './App.vue'
 
-import 'virtual:uno.css';
+import { i18nPlugin } from './plugins/i18n.plugin'
 
-import { naive } from './plugins/naive.plugin';
+import { naive } from './plugins/naive.plugin'
 
-import App from './App.vue';
-import router from './router';
-import { i18nPlugin } from './plugins/i18n.plugin';
+import { plausible } from './plugins/plausible.plugin'
+import router from './router'
+import 'virtual:uno.css'
 
-registerSW();
+registerSW()
 
-const app = createApp(App);
+const app = createApp(App)
 
-app.use(createPinia());
-app.use(createHead());
-app.use(i18nPlugin);
-app.use(router);
-app.use(naive);
-app.use(plausible);
-app.use(shadow);
+app.use(createPinia())
+app.use(createHead())
+app.use(i18nPlugin)
+app.use(router)
+app.use(naive)
+app.use(plausible)
+app.use(shadow)
 
-app.mount('#app');
+app.mount('#app')

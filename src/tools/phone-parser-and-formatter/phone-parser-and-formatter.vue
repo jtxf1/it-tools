@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js/max';
-import lookup from 'country-code-lookup';
+import lookup from 'country-code-lookup'
+import { getCountries, getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js/max'
+import { useValidation } from '@/composable/validation'
+import { booleanToHumanReadable } from '@/utils/boolean'
+import { withDefaultOnError } from '@/utils/defaults'
 import {
   formatTypeToHumanReadable,
   getDefaultCountryCode,
   getFullCountryName,
-} from './phone-parser-and-formatter.models';
-import { withDefaultOnError } from '@/utils/defaults';
-import { booleanToHumanReadable } from '@/utils/boolean';
-import { useValidation } from '@/composable/validation';
+} from './phone-parser-and-formatter.models'
 
-const rawPhone = ref('');
-const defaultCountryCode = ref(getDefaultCountryCode());
+const rawPhone = ref('')
+const defaultCountryCode = ref(getDefaultCountryCode())
 const validation = useValidation({
   source: rawPhone,
   rules: [
@@ -20,17 +20,17 @@ const validation = useValidation({
       message: 'Invalid phone number',
     },
   ],
-});
+})
 
 const parsedDetails = computed(() => {
   if (!validation.isValid) {
-    return undefined;
+    return undefined
   }
 
-  const parsed = withDefaultOnError(() => parsePhoneNumber(rawPhone.value, defaultCountryCode.value), undefined);
+  const parsed = withDefaultOnError(() => parsePhoneNumber(rawPhone.value, defaultCountryCode.value), undefined)
 
   if (!parsed) {
-    return undefined;
+    return undefined
   }
 
   return [
@@ -74,13 +74,13 @@ const parsedDetails = computed(() => {
       label: 'RFC3966 format',
       value: parsed.format('RFC3966'),
     },
-  ];
-});
+  ]
+})
 
 const countriesOptions = getCountries().map(code => ({
   label: `${lookup.byIso(code)?.country || code} (+${getCountryCallingCode(code)})`,
   value: code,
-}));
+}))
 </script>
 
 <template>

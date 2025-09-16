@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { PaletteOption } from '../command-palette.types';
+import type { PaletteOption } from '../command-palette.types'
 
-const props = withDefaults(defineProps<{ option: PaletteOption; selected?: boolean }>(), {
+const props = withDefaults(defineProps<{ option: PaletteOption, selected?: boolean }>(), {
   selected: false,
-});
-const emit = defineEmits(['activated']);
-const { option } = toRefs(props);
+})
+const emit = defineEmits(['activated'])
+const { option } = toRefs(props)
 
-const { selected } = toRefs(props);
+const { selected } = toRefs(props)
 </script>
 
 <template>

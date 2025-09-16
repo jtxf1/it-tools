@@ -1,4 +1,4 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType } from '../OGSchemaType.type'
 
 export const videoMovie: OGSchemaType = {
   name: 'Movie details',
@@ -26,4 +26,4 @@ export const videoMovie: OGSchemaType = {
     },
     { type: 'input', label: 'Tag', key: 'video:tag', placeholder: 'Tag words associated with this movie...' },
   ],
-};
+}

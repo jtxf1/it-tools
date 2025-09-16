@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useThemeVars } from 'naive-ui';
-import type { Tool } from '@/tools/tools.types';
+import type { Tool } from '@/tools/tools.types'
+import { useThemeVars } from 'naive-ui'
 
-const props = defineProps<{ tool: Tool }>();
-const { tool } = toRefs(props);
+const props = defineProps<{ tool: Tool }>()
+const { tool } = toRefs(props)
 
-const theme = useThemeVars();
+const theme = useThemeVars()
 </script>
 
 <template>

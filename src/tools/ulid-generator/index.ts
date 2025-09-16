@@ -1,6 +1,6 @@
-import { SortDescendingNumbers } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { SortDescendingNumbers } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: translate('tools.ulid-generator.title'),
@@ -10,4 +10,4 @@ export const tool = defineTool({
   component: () => import('./ulid-generator.vue'),
   icon: SortDescendingNumbers,
   createdAt: new Date('2023-09-11'),
-});
+})

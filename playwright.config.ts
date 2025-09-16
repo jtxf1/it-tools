@@ -1,8 +1,8 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test'
 
-const isCI = !!process.env.CI;
-const baseUrl = process.env.BASE_URL || 'http://localhost:5050';
-const useWebServer = process.env.NO_WEB_SERVER !== 'true';
+const isCI = !!process.env.CI
+const baseUrl = process.env.BASE_URL || 'http://localhost:5050'
+const useWebServer = process.env.NO_WEB_SERVER !== 'true'
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -62,4 +62,4 @@ export default defineConfig({
       },
     }
   ),
-});
+})

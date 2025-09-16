@@ -1,60 +1,60 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import _ from 'lodash';
-import { useCommandPaletteStore } from './command-palette.store';
-import type { PaletteOption } from './command-palette.types';
+import type { PaletteOption } from './command-palette.types'
+import _ from 'lodash'
+import { storeToRefs } from 'pinia'
+import { useCommandPaletteStore } from './command-palette.store'
 
-const isModalOpen = ref(false);
-const inputRef = ref();
-const router = useRouter();
-const isMac = computed(() => window.navigator.userAgent.toLowerCase().includes('mac'));
+const isModalOpen = ref(false)
+const inputRef = ref()
+const router = useRouter()
+const isMac = computed(() => window.navigator.userAgent.toLowerCase().includes('mac'))
 
-const commandPaletteStore = useCommandPaletteStore();
-const { searchPrompt, filteredSearchResult } = storeToRefs(commandPaletteStore);
+const commandPaletteStore = useCommandPaletteStore()
+const { searchPrompt, filteredSearchResult } = storeToRefs(commandPaletteStore)
 
 const keys = useMagicKeys({
   passive: false,
   onEventFired(e) {
     if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') {
-      e.preventDefault();
+      e.preventDefault()
     }
 
     if (e.metaKey && e.key === 'k' && e.type === 'keydown') {
-      e.preventDefault();
+      e.preventDefault()
     }
   },
-});
+})
 
-whenever(isModalOpen, () => inputRef.value?.focus());
+whenever(isModalOpen, () => inputRef.value?.focus())
 
-whenever(keys.ctrl_k, open);
-whenever(keys.meta_k, open);
-whenever(keys.escape, close);
+whenever(keys.ctrl_k, open)
+whenever(keys.meta_k, open)
+whenever(keys.escape, close)
 
 function open() {
-  return isModalOpen.value = true;
+  return isModalOpen.value = true
 }
 
 function close() {
-  isModalOpen.value = false;
-  searchPrompt.value = '';
+  isModalOpen.value = false
+  searchPrompt.value = ''
 }
 
-const selectedOptionIndex = ref(0);
+const selectedOptionIndex = ref(0)
 
 function handleKeydown(event: KeyboardEvent) {
-  const { key } = event;
-  const isEnterPressed = key === 'Enter';
-  const isArrowUpOrDown = ['ArrowUp', 'ArrowDown'].includes(key);
-  const isArrowDown = key === 'ArrowDown';
+  const { key } = event
+  const isEnterPressed = key === 'Enter'
+  const isArrowUpOrDown = ['ArrowUp', 'ArrowDown'].includes(key)
+  const isArrowDown = key === 'ArrowDown'
 
   if (isArrowUpOrDown) {
-    const increment = isArrowDown ? 1 : -1;
-    const maxIndex = Math.max(_.chain(filteredSearchResult.value).values().flatten().size().value() - 1, 0);
+    const increment = isArrowDown ? 1 : -1
+    const maxIndex = Math.max(_.chain(filteredSearchResult.value).values().flatten().size().value() - 1, 0)
 
-    selectedOptionIndex.value = Math.min(Math.max(selectedOptionIndex.value + increment, 0), maxIndex);
+    selectedOptionIndex.value = Math.min(Math.max(selectedOptionIndex.value + increment, 0), maxIndex)
 
-    return;
+    return
   }
 
   if (isEnterPressed) {
@@ -62,9 +62,9 @@ function handleKeydown(event: KeyboardEvent) {
       .values()
       .flatten()
       .nth(selectedOptionIndex.value)
-      .value();
+      .value()
 
-    activateOption(option);
+    activateOption(option)
   }
 }
 
@@ -73,38 +73,38 @@ function getOptionIndex(option: PaletteOption) {
     .values()
     .flatten()
     .findIndex(o => o === option)
-    .value();
+    .value()
 }
 
 function activateOption(option: PaletteOption) {
-  const { closeOnSelect } = option;
+  const { closeOnSelect } = option
 
   if (option.action) {
-    option.action();
+    option.action()
 
     if (closeOnSelect) {
-      close();
+      close()
     }
 
-    return;
+    return
   }
 
-  const closeAfterNavigation = closeOnSelect || _.isUndefined(closeOnSelect);
+  const closeAfterNavigation = closeOnSelect || _.isUndefined(closeOnSelect)
 
   if (option.to) {
-    router.push(option.to);
+    router.push(option.to)
 
     if (closeAfterNavigation) {
-      close();
+      close()
     }
-    return;
+    return
   }
 
   if (option.href) {
-    window.open(option.href, '_blank');
+    window.open(option.href, '_blank')
 
     if (closeAfterNavigation) {
-      close();
+      close()
     }
   }
 }

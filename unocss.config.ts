@@ -5,9 +5,9 @@ import {
   presetUno,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss';
+} from 'unocss'
 
-import { presetScrollbar } from 'unocss-preset-scrollbar';
+import { presetScrollbar } from 'unocss-preset-scrollbar'
 
 export default defineConfig({
   presets: [presetUno(), presetAttributify({ ignoreAttributes: ['size'] }), presetTypography(), presetScrollbar()],
@@ -24,4 +24,4 @@ export default defineConfig({
     'bg-surface': 'bg-#ffffff dark:bg-#232323',
     'bg-background': 'bg-#f1f5f9 dark:bg-#1c1c1c',
   },
-});
+})

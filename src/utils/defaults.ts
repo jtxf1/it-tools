@@ -1,21 +1,21 @@
-export { withDefaultOnError, withDefaultOnErrorAsync };
+export { withDefaultOnError, withDefaultOnErrorAsync }
 
 function withDefaultOnError<A, B>(cb: () => A, defaultValue: B): A | B {
   try {
-    return cb();
+    return cb()
   }
   catch (_) {
-    console.error(_);
-    return defaultValue;
+    console.error(_)
+    return defaultValue
   }
 }
 
 async function withDefaultOnErrorAsync<A, B>(cb: () => A, defaultValue: B): Promise<Awaited<A> | B> {
   try {
-    return await cb();
+    return await cb()
   }
   catch (_) {
-    console.error(_);
-    return defaultValue;
+    console.error(_)
+    return defaultValue
   }
 }

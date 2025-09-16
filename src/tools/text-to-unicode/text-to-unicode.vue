@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { convertTextToUnicode, convertUnicodeToText } from './text-to-unicode.service';
-import { useCopy } from '@/composable/copy';
+import { useCopy } from '@/composable/copy'
+import { convertTextToUnicode, convertUnicodeToText } from './text-to-unicode.service'
 
-const inputText = ref('');
-const unicodeFromText = computed(() => inputText.value.trim() === '' ? '' : convertTextToUnicode(inputText.value));
-const { copy: copyUnicode } = useCopy({ source: unicodeFromText });
+const inputText = ref('')
+const unicodeFromText = computed(() => inputText.value.trim() === '' ? '' : convertTextToUnicode(inputText.value))
+const { copy: copyUnicode } = useCopy({ source: unicodeFromText })
 
-const inputUnicode = ref('');
-const textFromUnicode = computed(() => inputUnicode.value.trim() === '' ? '' : convertUnicodeToText(inputUnicode.value));
-const { copy: copyText } = useCopy({ source: textFromUnicode });
+const inputUnicode = ref('')
+const textFromUnicode = computed(() => inputUnicode.value.trim() === '' ? '' : convertUnicodeToText(inputUnicode.value))
+const { copy: copyText } = useCopy({ source: textFromUnicode })
 </script>
 
 <template>

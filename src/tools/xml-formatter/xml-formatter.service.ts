@@ -1,29 +1,30 @@
-import xmlFormat, { type XMLFormatterOptions } from 'xml-formatter';
-import { withDefaultOnError } from '@/utils/defaults';
+import type { XMLFormatterOptions } from 'xml-formatter'
+import xmlFormat from 'xml-formatter'
+import { withDefaultOnError } from '@/utils/defaults'
 
-export { formatXml, isValidXML };
+export { formatXml, isValidXML }
 
 function cleanRawXml(rawXml: string): string {
-  return rawXml.trim();
+  return rawXml.trim()
 }
 
 function formatXml(rawXml: string, options?: XMLFormatterOptions): string {
-  return withDefaultOnError(() => xmlFormat(cleanRawXml(rawXml), options) ?? '', '');
+  return withDefaultOnError(() => xmlFormat(cleanRawXml(rawXml), options) ?? '', '')
 }
 
 function isValidXML(rawXml: string): boolean {
-  const cleanedRawXml = cleanRawXml(rawXml);
+  const cleanedRawXml = cleanRawXml(rawXml)
 
   if (cleanedRawXml === '') {
-    return true;
+    return true
   }
 
   try {
-    xmlFormat(cleanedRawXml);
-    return true;
+    xmlFormat(cleanedRawXml)
+    return true
   }
   catch (e) {
-    console.error(e);
-    return false;
+    console.error(e)
+    return false
   }
 }

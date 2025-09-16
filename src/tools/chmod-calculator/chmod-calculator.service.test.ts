@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { computeChmodOctalRepresentation, computeChmodSymbolicRepresentation } from './chmod-calculator.service';
+import { describe, expect, it } from 'vitest'
+import { computeChmodOctalRepresentation, computeChmodSymbolicRepresentation } from './chmod-calculator.service'
 
 describe('chmod-calculator', () => {
   describe('computeChmodOctalRepresentation', () => {
@@ -12,7 +12,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: true, execute: true },
           },
         }),
-      ).to.eql('777');
+      ).to.eql('777')
 
       expect(
         computeChmodOctalRepresentation({
@@ -22,7 +22,7 @@ describe('chmod-calculator', () => {
             public: { read: false, write: false, execute: false },
           },
         }),
-      ).to.eql('000');
+      ).to.eql('000')
 
       expect(
         computeChmodOctalRepresentation({
@@ -32,7 +32,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: false, execute: true },
           },
         }),
-      ).to.eql('235');
+      ).to.eql('235')
 
       expect(
         computeChmodOctalRepresentation({
@@ -42,7 +42,7 @@ describe('chmod-calculator', () => {
             public: { read: false, write: false, execute: true },
           },
         }),
-      ).to.eql('421');
+      ).to.eql('421')
 
       expect(
         computeChmodOctalRepresentation({
@@ -52,7 +52,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: false, execute: false },
           },
         }),
-      ).to.eql('124');
+      ).to.eql('124')
 
       expect(
         computeChmodOctalRepresentation({
@@ -62,8 +62,8 @@ describe('chmod-calculator', () => {
             public: { read: false, write: true, execute: false },
           },
         }),
-      ).to.eql('222');
-    });
+      ).to.eql('222')
+    })
 
     it('get the symbolic representation from permissions', () => {
       expect(
@@ -74,7 +74,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: true, execute: true },
           },
         }),
-      ).to.eql('rwxrwxrwx');
+      ).to.eql('rwxrwxrwx')
 
       expect(
         computeChmodSymbolicRepresentation({
@@ -84,7 +84,7 @@ describe('chmod-calculator', () => {
             public: { read: false, write: false, execute: false },
           },
         }),
-      ).to.eql('---------');
+      ).to.eql('---------')
 
       expect(
         computeChmodSymbolicRepresentation({
@@ -94,7 +94,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: false, execute: true },
           },
         }),
-      ).to.eql('-w--wxr-x');
+      ).to.eql('-w--wxr-x')
 
       expect(
         computeChmodSymbolicRepresentation({
@@ -104,7 +104,7 @@ describe('chmod-calculator', () => {
             public: { read: false, write: false, execute: true },
           },
         }),
-      ).to.eql('r---w---x');
+      ).to.eql('r---w---x')
 
       expect(
         computeChmodSymbolicRepresentation({
@@ -114,7 +114,7 @@ describe('chmod-calculator', () => {
             public: { read: true, write: false, execute: false },
           },
         }),
-      ).to.eql('--x-w-r--');
+      ).to.eql('--x-w-r--')
 
       expect(
         computeChmodSymbolicRepresentation({
@@ -124,7 +124,7 @@ describe('chmod-calculator', () => {
             public: { read: false, write: true, execute: false },
           },
         }),
-      ).to.eql('-w--w--w-');
-    });
-  });
-});
+      ).to.eql('-w--w--w-')
+    })
+  })
+})

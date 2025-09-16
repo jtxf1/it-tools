@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useTimestamp } from '@vueuse/core';
-import { useThemeVars } from 'naive-ui';
-import { useQRCode } from '../qr-code-generator/useQRCode';
-import { base32toHex, buildKeyUri, generateSecret, generateTOTP, getCounterFromTime } from './otp.service';
-import TokenDisplay from './token-display.vue';
-import { useStyleStore } from '@/stores/style.store';
-import InputCopyable from '@/components/InputCopyable.vue';
-import { computedRefreshable } from '@/composable/computedRefreshable';
+import { useTimestamp } from '@vueuse/core'
+import { useThemeVars } from 'naive-ui'
+import InputCopyable from '@/components/InputCopyable.vue'
+import { computedRefreshable } from '@/composable/computedRefreshable'
+import { useStyleStore } from '@/stores/style.store'
+import { useQRCode } from '../qr-code-generator/useQRCode'
+import { base32toHex, buildKeyUri, generateSecret, generateTOTP, getCounterFromTime } from './otp.service'
+import TokenDisplay from './token-display.vue'
 
-const now = useTimestamp();
-const interval = computed(() => (now.value / 1000) % 30);
-const theme = useThemeVars();
-const styleStore = useStyleStore();
+const now = useTimestamp()
+const interval = computed(() => (now.value / 1000) % 30)
+const theme = useThemeVars()
+const styleStore = useStyleStore()
 
-const secret = ref(generateSecret());
+const secret = ref(generateSecret())
 
 function refreshSecret() {
-  secret.value = generateSecret();
+  secret.value = generateSecret()
 }
 
 const [tokens] = computedRefreshable(
@@ -26,9 +26,9 @@ const [tokens] = computedRefreshable(
     next: generateTOTP({ key: secret.value, now: now.value + 30000 }),
   }),
   { throttle: 500 },
-);
+)
 
-const keyUri = computed(() => buildKeyUri({ secret: secret.value }));
+const keyUri = computed(() => buildKeyUri({ secret: secret.value }))
 
 const { qrcode } = useQRCode({
   text: keyUri,
@@ -37,18 +37,18 @@ const { qrcode } = useQRCode({
     foreground: '#000000',
   },
   options: { width: 210 },
-});
+})
 
 const secretValidationRules = [
   {
     message: 'Secret should be a base32 string',
-    validator: (value: string) => value.toUpperCase().match(/^[A-Z234567]+$/),
+    validator: (value: string) => value.toUpperCase().match(/^[A-Z2-7]+$/),
   },
   {
     message: 'Please set a secret',
     validator: (value: string) => value !== '',
   },
-];
+]
 </script>
 
 <template>

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import JSON5 from 'json5';
-import { useStorage } from '@vueuse/core';
-import { formatJson } from './json.models';
-import { withDefaultOnError } from '@/utils/defaults';
-import { useValidation } from '@/composable/validation';
-import TextareaCopyable from '@/components/TextareaCopyable.vue';
+import { useStorage } from '@vueuse/core'
+import JSON5 from 'json5'
+import TextareaCopyable from '@/components/TextareaCopyable.vue'
+import { useValidation } from '@/composable/validation'
+import { withDefaultOnError } from '@/utils/defaults'
+import { formatJson } from './json.models'
 
-const inputElement = ref<HTMLElement>();
+const inputElement = ref<HTMLElement>()
 
-const rawJson = useStorage('json-prettify:raw-json', '{"hello": "world", "foo": "bar"}');
-const indentSize = useStorage('json-prettify:indent-size', 3);
-const sortKeys = useStorage('json-prettify:sort-keys', true);
-const cleanJson = computed(() => withDefaultOnError(() => formatJson({ rawJson, indentSize, sortKeys }), ''));
+const rawJson = useStorage('json-prettify:raw-json', '{"hello": "world", "foo": "bar"}')
+const indentSize = useStorage('json-prettify:indent-size', 3)
+const sortKeys = useStorage('json-prettify:sort-keys', true)
+const cleanJson = computed(() => withDefaultOnError(() => formatJson({ rawJson, indentSize, sortKeys }), ''))
 
 const rawJsonValidation = useValidation({
   source: rawJson,
@@ -21,7 +21,7 @@ const rawJsonValidation = useValidation({
       message: 'Provided JSON is not valid.',
     },
   ],
-});
+})
 </script>
 
 <template>

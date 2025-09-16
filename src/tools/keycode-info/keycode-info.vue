@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useEventListener } from '@vueuse/core';
+import { useEventListener } from '@vueuse/core'
 
-import InputCopyable from '../../components/InputCopyable.vue';
+import InputCopyable from '../../components/InputCopyable.vue'
 
-const event = ref<KeyboardEvent>();
+const event = ref<KeyboardEvent>()
 
 useEventListener(document, 'keydown', (e) => {
-  event.value = e;
-});
+  event.value = e
+})
 
 const fields = computed(() => {
   if (!event.value) {
-    return [];
+    return []
   }
 
   return [
@@ -48,8 +48,8 @@ const fields = computed(() => {
         .join(' + '),
       placeholder: 'None',
     },
-  ];
-});
+  ]
+})
 </script>
 
 <template>

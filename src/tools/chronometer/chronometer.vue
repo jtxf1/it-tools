@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { useRafFn } from '@vueuse/core';
+import { useRafFn } from '@vueuse/core'
 
-import { formatMs } from './chronometer.service';
+import { formatMs } from './chronometer.service'
 
-const isRunning = ref(false);
-const counter = ref(0);
+const isRunning = ref(false)
+const counter = ref(0)
 
-let previousRafDate = Date.now();
+let previousRafDate = Date.now()
 const { pause: pauseRaf, resume: resumeRaf } = useRafFn(
   () => {
-    const deltaMs = Date.now() - previousRafDate;
-    previousRafDate = Date.now();
-    counter.value += deltaMs;
+    const deltaMs = Date.now() - previousRafDate
+    previousRafDate = Date.now()
+    counter.value += deltaMs
   },
   { immediate: false },
-);
+)
 
 function resume() {
-  previousRafDate = Date.now();
-  resumeRaf();
-  isRunning.value = true;
+  previousRafDate = Date.now()
+  resumeRaf()
+  isRunning.value = true
 }
 
 function pause() {
-  pauseRaf();
-  isRunning.value = false;
+  pauseRaf()
+  isRunning.value = false
 }
 </script>
 

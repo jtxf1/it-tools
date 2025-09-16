@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const modal1 = ref();
+const modal1 = ref()
 </script>
 
 <template>

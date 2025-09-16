@@ -1,6 +1,6 @@
-import { ArrowsLeftRight } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { ArrowsLeftRight } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: translate('tools.base-converter.title'),
@@ -9,4 +9,4 @@ export const tool = defineTool({
   keywords: ['integer', 'number', 'base', 'conversion', 'decimal', 'hexadecimal', 'binary', 'octal', 'base64'],
   component: () => import('./integer-base-converter.vue'),
   icon: ArrowsLeftRight,
-});
+})

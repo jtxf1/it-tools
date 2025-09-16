@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import cronstrue from 'cronstrue';
-import { isValidCron } from 'cron-validator';
-import { useStyleStore } from '@/stores/style.store';
+import { isValidCron } from 'cron-validator'
+import cronstrue from 'cronstrue'
+import { useStyleStore } from '@/stores/style.store'
 
 function isCronValid(v: string) {
-  return isValidCron(v, { allowBlankDay: true, alias: true, seconds: true });
+  return isValidCron(v, { allowBlankDay: true, alias: true, seconds: true })
 }
 
-const styleStore = useStyleStore();
+const styleStore = useStyleStore()
 
-const cron = ref('40 * * * *');
+const cron = ref('40 * * * *')
 const cronstrueConfig = reactive({
   verbose: true,
   dayOfWeekStartIndexZero: true,
   use24HourTimeFormat: true,
   throwExceptionOnParseError: true,
-});
+})
 
 const helpers = [
   {
@@ -90,21 +90,21 @@ const helpers = [
     example: '',
     equivalent: '',
   },
-];
+]
 
 const cronString = computed(() => {
   if (isCronValid(cron.value)) {
-    return cronstrue.toString(cron.value, cronstrueConfig);
+    return cronstrue.toString(cron.value, cronstrueConfig)
   }
-  return ' ';
-});
+  return ' '
+})
 
 const cronValidationRules = [
   {
     validator: (value: string) => isCronValid(value),
     message: 'This cron is invalid',
   },
-];
+]
 </script>
 
 <template>

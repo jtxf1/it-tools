@@ -1,5 +1,5 @@
-import { Mail } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import { Mail } from '@vicons/tabler'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: 'Email normalizer',
@@ -9,4 +9,4 @@ export const tool = defineTool({
   component: () => import('./email-normalizer.vue'),
   icon: Mail,
   createdAt: new Date('2024-08-15'),
-});
+})

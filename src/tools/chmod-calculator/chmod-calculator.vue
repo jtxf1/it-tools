@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { useThemeVars } from 'naive-ui';
+import type { Group, Scope } from './chmod-calculator.types'
 
-import InputCopyable from '../../components/InputCopyable.vue';
-import { computeChmodOctalRepresentation, computeChmodSymbolicRepresentation } from './chmod-calculator.service';
+import { useThemeVars } from 'naive-ui'
+import InputCopyable from '../../components/InputCopyable.vue'
 
-import type { Group, Scope } from './chmod-calculator.types';
+import { computeChmodOctalRepresentation, computeChmodSymbolicRepresentation } from './chmod-calculator.service'
 
-const themeVars = useThemeVars();
+const themeVars = useThemeVars()
 
-const scopes: { scope: Scope; title: string }[] = [
+const scopes: { scope: Scope, title: string }[] = [
   { scope: 'read', title: 'Read (4)' },
   { scope: 'write', title: 'Write (2)' },
   { scope: 'execute', title: 'Execute (1)' },
-];
-const groups: Group[] = ['owner', 'group', 'public'];
+]
+const groups: Group[] = ['owner', 'group', 'public']
 
 const permissions = ref({
   owner: { read: false, write: false, execute: false },
   group: { read: false, write: false, execute: false },
   public: { read: false, write: false, execute: false },
-});
+})
 
-const octal = computed(() => computeChmodOctalRepresentation({ permissions: permissions.value }));
-const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions: permissions.value }));
+const octal = computed(() => computeChmodOctalRepresentation({ permissions: permissions.value }))
+const symbolic = computed(() => computeChmodSymbolicRepresentation({ permissions: permissions.value }))
 </script>
 
 <template>

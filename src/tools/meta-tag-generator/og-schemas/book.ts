@@ -1,4 +1,4 @@
-import type { OGSchemaType } from '../OGSchemaType.type';
+import type { OGSchemaType } from '../OGSchemaType.type'
 
 export const book: OGSchemaType = {
   name: 'Book',
@@ -13,4 +13,4 @@ export const book: OGSchemaType = {
     },
     { type: 'input', label: 'Tag', key: 'book:tag', placeholder: 'Tag words associated with this book...' },
   ],
-};
+}

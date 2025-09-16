@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<{ title?: string }>(), { title: '' });
-const { title } = toRefs(props);
+const props = withDefaults(defineProps<{ title?: string }>(), { title: '' })
+const { title } = toRefs(props)
 
-const isCollapsed = ref(true);
+const isCollapsed = ref(true)
 </script>
 
 <template>

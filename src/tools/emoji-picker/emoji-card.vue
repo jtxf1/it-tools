@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { EmojiInfo } from './emoji.types';
-import { useCopy } from '@/composable/copy';
+import type { EmojiInfo } from './emoji.types'
+import { useCopy } from '@/composable/copy'
 
-const props = (defineProps<{ emojiInfo: EmojiInfo }>());
-const { emojiInfo } = toRefs(props);
+const props = (defineProps<{ emojiInfo: EmojiInfo }>())
+const { emojiInfo } = toRefs(props)
 
-const { copy } = useCopy();
+const { copy } = useCopy()
 </script>
 
 <template>

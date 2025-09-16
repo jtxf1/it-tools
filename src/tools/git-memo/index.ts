@@ -1,6 +1,6 @@
-import { BrandGit } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { BrandGit } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: translate('tools.git-memo.title'),
@@ -9,4 +9,4 @@ export const tool = defineTool({
   keywords: ['git', 'push', 'force', 'pull', 'commit', 'amend', 'rebase', 'merge', 'reset', 'soft', 'hard', 'lease'],
   component: () => import('./git-memo.vue'),
   icon: BrandGit,
-});
+})

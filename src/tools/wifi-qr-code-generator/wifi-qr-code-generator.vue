@@ -1,21 +1,21 @@
 <script setup lang="ts">
+import { useDownloadFileFromBase64 } from '@/composable/downloadBase64'
 import {
   EAPMethods,
   EAPPhase2Methods,
   useWifiQRCode,
-} from './useQRCode';
-import { useDownloadFileFromBase64 } from '@/composable/downloadBase64';
+} from './useQRCode'
 
-const foreground = ref('#000000ff');
-const background = ref('#ffffffff');
+const foreground = ref('#000000ff')
+const background = ref('#ffffffff')
 
-const ssid = ref();
-const password = ref();
-const eapMethod = ref();
-const isHiddenSSID = ref(false);
-const eapAnonymous = ref(false);
-const eapIdentity = ref();
-const eapPhase2Method = ref();
+const ssid = ref()
+const password = ref()
+const eapMethod = ref()
+const isHiddenSSID = ref(false)
+const eapAnonymous = ref(false)
+const eapIdentity = ref()
+const eapPhase2Method = ref()
 
 const { qrcode, encryption } = useWifiQRCode({
   ssid,
@@ -30,9 +30,9 @@ const { qrcode, encryption } = useWifiQRCode({
     foreground,
   },
   options: { width: 1024 },
-});
+})
 
-const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-code.png' });
+const { download } = useDownloadFileFromBase64({ source: qrcode, filename: 'qr-code.png' })
 </script>
 
 <template>

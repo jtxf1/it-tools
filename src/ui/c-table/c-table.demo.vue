@@ -3,7 +3,7 @@ const data = ref([
   { name: 'John', age: 20 },
   { name: 'Jane', age: 24 },
   { name: 'Joe', age: 30 },
-]);
+])
 </script>
 
 <template>

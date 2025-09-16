@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import _ from 'lodash';
+import _ from 'lodash'
 
-import { useMediaRecorder } from './useMediaRecorder';
+import { useMediaRecorder } from './useMediaRecorder'
 
-interface Media { type: 'image' | 'video'; value: string; createdAt: Date }
+interface Media { type: 'image' | 'video', value: string, createdAt: Date }
 
 const {
   videoInputs: cameras,
@@ -15,15 +15,15 @@ const {
   requestPermissions: true,
   constraints: { video: true, audio: true },
   onUpdated() {
-    refreshCurrentDevices();
+    refreshCurrentDevices()
   },
-});
+})
 
-const video = ref<HTMLVideoElement>();
-const medias = ref<Media[]>([]);
-const currentCamera = ref(cameras.value[0]?.deviceId);
-const currentMicrophone = ref(microphones.value[0]?.deviceId);
-const permissionCannotBePrompted = ref(false);
+const video = ref<HTMLVideoElement>()
+const medias = ref<Media[]>([])
+const currentCamera = ref(cameras.value[0]?.deviceId)
+const currentMicrophone = ref(microphones.value[0]?.deviceId)
+const permissionCannotBePrompted = ref(false)
 
 const {
   stream,
@@ -36,7 +36,7 @@ const {
     ...(currentMicrophone.value ? { audio: { deviceId: currentMicrophone.value } } : {}),
   })),
   autoSwitch: true,
-});
+})
 
 const {
   isRecordingSupported,
@@ -48,58 +48,58 @@ const {
   resumeRecording,
 } = useMediaRecorder({
   stream,
-});
+})
 
 onRecordAvailable((value) => {
-  medias.value.unshift({ type: 'video', value, createdAt: new Date() });
-});
+  medias.value.unshift({ type: 'video', value, createdAt: new Date() })
+})
 
 function refreshCurrentDevices() {
   if (_.isNil(currentCamera) || !cameras.value.find(i => i.deviceId === currentCamera.value)) {
-    currentCamera.value = cameras.value[0]?.deviceId;
+    currentCamera.value = cameras.value[0]?.deviceId
   }
 
   if (_.isNil(microphones) || !microphones.value.find(i => i.deviceId === currentMicrophone.value)) {
-    currentMicrophone.value = microphones.value[0]?.deviceId;
+    currentMicrophone.value = microphones.value[0]?.deviceId
   }
 }
 
 function takeScreenshot() {
   if (!video.value) {
-    return;
+    return
   }
 
-  const canvas = document.createElement('canvas');
-  canvas.width = video.value.videoWidth;
-  canvas.height = video.value.videoHeight;
-  canvas.getContext('2d')?.drawImage(video.value, 0, 0);
-  const image = canvas.toDataURL('image/png');
+  const canvas = document.createElement('canvas')
+  canvas.width = video.value.videoWidth
+  canvas.height = video.value.videoHeight
+  canvas.getContext('2d')?.drawImage(video.value, 0, 0)
+  const image = canvas.toDataURL('image/png')
 
-  medias.value.unshift({ type: 'image', value: image, createdAt: new Date() });
+  medias.value.unshift({ type: 'image', value: image, createdAt: new Date() })
 }
 
 watchEffect(() => {
   if (video.value && stream.value) {
-    video.value.srcObject = stream.value;
+    video.value.srcObject = stream.value
   }
-});
+})
 
-onBeforeUnmount(() => stop());
+onBeforeUnmount(() => stop())
 
 async function requestPermissions() {
   try {
-    await ensurePermissions();
+    await ensurePermissions()
   }
   catch (e) {
-    permissionCannotBePrompted.value = true;
+    permissionCannotBePrompted.value = true
   }
 }
 
 function downloadMedia({ type, value, createdAt }: Media) {
-  const link = document.createElement('a');
-  link.href = value;
-  link.download = `${type}-${createdAt.getTime()}.${type === 'image' ? 'png' : 'webm'}`;
-  link.click();
+  const link = document.createElement('a')
+  link.href = value
+  link.download = `${type}-${createdAt.getTime()}.${type === 'image' ? 'png' : 'webm'}`
+  link.click()
 }
 </script>
 

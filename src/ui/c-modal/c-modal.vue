@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { useTheme } from './c-modal.theme';
+import { useTheme } from './c-modal.theme'
 
 defineOptions({
   inheritAttrs: false,
-});
+})
 
-const props = withDefaults(defineProps<{ open?: boolean; centered?: boolean }>(), {
+const props = withDefaults(defineProps<{ open?: boolean, centered?: boolean }>(), {
   open: false,
   centered: true,
-});
+})
 
-const emit = defineEmits(['update:open']);
+const emit = defineEmits(['update:open'])
 
-const isOpen = useVModel(props, 'open', emit, { passive: true });
+const isOpen = useVModel(props, 'open', emit, { passive: true })
 
-const { centered } = toRefs(props);
+const { centered } = toRefs(props)
 
 function close() {
-  isOpen.value = false;
+  isOpen.value = false
 }
 
 function open() {
-  isOpen.value = true;
+  isOpen.value = true
 }
 
 function toggle() {
-  isOpen.value = !isOpen.value;
+  isOpen.value = !isOpen.value
 }
 
 defineExpose({
@@ -33,16 +33,16 @@ defineExpose({
   open,
   toggle,
   isOpen,
-});
+})
 
-const theme = useTheme();
-const modal = ref();
+const theme = useTheme()
+const modal = ref()
 
 onClickOutside(modal, () => {
   if (isOpen.value) {
-    close();
+    close()
   }
-});
+})
 </script>
 
 <template>

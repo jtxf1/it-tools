@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import { useValidation } from '@/composable/validation';
+import { useValidation } from '@/composable/validation'
 
-const value = ref('value');
+const value = ref('value')
 const valueLong = ref(
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, est modi iusto repellendus fuga accusantium atque at magnam aliquam eum explicabo vero quia, nobis quasi quis! Earum amet quam a?',
-);
+)
 
-const validationRules = [{ message: 'Length must be > 10', validator: (value: string) => value.length > 10 }];
+const validationRules = [{ message: 'Length must be > 10', validator: (value: string) => value.length > 10 }]
 
 const validation = useValidation({
   source: value,
   rules: validationRules,
-});
+})
 </script>
 
 <template>

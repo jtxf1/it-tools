@@ -1,6 +1,6 @@
-import { Unlink } from '@vicons/tabler';
-import { defineTool } from '../tool';
-import { translate } from '@/plugins/i18n.plugin';
+import { Unlink } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: translate('tools.url-parser.title'),
@@ -9,4 +9,4 @@ export const tool = defineTool({
   keywords: ['url', 'parser', 'protocol', 'origin', 'params', 'port', 'username', 'password', 'href'],
   component: () => import('./url-parser.vue'),
   icon: Unlink,
-});
+})

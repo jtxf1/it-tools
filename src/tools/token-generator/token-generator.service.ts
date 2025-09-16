@@ -1,4 +1,4 @@
-import { shuffleString } from '@/utils/random';
+import { shuffleString } from '@/utils/random'
 
 export function createToken({
   withUppercase = true,
@@ -20,7 +20,7 @@ export function createToken({
     withLowercase ? 'abcdefghijklmopqrstuvwxyz' : '',
     withNumbers ? '0123456789' : '',
     withSymbols ? '.,;:!?./-"\'#{([-|\\@)]=}*+' : '',
-  ].join('');
+  ].join('')
 
-  return shuffleString(allAlphabet.repeat(length)).substring(0, length);
+  return shuffleString(allAlphabet.repeat(length)).substring(0, length)
 }

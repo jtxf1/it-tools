@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { decodeJwt } from './jwt-parser.service';
-import { useValidation } from '@/composable/validation';
-import { isNotThrowing } from '@/utils/boolean';
-import { withDefaultOnError } from '@/utils/defaults';
+import { useValidation } from '@/composable/validation'
+import { isNotThrowing } from '@/utils/boolean'
+import { withDefaultOnError } from '@/utils/defaults'
+import { decodeJwt } from './jwt-parser.service'
 
 const rawJwt = ref(
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-);
+)
 
 const decodedJWT = computed(() =>
   withDefaultOnError(() => decodeJwt({ jwt: rawJwt.value }), { header: [], payload: [] }),
-);
+)
 
 const sections = [
   { key: 'header', title: 'Header' },
   { key: 'payload', title: 'Payload' },
-] as const;
+] as const
 
 const validation = useValidation({
   source: rawJwt,
@@ -25,7 +25,7 @@ const validation = useValidation({
       message: 'Invalid JWT',
     },
   ],
-});
+})
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { EmojiInfo } from './emoji.types';
+import type { EmojiInfo } from './emoji.types'
 
-const props = withDefaults(defineProps<{ emojiInfos?: EmojiInfo[] }>(), { emojiInfos: () => [] });
-const { emojiInfos } = toRefs(props);
+const props = withDefaults(defineProps<{ emojiInfos?: EmojiInfo[] }>(), { emojiInfos: () => [] })
+const { emojiInfos } = toRefs(props)
 </script>
 
 <template>

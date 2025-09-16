@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { IconDragDrop, IconHeart } from '@tabler/icons-vue';
-import { useHead } from '@vueuse/head';
-import { computed } from 'vue';
-import Draggable from 'vuedraggable';
-import ColoredCard from '../components/ColoredCard.vue';
-import ToolCard from '../components/ToolCard.vue';
-import { useToolStore } from '@/tools/tools.store';
-import { config } from '@/config';
+import { IconDragDrop, IconHeart } from '@tabler/icons-vue'
+import { useHead } from '@vueuse/head'
+import { computed } from 'vue'
+import Draggable from 'vuedraggable'
+import { config } from '@/config'
+import { useToolStore } from '@/tools/tools.store'
+import ColoredCard from '../components/ColoredCard.vue'
+import ToolCard from '../components/ToolCard.vue'
 
-const toolStore = useToolStore();
+const toolStore = useToolStore()
 
-useHead({ title: 'IT Tools - 程序员在线工具' });
-const { t } = useI18n();
+useHead({ title: 'IT Tools - 程序员在线工具' })
+const { t } = useI18n()
 
-const favoriteTools = computed(() => toolStore.favoriteTools);
+const favoriteTools = computed(() => toolStore.favoriteTools)
 
 // Update favorite tools order when drag is finished
 function onUpdateFavoriteTools() {
-  toolStore.updateFavoriteTools(favoriteTools.value); // Update the store with the new order
+  toolStore.updateFavoriteTools(favoriteTools.value) // Update the store with the new order
 }
 </script>
 

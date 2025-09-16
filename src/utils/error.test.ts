@@ -1,28 +1,28 @@
-import { describe, expect, it } from 'vitest';
-import { getErrorMessageIfThrows } from './error';
+import { describe, expect, it } from 'vitest'
+import { getErrorMessageIfThrows } from './error'
 
 describe('error util', () => {
   describe('getErrorMessageIfThrows', () => {
     it('get an error message if the callback throws, undefined instead', () => {
       expect(
         getErrorMessageIfThrows(() => {
-          throw 'message';
+          throw 'message'
         }),
-      ).to.equal('message');
+      ).to.equal('message')
 
       expect(
         getErrorMessageIfThrows(() => {
-          throw new Error('message');
+          throw new Error('message')
         }),
-      ).to.equal('message');
+      ).to.equal('message')
 
       expect(
         getErrorMessageIfThrows(() => {
-          throw { message: 'message' };
+          throw { message: 'message' }
         }),
-      ).to.equal('message');
+      ).to.equal('message')
 
-      expect(getErrorMessageIfThrows(() => {})).to.equal(undefined);
-    });
-  });
-});
+      expect(getErrorMessageIfThrows(() => {})).to.equal(undefined)
+    })
+  })
+})

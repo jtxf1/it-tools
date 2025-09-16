@@ -1,5 +1,5 @@
-import { defineConfig } from 'figue';
-import { z } from 'zod';
+import { defineConfig } from 'figue'
+import { z } from 'zod'
 
 export const { config } = defineConfig(
   {
@@ -72,4 +72,4 @@ export const { config } = defineConfig(
       PACKAGE_VERSION: import.meta.env.PACKAGE_VERSION,
     },
   },
-);
+)

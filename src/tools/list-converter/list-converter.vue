@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core';
-import { convert } from './list-converter.models';
-import type { ConvertOptions } from './list-converter.types';
+import type { ConvertOptions } from './list-converter.types'
+import { useStorage } from '@vueuse/core'
+import { convert } from './list-converter.models'
 
 const sortOrderOptions = [
   {
@@ -14,7 +14,7 @@ const sortOrderOptions = [
     value: 'desc',
     disabled: false,
   },
-];
+]
 
 const conversionConfig = useStorage<ConvertOptions>('list-converter:conversionConfig', {
   lowerCase: false,
@@ -28,10 +28,10 @@ const conversionConfig = useStorage<ConvertOptions>('list-converter:conversionCo
   reverseList: false,
   sortList: null,
   separator: ', ',
-});
+})
 
 function transformer(value: string) {
-  return convert(value, conversionConfig.value);
+  return convert(value, conversionConfig.value)
 }
 </script>
 
