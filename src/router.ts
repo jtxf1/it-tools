@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { config } from './config'
 import { layouts } from './layouts/index'
-import NotFound from './pages/404.page.vue'
+// import NotFound from './pages/404.page.vue'
 import HomePage from './pages/Home.page.vue'
 import { tools } from './tools'
 import { routes as demoRoutes } from './ui/demo/demo.routes'
@@ -27,6 +27,11 @@ const router = createRouter({
       component: HomePage,
     },
     {
+      path: '/index.html',
+      name: 'home1',
+      component: HomePage,
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('./pages/About.vue'),
@@ -34,7 +39,7 @@ const router = createRouter({
     ...toolsRoutes,
     ...toolsRedirectRoutes,
     ...(config.app.env === 'development' ? demoRoutes : []),
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: HomePage },
   ],
 })
 

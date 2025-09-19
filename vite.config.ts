@@ -91,6 +91,14 @@ export default defineConfig({
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 设置最大文件大小为 5 MiB
         globPatterns: ['**/*.{html,js,css,ico,png,svg}'],
+        globIgnores: [
+          '**/*.gz', // 通常不需要排除 html
+          '**/node_modules/**/*',
+        ],
+        // 显式指定需要缓存的文件（可选，用于强制包含）
+        additionalManifestEntries: [
+          { url: 'index.html', revision: `${Date.now()}` }, // 强制添加 index.html
+        ],
       },
     }),
     Components({
