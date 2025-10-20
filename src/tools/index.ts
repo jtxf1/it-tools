@@ -2,9 +2,7 @@ import type { ToolCategory } from './tools.types'
 import { tool as asciiTextDrawer } from './ascii-text-drawer'
 import { tool as base64FileConverter } from './base64-file-converter'
 import { tool as base64StringConverter } from './base64-string-converter'
-
 import { tool as basicAuthGenerator } from './basic-auth-generator'
-
 import { tool as bcrypt } from './bcrypt'
 import { tool as benchmarkBuilder } from './benchmark-builder'
 import { tool as bip39 } from './bip39-generator'
@@ -81,6 +79,7 @@ import { tool as urlEncoder } from './url-encoder'
 import { tool as urlParser } from './url-parser'
 import { tool as userAgentParser } from './user-agent-parser'
 import { tool as uuidGenerator } from './uuid-generator'
+import { tool as variableNaming } from './variable-naming'
 import { tool as wifiQrCodeGenerator } from './wifi-qr-code-generator'
 import { tool as xmlFormatter } from './xml-formatter'
 import { tool as xmlToJson } from './xml-to-json'
@@ -91,7 +90,7 @@ import { tool as yamlViewer } from './yaml-viewer'
 export const toolsByCategory: ToolCategory[] = [
   {
     name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
+    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, variableNaming, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
   },
   {
     name: 'Converter',

@@ -8,8 +8,39 @@ import DiffsViewer from './diff-viewer/diff-viewer.vue'
 const rawLeftJson = ref('')
 const rawRightJson = ref('')
 
-const leftJson = computed(() => withDefaultOnError(() => JSON5.parse(rawLeftJson.value), undefined))
-const rightJson = computed(() => withDefaultOnError(() => JSON5.parse(rawRightJson.value), undefined))
+const leftJson = computed(() => {
+  return withDefaultOnError(() => {
+    // 1. 检查原始值是否存在
+    if (!rawLeftJson.value) {
+      return {} // 返回空对象作为默认
+    }
+
+    // 2. 清理空白
+    const content = rawLeftJson.value.trim()
+
+    // 3. 处理空内容
+    if (content === '') {
+      return {}
+    }
+
+    // 4. 尝试解析
+    return JSON5.parse(content)
+  }, {}) // 解析失败时返回空对象而非undefined
+})
+const rightJson = computed(() => {
+  return withDefaultOnError(() => {
+    // 处理可能的空值或空白内容
+    const content = (rawRightJson.value || '').trim()
+
+    // 如果内容为空，返回空对象作为默认值
+    if (!content) {
+      return {}
+    }
+
+    // 尝试解析 JSON5
+    return JSON5.parse(content)
+  }, {}) // 解析失败时返回空对象，避免 undefined 问题
+})
 
 const jsonValidationRules = [
   {

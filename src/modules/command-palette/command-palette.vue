@@ -13,7 +13,7 @@ const commandPaletteStore = useCommandPaletteStore()
 const { searchPrompt, filteredSearchResult } = storeToRefs(commandPaletteStore)
 
 const keys = useMagicKeys({
-  passive: false,
+  passive: true,
   onEventFired(e) {
     if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') {
       e.preventDefault()
@@ -27,9 +27,9 @@ const keys = useMagicKeys({
 
 whenever(isModalOpen, () => inputRef.value?.focus())
 
-whenever(keys.ctrl_k, open)
-whenever(keys.meta_k, open)
-whenever(keys.escape, close)
+whenever(keys.ctrl_k!, open)
+whenever(keys.meta_k!, open)
+whenever(keys.escape!, close)
 
 function open() {
   return isModalOpen.value = true
