@@ -27,8 +27,19 @@ const parsedDetails = computed(() => {
     return undefined
   }
 
-  const parsed = withDefaultOnError(() => parsePhoneNumber(rawPhone.value, defaultCountryCode.value), undefined)
+  // 预处理：移除所有非数字字符（保留 + 号，因为电话号码可能带国家码前缀）
+  const cleanedPhone = rawPhone.value?.replace(/[^\d+]/g, '') || ''
 
+  // 基本校验：至少包含1个数字（避免空值或纯非数字）
+  const parsed = withDefaultOnError(
+    () => {
+      if (!cleanedPhone.match(/\d/)) {
+        return null// 主动抛出明确错误
+      }
+      return parsePhoneNumber(cleanedPhone, defaultCountryCode.value)
+    },
+    undefined,
+  )
   if (!parsed) {
     return undefined
   }
