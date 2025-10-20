@@ -441,3 +441,6 @@ tools:
   regex-memo:
     description: regex memo
     title: regex memo
+  variable-naming:
+    title: variable naming
+    description: variable naming

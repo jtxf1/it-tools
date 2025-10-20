@@ -342,3 +342,6 @@ tools:
   ascii-text-drawer:
     title: ASCII 文本编辑器
     description: 说明
+  variable-naming:
+    title: 变量命名
+    description: 变量命名

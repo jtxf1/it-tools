@@ -89,8 +89,28 @@ import { tool as yamlViewer } from './yaml-viewer'
 
 export const toolsByCategory: ToolCategory[] = [
   {
+    name: 'Development',
+    components: [
+      variableNaming,
+      gitMemo,
+      randomPortGenerator,
+      crontabGenerator,
+      jsonViewer,
+      jsonMinify,
+      jsonToCsv,
+      sqlPrettify,
+      chmodCalculator,
+      dockerRunToDockerComposeConverter,
+      xmlFormatter,
+      yamlViewer,
+      emailNormalizer,
+      regexTester,
+      regexMemo,
+    ],
+  },
+  {
     name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, variableNaming, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
+    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
   },
   {
     name: 'Converter',
@@ -141,25 +161,6 @@ export const toolsByCategory: ToolCategory[] = [
   {
     name: 'Images and videos',
     components: [qrCodeGenerator, wifiQrCodeGenerator, svgPlaceholderGenerator, cameraRecorder],
-  },
-  {
-    name: 'Development',
-    components: [
-      gitMemo,
-      randomPortGenerator,
-      crontabGenerator,
-      jsonViewer,
-      jsonMinify,
-      jsonToCsv,
-      sqlPrettify,
-      chmodCalculator,
-      dockerRunToDockerComposeConverter,
-      xmlFormatter,
-      yamlViewer,
-      emailNormalizer,
-      regexTester,
-      regexMemo,
-    ],
   },
   {
     name: 'Network',
