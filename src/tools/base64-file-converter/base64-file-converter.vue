@@ -2,7 +2,7 @@
 import type { Ref } from 'vue'
 import { useBase64 } from '@vueuse/core'
 import { useCopy } from '@/composable/copy'
-import { getExtensionFromMimeType, getMimeTypeFromBase64, previewImageFromBase64, useDownloadFileFromBase64Refs } from '@/composable/downloadBase64'
+import { getMimeTypeFromBase64, previewImageFromBase64, useDownloadFileFromBase64Refs } from '@/composable/downloadBase64'
 import { useValidation } from '@/composable/validation'
 import { isValidBase64 } from '@/utils/base64'
 
@@ -30,9 +30,6 @@ watch(
   base64Input,
   (newValue, _) => {
     const { mimeType } = getMimeTypeFromBase64({ base64String: newValue })
-    if (mimeType) {
-      fileExtension.value = getExtensionFromMimeType(mimeType) || fileExtension.value
-    }
   },
 )
 
