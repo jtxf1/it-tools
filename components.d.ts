@@ -117,7 +117,6 @@ declare module 'vue' {
     Ipv4SubnetCalculator: typeof import('./src/tools/ipv4-subnet-calculator/ipv4-subnet-calculator.vue')['default']
     Ipv6UlaGenerator: typeof import('./src/tools/ipv6-ula-generator/ipv6-ula-generator.vue')['default']
     JsonDiff: typeof import('./src/tools/json-diff/json-diff.vue')['default']
-    JsonMinify: typeof import('./src/tools/json-minify/json-minify.vue')['default']
     JsonToCsv: typeof import('./src/tools/json-to-csv/json-to-csv.vue')['default']
     JsonToToml: typeof import('./src/tools/json-to-toml/json-to-toml.vue')['default']
     JsonToXml: typeof import('./src/tools/json-to-xml/json-to-xml.vue')['default']

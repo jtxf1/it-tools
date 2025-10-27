@@ -266,9 +266,6 @@ tools:
   pdf-signature-checker:
     title: PDF签名检查器
     description: 验证PDF文件的签名。签名的PDF文件包含一个或多个签名，可用于确定文件的内容在签名后是否已被更改。
-  json-minify:
-    title: JSON 压缩
-    description: 通过删除不必要的空白来缩小和压缩JSON。
   ulid-generator:
     title: ULID 生成器
     description: 生成随机的通用唯一词典可排序标识符（ULID）。

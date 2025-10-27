@@ -24,13 +24,15 @@ function sortObjectKeys<T>(obj: T): T {
 function formatJson({
   rawJson,
   sortKeys = true,
+  isZip = false,
   indentSize = 3,
 }: {
   rawJson: MaybeRef<string>
   sortKeys?: MaybeRef<boolean>
+  isZip?: MaybeRef<boolean>
   indentSize?: MaybeRef<number>
 }) {
   const parsedObject = JSON5.parse(get(rawJson))
 
-  return JSON.stringify(get(sortKeys) ? sortObjectKeys(parsedObject) : parsedObject, null, get(indentSize))
+  return JSON.stringify(get(sortKeys) ? sortObjectKeys(parsedObject) : parsedObject, null, get(isZip) ? 0 : get(indentSize))
 }
