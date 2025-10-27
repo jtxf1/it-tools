@@ -68,7 +68,6 @@ import { tool as temperatureConverter } from './temperature-converter'
 import { tool as textDiff } from './text-diff'
 import { tool as textStatistics } from './text-statistics'
 import { tool as textToBinary } from './text-to-binary'
-import { tool as textToNatoAlphabet } from './text-to-nato-alphabet'
 import { tool as textToUnicode } from './text-to-unicode'
 import { tool as tokenGenerator } from './token-generator'
 import { tool as tomlToJson } from './toml-to-json'
@@ -120,7 +119,6 @@ export const toolsByCategory: ToolCategory[] = [
       base64FileConverter,
       colorConverter,
       caseConverter,
-      textToNatoAlphabet,
       textToBinary,
       textToUnicode,
       yamlToJson,

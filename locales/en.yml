@@ -382,9 +382,6 @@ tools:
     description: >-
       Get information about a text, the number of characters, the number of
       words, its size in bytes, ...
-  text-to-nato-alphabet:
-    title: Text to NATO alphabet
-    description: Transform text into the NATO phonetic alphabet for oral transmission.
   basic-auth-generator:
     title: Basic auth generator
     description: Generate a base64 basic auth header from a username and password.
