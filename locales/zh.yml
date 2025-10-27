@@ -197,9 +197,6 @@ tools:
   mac-address-lookup:
     title: MAC地址查找
     description: 通过设备的MAC地址查找设备的供应商和制造商。
-  mime-types:
-    title: mime类型
-    description: 将mime类型转换为扩展，反之亦然。
   toml-to-json:
     title: TOML 到 JSON
     description: 解析TOML并将其转换为JSON。

@@ -251,9 +251,6 @@ tools:
   mac-address-lookup:
     title: MAC address lookup
     description: Find the vendor and manufacturer of a device by its MAC address.
-  mime-types:
-    title: MIME types
-    description: Convert MIME types to file extensions and vice-versa.
   toml-to-json:
     title: TOML to JSON
     description: Parse and convert TOML to JSON.

@@ -1,11 +1,8 @@
 import type { Ref } from 'vue'
 import _ from 'lodash'
-import { extension as getExtensionFromMimeType, extension as getMimeTypeFromExtension } from 'mime-types'
 
 export {
-  getExtensionFromMimeType,
   getMimeTypeFromBase64,
-  getMimeTypeFromExtension,
   previewImageFromBase64,
   useDownloadFileFromBase64,
   useDownloadFileFromBase64Refs,
@@ -35,45 +32,15 @@ function getMimeTypeFromBase64({ base64String }: { base64String: string }) {
   return { mimeType: undefined }
 }
 
-function getFileExtensionFromMimeType({
-  mimeType,
-  defaultExtension = 'txt',
-}: {
-  mimeType: string | undefined
-  defaultExtension?: string
-}) {
-  if (mimeType) {
-    return getExtensionFromMimeType(mimeType) ?? defaultExtension
-  }
-
-  return defaultExtension
-}
-
 function downloadFromBase64({ sourceValue, filename, extension, fileMimeType }:
 { sourceValue: string, filename?: string, extension?: string, fileMimeType?: string }) {
   if (sourceValue === '') {
     throw new Error('Base64 string is empty')
   }
 
-  const defaultExtension = extension ?? 'txt'
   const { mimeType } = getMimeTypeFromBase64({ base64String: sourceValue })
-  let base64String = sourceValue
-  if (!mimeType) {
-    const targetMimeType = fileMimeType ?? getMimeTypeFromExtension(defaultExtension)
-    base64String = `data:${targetMimeType};base64,${sourceValue}`
-  }
-
-  const cleanExtension = extension ?? getFileExtensionFromMimeType(
-    { mimeType, defaultExtension },
-  )
-  let cleanFileName = filename ?? `file.${cleanExtension}`
-  if (extension && !cleanFileName.endsWith(`.${extension}`)) {
-    cleanFileName = `${cleanFileName}.${cleanExtension}`
-  }
 
   const a = document.createElement('a')
-  a.href = base64String
-  a.download = cleanFileName
   a.click()
 }
 
