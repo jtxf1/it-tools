@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type {
+  PascalCaseOptions,
+} from 'change-case'
 import {
   camelCase,
   capitalCase,
@@ -14,8 +17,8 @@ import {
 } from 'change-case'
 import InputCopyable from '../../components/InputCopyable.vue'
 
-const baseConfig = {
-  stripRegexp: /[^A-ZØ-öø-ÿ]+/gi,
+const baseConfig: PascalCaseOptions = {
+  // split: /[^A-ZØ-öø-ÿ]+/gi,
 }
 
 const input = ref('lorem ipsum dolor sit amet')
@@ -96,7 +99,11 @@ const inputLabelAlignmentConfig = {
       label="Your string:"
       placeholder="Your string..."
       raw-text
-      v-bind="inputLabelAlignmentConfig"
+      v-bind="{
+        labelPosition: 'left',
+        labelWidth: '120px',
+        labelAlign: 'right',
+      }"
     />
 
     <div my-16px divider />

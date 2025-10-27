@@ -1,24 +1,120 @@
 <script setup lang="ts">
-const ibanExamples = [
-  '驼峰',
-  '下划线',
-  '全小写',
-  '全大写',
-  '横线',
-]
+import type {
+  PascalCaseOptions,
+} from 'change-case'
+import {
+  camelCase,
+  capitalCase,
+  constantCase,
+  dotCase,
+  kebabCase,
+  noCase,
+  pascalCase,
+  pathCase,
+  sentenceCase,
+  snakeCase,
+  trainCase,
+} from 'change-case'
+import InputCopyable from '../../components/InputCopyable.vue'
+
+const baseConfig: PascalCaseOptions = {
+  // split: /[^A-ZØ-öø-ÿ]+/gi,
+}
+
+const input = ref('lorem ipsum dolor sit amet')
+
+const formats = computed(() => [
+  {
+    label: 'Lowercase:',
+    value: input.value.toLocaleLowerCase(),
+  },
+  {
+    label: 'Uppercase:',
+    value: input.value.toLocaleUpperCase(),
+  },
+  {
+    label: 'Camelcase:',
+    value: camelCase(input.value, baseConfig),
+  },
+  {
+    label: 'Capitalcase:',
+    value: capitalCase(input.value, baseConfig),
+  },
+  {
+    label: 'Constantcase:',
+    value: constantCase(input.value, baseConfig),
+  },
+  {
+    label: 'Dotcase:',
+    value: dotCase(input.value, baseConfig),
+  },
+  {
+    label: 'trainCase:',
+    value: trainCase(input.value, baseConfig),
+  },
+  {
+    label: 'Nocase:',
+    value: noCase(input.value, baseConfig),
+  },
+  {
+    label: 'kebabCase:',
+    value: kebabCase(input.value, baseConfig),
+  },
+  {
+    label: 'Pascalcase:',
+    value: pascalCase(input.value, baseConfig),
+  },
+  {
+    label: 'Pathcase:',
+    value: pathCase(input.value, baseConfig),
+  },
+  {
+    label: 'Sentencecase:',
+    value: sentenceCase(input.value, baseConfig),
+  },
+  {
+    label: 'Snakecase:',
+    value: snakeCase(input.value, baseConfig),
+  },
+  {
+    label: 'Mockingcase:',
+    value: input.value
+      .split('')
+      .map((char, index) => (index % 2 === 0 ? char.toUpperCase() : char.toLowerCase()))
+      .join(''),
+  },
+])
+
+const inputLabelAlignmentConfig = {
+  labelPosition: 'left',
+  labelWidth: '120px',
+  labelAlign: 'right',
+}
 </script>
 
 <template>
-  <div>
-    <c-input-text placeholder="请输入变量" test-id="iban-input" />
+  <c-card>
+    <c-input-text
+      v-model:value="input"
+      label="Your string:"
+      placeholder="Your string..."
+      raw-text
+      v-bind="{
+        labelPosition: 'left',
+        labelWidth: '120px',
+        labelAlign: 'right',
+      }"
+    />
 
-    <c-card title="Valid IBAN examples" mt-5>
-      <div v-for="iban in ibanExamples" :key="iban">
-        <c-text-copyable :value="iban" font-mono :displayed-value="undefined" />
-      </div>
-    </c-card>
-  </div>
+    <div my-16px divider />
+
+    <InputCopyable
+      v-for="format in formats"
+      :key="format.label"
+      :value="format.value"
+      :label="format.label"
+      v-bind="inputLabelAlignmentConfig"
+      mb-1
+    />
+  </c-card>
 </template>
-
-<style lang="less" scoped>
-</style>
