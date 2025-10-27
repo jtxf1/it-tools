@@ -85,7 +85,6 @@
     "node-forge": "latest",
     "oui-data": "latest",
     "path-browserify": "latest",
-    "pdf-signature-reader": "latest",
     "pinia": "latest",
     "plausible-tracker": "latest",
     "qrcode": "latest",

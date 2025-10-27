@@ -49,7 +49,6 @@ import { tool as metaTagGenerator } from './meta-tag-generator'
 import { tool as numeronymGenerator } from './numeronym-generator'
 import { tool as otpCodeGeneratorAndValidator } from './otp-code-generator-and-validator'
 import { tool as passwordStrengthAnalyser } from './password-strength-analyser'
-import { tool as pdfSignatureChecker } from './pdf-signature-checker'
 import { tool as percentageCalculator } from './percentage-calculator'
 import { tool as phoneParserAndFormatter } from './phone-parser-and-formatter'
 import { tool as qrCodeGenerator } from './qr-code-generator'
@@ -103,7 +102,7 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser, pdfSignatureChecker],
+    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser],
   },
   {
     name: 'Converter',
