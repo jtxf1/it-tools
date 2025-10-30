@@ -34,8 +34,8 @@ export function matchRegex(regex: string, text: string, flags: string) {
         captures.push({
           name: captureName,
           value: captureValue,
-          start: indices[Number(captureName)][0],
-          end: indices[Number(captureName)][1],
+          start: indices[Number(captureName)]?.[0] ?? 0,
+          end: indices[Number(captureName)]?.[1] ?? 0,
         })
       }
     })
@@ -44,8 +44,8 @@ export function matchRegex(regex: string, text: string, flags: string) {
       groups.push({
         name: groupName,
         value: groupValue,
-        start: indices.groups[groupName][0],
-        end: indices.groups[groupName][1],
+        start: indices.groups[groupName]?.[0] ?? 0,
+        end: indices.groups[groupName]?.[1] ?? 0,
       })
     })
     results.push({

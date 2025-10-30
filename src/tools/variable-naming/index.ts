@@ -1,5 +1,5 @@
-import { ArrowsShuffle } from '@vicons/tabler';
-import { defineTool } from '../tool';
+import { AB } from '@vicons/tabler'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
   name: 'Variable naming',
@@ -7,6 +7,6 @@ export const tool = defineTool({
   description: '',
   keywords: ['variable', 'naming'],
   component: () => import('./variable-naming.vue'),
-  icon: ArrowsShuffle,
+  icon: AB,
   createdAt: new Date('2025-10-20'),
-});
+})
