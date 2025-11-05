@@ -147,6 +147,7 @@
     "unplugin-icons": "latest",
     "unplugin-vue-components": "latest",
     "unplugin-vue-markdown": "latest",
+    "utools-api-types": "^7.2.0",
     "vite": "latest",
     "vite-plugin-pwa": "latest",
     "vite-svg-loader": "latest",

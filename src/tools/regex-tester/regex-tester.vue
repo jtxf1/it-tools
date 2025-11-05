@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import type { ShadowRootExpose } from 'vue-shadow-dom'
 import { render } from '@regexper/render'
+import { useThemeVars } from 'naive-ui'
 import RandExp from 'randexp'
 import { useQueryParamOrStorage } from '@/composable/queryParams'
 import { useValidation } from '@/composable/validation'
+
+import Memo from './regex-memo.content.md'
 import { matchRegex } from './regex-tester.service'
 
+const themeVars = useThemeVars()
 const regex = useQueryParamOrStorage({ name: 'regex', storageName: 'regex-tester:regex', defaultValue: '' })
 const text = ref('')
 const global = ref(true)
@@ -193,103 +197,7 @@ watchEffect(
     </div>
 
     <div class="child">
-      <c-card title="Regex" mb-1>
-        <c-input-text
-          v-model:value="regex"
-          label="Regex to test:"
-          placeholder="Put the regex to test"
-          multiline
-          rows="3"
-          :validation="regexValidation"
-        />
-        <router-link target="_blank" to="/regex-memo" mb-1 mt-1>
-          See Regular Expression Cheatsheet
-        </router-link>
-        <n-space>
-          <n-checkbox v-model:checked="global">
-            <span title="Global search">Global search. (<code>g</code>)</span>
-          </n-checkbox>
-          <n-checkbox v-model:checked="ignoreCase">
-            <span title="Case-insensitive search">Case-insensitive search. (<code>i</code>)</span>
-          </n-checkbox>
-          <n-checkbox v-model:checked="multiline">
-            <span title="Allows ^ and $ to match next to newline characters.">Multiline(<code>m</code>)</span>
-          </n-checkbox>
-          <n-checkbox v-model:checked="dotAll">
-            <span title="Allows . to match newline characters.">Singleline(<code>s</code>)</span>
-          </n-checkbox>
-          <n-checkbox v-model:checked="unicode">
-            <span title="Unicode; treat a pattern as a sequence of Unicode code points.">Unicode(<code>u</code>)</span>
-          </n-checkbox>
-          <n-checkbox v-model:checked="unicodeSets">
-            <span title="An upgrade to the u mode with more Unicode features.">Unicode Sets (<code>v</code>)</span>
-          </n-checkbox>
-        </n-space>
-
-        <n-divider />
-
-        <c-input-text
-          v-model:value="text"
-          label="Text to match:"
-          placeholder="Put the text to match"
-          multiline
-          rows="5"
-        />
-      </c-card>
-
-      <c-card title="Matches" mb-1 mt-3>
-        <n-table v-if="results?.length > 0">
-          <thead>
-            <tr>
-              <th scope="col">
-                Index in text
-              </th>
-              <th scope="col">
-                Value
-              </th>
-              <th scope="col">
-                Captures
-              </th>
-              <th scope="col">
-                Groups
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="match of results" :key="match.index">
-              <td>{{ match.index }}</td>
-              <td>{{ match.value }}</td>
-              <td>
-                <ul>
-                  <li v-for="capture in match.captures" :key="capture.name">
-                    "{{ capture.name }}" = {{ capture.value }} [{{ capture.start }} - {{ capture.end }}]
-                  </li>
-                </ul>
-              </td>
-              <td>
-                <ul>
-                  <li v-for="group in match.groups" :key="group.name">
-                    "{{ group.name }}" = {{ group.value }} [{{ group.start }} - {{ group.end }}]
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </n-table>
-        <c-alert v-else>
-          No match
-        </c-alert>
-      </c-card>
-
-      <c-card title="Sample matching text" mt-3>
-        <pre style="white-space: pre-wrap; word-break: break-all;">{{ sample }}</pre>
-      </c-card>
-
-      <c-card title="Regex Diagram" style="overflow-x: scroll;" mt-3>
-        <shadow-root ref="visualizerSVG">
-&#xa0;
-        </shadow-root>
-      </c-card>
+      <Memo />
     </div>
   </div>
 </template>
@@ -302,14 +210,29 @@ watchEffect(
   display: flex; // 启用 Flex 布局
   flex-wrap: nowrap; // 强制子元素不换行（默认值，可省略但显式更清晰）
   margin: 0 auto; // 可选：让父容器水平居中
-  gap: 20px; // 可选：子元素之间的间距（Less 支持直接写数值）
-
+  flex: 0 1 auto;
   // 子元素样式
   .child {
     max-width: 600px; // 子元素最大宽度
     flex-shrink: 0; // 防止子元素被压缩（内容超出时保持最大宽度）
-    padding: 20px; // 内边距
-    background: #f0f0f0; // 背景色（方便演示）
   }
+}
+
+::v-deep(pre) {
+  margin: 0;
+  padding: 15px 22px;
+  background-color: v-bind('themeVars.cardColor');
+  border-radius: 4px;
+  overflow: auto;
+}
+::v-deep(table) {
+  border-collapse: collapse;
+}
+::v-deep(table), ::v-deep(td), ::v-deep(th) {
+  border: 1px solid v-bind('themeVars.textColor1');
+  padding: 5px;
+}
+::v-deep(a) {
+  color: v-bind('themeVars.textColor1');
 }
 </style>

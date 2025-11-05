@@ -418,9 +418,6 @@ tools:
   ascii-text-drawer:
     description: ascii text drawer
     title: ascii text drawer
-  regex-memo:
-    description: regex memo
-    title: regex memo
   variable-naming:
     title: variable naming
     description: variable naming

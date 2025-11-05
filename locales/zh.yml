@@ -321,9 +321,6 @@ tools:
   regex-tester:
     title: 正则表达式测试器
     description: 说明
-  regex-memo:
-    title: 正则表达式备忘录
-    description: 说明
   ascii-text-drawer:
     title: ASCII 文本编辑器
     description: 说明

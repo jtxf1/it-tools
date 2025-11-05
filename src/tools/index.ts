@@ -52,7 +52,6 @@ import { tool as passwordStrengthAnalyser } from './password-strength-analyser'
 import { tool as percentageCalculator } from './percentage-calculator'
 import { tool as phoneParserAndFormatter } from './phone-parser-and-formatter'
 import { tool as qrCodeGenerator } from './qr-code-generator'
-import { tool as regexMemo } from './regex-memo'
 import { tool as regexTester } from './regex-tester'
 import { tool as romanNumeralConverter } from './roman-numeral-converter'
 import { tool as rsaKeyPairGenerator } from './rsa-key-pair-generator'
@@ -97,7 +96,6 @@ export const toolsByCategory: ToolCategory[] = [
       yamlViewer,
       emailNormalizer,
       regexTester,
-      regexMemo,
     ],
   },
   {
