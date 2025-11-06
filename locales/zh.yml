@@ -257,9 +257,6 @@ tools:
   device-information:
     title: 设备信息
     description: 获取有关当前设备的信息（屏幕大小、像素比率、用户代理…）
-  ulid-generator:
-    title: ULID 生成器
-    description: 生成随机的通用唯一词典可排序标识符（ULID）。
   string-obfuscator:
     title: 字符串混淆器
     description: 混淆字符串（如秘密、IBAN 或令牌），使其可共享和可识别，而不泄露其内容。
@@ -270,9 +267,9 @@ tools:
     title: YAML到JSON转换器
     description: 使用此在线转换器将YAML转换为JSON。
   uuid-generator:
-    title: UUIDs 生成器
+    title: 唯一IDs 生成器
     description: >-
-      通用唯一标识符（UUID）是一个128位数字，用于标识计算机系统中的信息。可能的UUID数量为16^32，即2^128或约3.4x10^38（这是一个很大的数字！）。
+      通用唯一标识符（UUID、ULID）是一个128位数字，用于标识计算机系统中的信息。可能的UUID数量为16^32，即2^128或约3.4x10^38（这是一个很大的数字！）。
   ipv4-address-converter:
     title: Ipv4地址转换器
     description: 在ipv6中，将ip地址转换为十进制、二进制、十六进制或事件

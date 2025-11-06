@@ -67,7 +67,6 @@ import { tool as textToUnicode } from './text-to-unicode'
 import { tool as tokenGenerator } from './token-generator'
 import { tool as tomlToJson } from './toml-to-json'
 import { tool as tomlToYaml } from './toml-to-yaml'
-import { tool as ulidGenerator } from './ulid-generator'
 import { tool as urlEncoder } from './url-encoder'
 import { tool as urlParser } from './url-parser'
 import { tool as userAgentParser } from './user-agent-parser'
@@ -99,7 +98,7 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, ulidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser],
+    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser],
   },
   {
     name: 'Converter',
