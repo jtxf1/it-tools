@@ -143,9 +143,6 @@ tools:
   eta-calculator:
     title: ETA 计算器
     description: ETA（估计到达时间）计算器，用于知道任务的近似结束时间，例如下载的结束时刻。
-  roman-numeral-converter:
-    title: 罗马数字转换器
-    description: 将罗马数字转换为数字，并将数字转换为罗马数字。
   hmac-generator:
     title: Hmac 生成器
     description: 使用密钥和您喜欢的哈希函数计算基于哈希的消息身份验证代码（HMAC）。

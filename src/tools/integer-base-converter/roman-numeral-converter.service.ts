@@ -22,9 +22,9 @@ export function arabicToRoman(num: number) {
   }
   let roman = ''
   for (const i in lookup) {
-    while (num >= lookup[i]) {
+    while (num >= lookup[i]!) {
       roman += i
-      num -= lookup[i]
+      num -= lookup[i]!
     }
   }
   return roman
@@ -41,5 +41,15 @@ export function romanToArabic(s: string) {
     return null
   }
   const map: { [key: string]: number } = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 }
-  return [...s].reduce((r, c, i, s) => (map[s[i + 1]] > map[c] ? r - map[c] : r + map[c]), 0)
+  return [...s].reduce((result, currentChar, index, arr) => {
+    const nextChar = arr[index + 1]
+    // 用!断言map中的值一定存在（因为输入已验证）
+    const currentValue = map[currentChar]!
+    if (nextChar) {
+      const nextValue = map[nextChar]!
+      return nextValue > currentValue ? result - currentValue : result + currentValue
+    }
+    // 最后一个字符直接累加
+    return result + currentValue
+  }, 0)
 }
