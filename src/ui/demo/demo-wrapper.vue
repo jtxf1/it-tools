@@ -1,10 +1,57 @@
 <script lang="ts" setup>
+import type { RouteRecordName } from 'vue-router'
 import _ from 'lodash'
 import { demoRoutes } from './demo.routes'
 
 const route = useRoute()
+const a = [
+  'c-alert',
+  'c-button',
+  'c-buttons-select',
+  'c-card',
+  'c-collapse',
+  'c-file-upload',
+  'c-input-text',
+  'c-link',
+  'c-markdown',
+  'c-modal-value',
+  'c-modal',
+  'c-select',
+  'c-table',
+  'c-text-copyable',
+  'c-tooltip',
+]
+const b = [
+  'c-alert 提示',
+  'c-button 按钮',
+  'c-buttons-select 选择',
+  'c-card 卡片',
+  'c-collapse 折叠',
+  'c-file-upload 文件上传',
+  'c-input-text 输入框',
+  'c-link 链接',
+  'c-markdown md文档',
+  'c-modal-value 弹框按钮',
+  'c-modal 弹框',
+  'c-select 下拉选框',
+  'c-table 表格',
+  'c-text-copyable 复制',
+  'c-tooltip 提示文本',
+]
 
 const componentName = computed(() => _.startCase(String(route.name).replace(/^c-/, '')))
+// 替换 const 箭头函数为 function 声明
+function getSafeIndex(name: RouteRecordName | string) {
+  // 处理 undefined 或非 string 类型（如 symbol）
+  if (name === undefined || typeof name !== 'string') {
+    return name// 或返回默认值，如 'unknown'
+  }
+  const c = a.indexOf(name)
+  if (c >= 0) {
+    return b[c]!
+  }
+  return name
+}
 </script>
 
 <template>
@@ -23,7 +70,7 @@ const componentName = computed(() => _.startCase(String(route.name).replace(/^c-
           important:text-left
           :type="route.name === name ? 'primary' : 'default'"
         >
-          {{ name }}
+          {{ getSafeIndex(name) }}
         </c-button>
       </div>
 
