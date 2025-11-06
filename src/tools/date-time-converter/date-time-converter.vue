@@ -73,7 +73,7 @@ const formats: DateFormat[] = [
   {
     name: 'Timestamp',
     fromDate: date => String(getTime(date)),
-    toDate: ms => parseJSON(+ms),
+    toDate: ms => parseJSON(`${+ms}`),
     formatMatcher: date => isTimestamp(date),
   },
   {
@@ -104,7 +104,7 @@ const normalizedDate = computed(() => {
     return now.value
   }
 
-  const { toDate } = formats[formatIndex.value]
+  const { toDate } = formats[formatIndex.value]!
 
   try {
     return toDate(inputDate.value)
@@ -133,7 +133,7 @@ const validation = useValidation({
             return true
           }
 
-          const maybeDate = formats[formatIndex.value].toDate(value)
+          const maybeDate = formats[formatIndex.value]!.toDate(value)
           return isDate(maybeDate) && isValid(maybeDate)
         }, false),
     },
