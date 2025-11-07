@@ -59,14 +59,3 @@ const rawYamlValidation = useValidation({
     <TextareaCopyable :value="cleanYaml" language="yaml" :follow-height-of="inputElement" />
   </n-form-item>
 </template>
-
-<style lang="less" scoped>
-.result-card {
-  position: relative;
-  .copy-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-}
-</style>
