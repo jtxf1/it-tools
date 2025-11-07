@@ -77,7 +77,6 @@ import { tool as xmlFormatter } from './xml-formatter'
 import { tool as xmlToJson } from './xml-to-json'
 import { tool as yamlToJson } from './yaml-to-json-converter'
 import { tool as yamlToToml } from './yaml-to-toml'
-import { tool as yamlViewer } from './yaml-viewer'
 
 export const toolsByCategory: ToolCategory[] = [
   {
@@ -91,7 +90,6 @@ export const toolsByCategory: ToolCategory[] = [
       chmodCalculator,
       dockerRunToDockerComposeConverter,
       xmlFormatter,
-      yamlViewer,
       emailNormalizer,
       regexTester,
     ],

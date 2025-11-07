@@ -191,7 +191,6 @@ declare module 'vue' {
     XmlToJson: typeof import('./src/tools/xml-to-json/xml-to-json.vue')['default']
     YamlToJson: typeof import('./src/tools/yaml-to-json-converter/yaml-to-json.vue')['default']
     YamlToToml: typeof import('./src/tools/yaml-to-toml/yaml-to-toml.vue')['default']
-    YamlViewer: typeof import('./src/tools/yaml-viewer/yaml-viewer.vue')['default']
   }
 }
 
@@ -376,5 +375,4 @@ declare global {
   const XmlToJson: typeof import('./src/tools/xml-to-json/xml-to-json.vue')['default']
   const YamlToJson: typeof import('./src/tools/yaml-to-json-converter/yaml-to-json.vue')['default']
   const YamlToToml: typeof import('./src/tools/yaml-to-toml/yaml-to-toml.vue')['default']
-  const YamlViewer: typeof import('./src/tools/yaml-viewer/yaml-viewer.vue')['default']
 }

@@ -265,8 +265,8 @@ tools:
     title: WiFi QR Code generator
     description: Generate and download QR codes for quick connections to WiFi networks.
   xml-formatter:
-    title: XML formatter
-    description: Prettify your XML string into a friendly, human-readable format.
+    title: XML/YAML formatter
+    description: Prettify your XML/YAML string into a friendly, human-readable format.
   temperature-converter:
     title: Temperature converter
     description: >-

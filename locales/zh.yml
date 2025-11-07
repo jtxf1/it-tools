@@ -207,8 +207,8 @@ tools:
     title: WiFi 二维码生成器
     description: 生成和下载QR码以快速连接到WiFi网络。
   xml-formatter:
-    title: XML 格式化
-    description: 将XML字符串修饰为友好的可读格式。
+    title: XML/YAML 格式化
+    description: 将XML/YAML字符串修饰为友好的可读格式。
   temperature-converter:
     title: 温度转换器
     description: 开尔文、摄氏度、华氏度、兰金、德莱尔、牛顿、雷奥穆尔和罗默温度度数转换。

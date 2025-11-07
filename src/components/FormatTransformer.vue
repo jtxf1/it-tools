@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { UseValidationRule } from '@/composable/validation'
 import _ from 'lodash'
+import { computed, ref, toRefs, watch } from 'vue' // 确保导入watch
 import CInputText from '@/ui/c-input-text/c-input-text.vue'
 
 const props = withDefaults(
@@ -30,6 +31,16 @@ const { transformer, inputValidationRules, inputLabel, outputLabel, outputLangua
 const inputElement = ref<typeof CInputText>()
 
 const input = ref(inputDefault.value)
+
+// 关键：监听inputDefault的变化，同步更新input
+watch(
+  inputDefault, // 监听inputDefault（ref对象）
+  (newVal) => {
+    input.value = newVal // 当inputDefault变化时，更新input的值
+  },
+)
+
+// 注意：这里的output应该依赖input的值，而不是inputDefault（否则输入框手动修改后output不会更新）
 const output = computed(() => transformer.value(input.value))
 </script>
 
