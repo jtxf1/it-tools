@@ -10,5 +10,6 @@
     {
       "path": "./tsconfig.vitest.json"
     }
-  ]
+  ],
+  "exclude": ["node_modules","_templates", ".github", ".vscode", "locales", "public", "scripts", "dist", "src/test/**/*.vue"]
 }
