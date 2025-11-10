@@ -4,7 +4,7 @@ import DemoHome from './demo-home.page.vue'
 const demoPages = import.meta.glob('../*/*.demo.vue', { eager: true })
 
 export const demoRoutes = Object.keys(demoPages).map((demoComponentPath) => {
-  const [, , fileName] = demoComponentPath.split('/')
+  const [, , fileName = ''] = demoComponentPath.split('/')
   const demoComponentName = fileName.split('.').shift()
 
   return {
