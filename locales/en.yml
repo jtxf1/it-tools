@@ -401,9 +401,6 @@ tools:
   safelink-decoder:
     title: safelink decoder
     description: description
-  email-normalizer:
-    title: email normalizer
-    description: description
   regex-tester:
     title: regex tester
     description: description

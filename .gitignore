@@ -27,6 +27,8 @@ coverage
 *.sln
 *.sw?
 pnpm-workspace.yaml
+components.d.ts
+pnpm-lock.yaml
 
 .env
 /test-results/
