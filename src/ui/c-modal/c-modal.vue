@@ -5,16 +5,17 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const props = withDefaults(defineProps<{ open?: boolean, centered?: boolean }>(), {
+const props = withDefaults(defineProps<{ open?: boolean, centered?: boolean, overlay?: boolean }>(), {
   open: false,
   centered: true,
+  overlay: true,
 })
 
 const emit = defineEmits(['update:open'])
 
 const isOpen = useVModel(props, 'open', emit, { passive: true })
 
-const { centered } = toRefs(props)
+const { centered, overlay } = toRefs(props)
 
 function close() {
   isOpen.value = false
@@ -47,8 +48,8 @@ onClickOutside(modal, () => {
 
 <template>
   <transition>
-    <div v-if="isOpen" class="c-modal--overlay" fixed left-0 top-0 z-10 h-full w-full flex justify-center px-2 :class="{ 'items-center': centered }">
-      <div ref="modal" class="c-modal--container" v-bind="$attrs" max-w-xl w-full flex-grow rounded-md pa-24px>
+    <div v-if="isOpen" fixed left-0 top-0 z-10 h-full w-full flex justify-center px-2 :class="{ 'items-center': centered, 'c-modal--overlay': overlay, 'c-modal--overlay-transparent': !overlay }">
+      <div ref="modal" :class="{ 'c-modal--container': overlay, 'c-modal--overlay-transparent': !overlay }" v-bind="$attrs" max-w-xl w-full flex-grow rounded-md pa-24px>
         <slot />
       </div>
     </div>
@@ -58,6 +59,9 @@ onClickOutside(modal, () => {
 <style scoped lang="less">
 .c-modal--overlay {
   background-color: rgba(0, 0, 0, 0.5);
+}
+.c-modal--overlay-transparent {
+  background-color: transparent;
 }
 
 .c-modal--container {

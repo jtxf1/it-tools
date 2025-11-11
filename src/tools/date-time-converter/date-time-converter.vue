@@ -30,10 +30,30 @@ import {
 } from './date-time-converter.models'
 
 const inputDate = ref('')
+const modal1 = ref()
+const formattedValue = ref(null)
 
 const toDate: ToDateMapper = date => new Date(date)
 
 const formats: DateFormat[] = [
+  {
+    name: 'ISO 9075',
+    fromDate: formatISO9075,
+    toDate: parseISO,
+    formatMatcher: date => isISO9075DateString(date),
+  },
+  {
+    name: 'Unix timestamp',
+    fromDate: date => String(getUnixTime(date)),
+    toDate: sec => fromUnixTime(+sec),
+    formatMatcher: date => isUnixTimestamp(date),
+  },
+  {
+    name: 'Timestamp',
+    fromDate: date => String(getTime(date)),
+    toDate: ms => parseJSON(`${+ms}`),
+    formatMatcher: date => isTimestamp(date),
+  },
   {
     name: 'JS locale date string',
     fromDate: date => date.toString(),
@@ -47,12 +67,6 @@ const formats: DateFormat[] = [
     formatMatcher: date => isISO8601DateTimeString(date),
   },
   {
-    name: 'ISO 9075',
-    fromDate: formatISO9075,
-    toDate: parseISO,
-    formatMatcher: date => isISO9075DateString(date),
-  },
-  {
     name: 'RFC 3339',
     fromDate: formatRFC3339,
     toDate,
@@ -63,18 +77,6 @@ const formats: DateFormat[] = [
     fromDate: formatRFC7231,
     toDate,
     formatMatcher: date => isRFC7231DateString(date),
-  },
-  {
-    name: 'Unix timestamp',
-    fromDate: date => String(getUnixTime(date)),
-    toDate: sec => fromUnixTime(+sec),
-    formatMatcher: date => isUnixTimestamp(date),
-  },
-  {
-    name: 'Timestamp',
-    fromDate: date => String(getTime(date)),
-    toDate: ms => parseJSON(`${+ms}`),
-    formatMatcher: date => isTimestamp(date),
   },
   {
     name: 'UTC format',
@@ -93,6 +95,25 @@ const formats: DateFormat[] = [
     fromDate: date => dateToExcelFormat(date),
     toDate: excelFormatToDate,
     formatMatcher: isExcelFormat,
+  },
+  {
+    name: 'YYYY-MM-DD',
+    fromDate: date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
+    toDate: (dateString) => {
+      const [year, month, day] = dateString.split('-').map(Number)
+      return new Date(year!, month! - 1, day)
+    },
+    formatMatcher: date => /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(new Date(date).getTime()),
+  },
+  {
+    name: 'HH:mm:ss',
+    fromDate: date => `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`,
+    toDate: (timeString) => {
+      const [hours, minutes, seconds] = timeString.split(':').map(Number)
+      const now = new Date()
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, seconds)
+    },
+    formatMatcher: date => /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/.test(date),
   },
 ]
 
@@ -147,27 +168,47 @@ function formatDateUsingFormatter(formatter: (date: Date) => string, date?: Date
 
   return withDefaultOnError(() => formatter(date), '')
 }
+
+function onChange1(v: number) {
+  console.error(`Change-1 ${v}`)
+  formatIndex.value = 0
+  modal1.value.close()
+  inputDate.value = formatDateUsingFormatter(formatISO9075, new Date(v))
+}
+
+function onClear() {
+  modal1.value.close()
+}
 </script>
 
 <template>
   <div>
     <div flex gap-2>
-      <c-input-text
-        v-model:value="inputDate"
-        autofocus
-        placeholder="Put your date string here..."
-        clearable
-        test-id="date-time-converter-input"
-        :validation="validation"
-        @update:value="onDateInputChanged"
-      />
+      <n-input-group>
+        <c-input-text
+          v-model:value="inputDate"
+          autofocus
+          placeholder="Put your date string here..."
+          clearable
+          test-id="date-time-converter-input"
+          :validation="validation"
+          @update:value="onDateInputChanged"
+        />
 
-      <c-select
-        v-model:value="formatIndex"
-        style="flex: 0 0 170px"
-        :options="formats.map(({ name }, i) => ({ label: name, value: i }))"
-        data-test-id="date-time-converter-format-select"
-      />
+        <c-button @click="() => modal1?.open()">
+          选择时间
+        </c-button>
+
+        <c-modal ref="modal1" :overlay="false" flex justify-center items-center>
+          <n-date-picker v-model:value="formattedValue" panel type="datetime" clearable @clear="onClear" @update:value="onChange1" />
+        </c-modal>
+        <c-select
+          v-model:value="formatIndex"
+          style="flex: 0 0 170px"
+          :options="formats.map(({ name }, i) => ({ label: name, value: i }))"
+          data-test-id="date-time-converter-format-select"
+        />
+      </n-input-group>
     </div>
 
     <n-divider />
