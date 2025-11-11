@@ -5,4 +5,5 @@ export interface DateFormat {
   fromDate: (date: Date) => string
   toDate: (value: string) => Date
   formatMatcher: (dateString: string) => boolean
+  hide?: boolean
 }

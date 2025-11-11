@@ -97,13 +97,14 @@ const formats: DateFormat[] = [
     formatMatcher: isExcelFormat,
   },
   {
-    name: 'YYYY-MM-DD',
+    name: 'yyyy-MM-dd',
     fromDate: date => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
     toDate: (dateString) => {
       const [year, month, day] = dateString.split('-').map(Number)
       return new Date(year!, month! - 1, day)
     },
     formatMatcher: date => /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(new Date(date).getTime()),
+    hide: true,
   },
   {
     name: 'HH:mm:ss',
@@ -114,6 +115,7 @@ const formats: DateFormat[] = [
       return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, seconds)
     },
     formatMatcher: date => /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/.test(date),
+    hide: true,
   },
 ]
 
@@ -205,7 +207,7 @@ function onClear() {
         <c-select
           v-model:value="formatIndex"
           style="flex: 0 0 170px"
-          :options="formats.map(({ name }, i) => ({ label: name, value: i }))"
+          :options="formats.filter(format => !format.hide).map(({ name }, i) => ({ label: name, value: i }))"
           data-test-id="date-time-converter-format-select"
         />
       </n-input-group>
