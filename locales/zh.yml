@@ -158,9 +158,6 @@ tools:
   base64-string-converter:
     title: Base64 字符串编码/解码
     description: 将字符串编码和解码为其 Base64 格式表示形式即可。
-  toml-to-yaml:
-    title: TOML 到 YAML
-    description: Parse and convert TOML to YAML.
   math-evaluator:
     title: 数学计算器
     description: 计算数学表达式的计算器。您可以使用sqrt、cos、sin、abs等函数。
@@ -222,7 +219,7 @@ tools:
     title: HTML所见即所得编辑器
     description: 在线HTML编辑器具有功能丰富的所见即所得编辑器，立即获得内容的源代码。
   yaml-to-toml:
-    title: YAML 到 TOML
+    title: YAML 🔁 TOML
     description: 解析YAML并将其转换为TOML。
   mac-address-generator:
     title: MAC 地址生成器
@@ -264,7 +261,7 @@ tools:
     title: 整数基转换器
     description: 在不同的基数（十进制、十六进制、二进制、八进制、base64…）之间转换数字
   yaml-to-json-converter:
-    title: YAML到JSON转换器
+    title: YAML🔁JSON转换器
     description: 使用此在线转换器将YAML转换为JSON。
   uuid-generator:
     title: 唯一IDs 生成器

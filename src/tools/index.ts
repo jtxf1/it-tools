@@ -65,7 +65,6 @@ import { tool as textToBinary } from './text-to-binary'
 import { tool as textToUnicode } from './text-to-unicode'
 import { tool as tokenGenerator } from './token-generator'
 import { tool as tomlToJson } from './toml-to-json'
-import { tool as tomlToYaml } from './toml-to-yaml'
 import { tool as urlEncoder } from './url-encoder'
 import { tool as urlParser } from './url-parser'
 import { tool as userAgentParser } from './user-agent-parser'
@@ -114,7 +113,6 @@ export const toolsByCategory: ToolCategory[] = [
       jsonToCsv,
       listConverter,
       tomlToJson,
-      tomlToYaml,
       xmlToJson,
       jsonToXml,
       markdownToHtml,

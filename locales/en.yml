@@ -199,9 +199,6 @@ tools:
   base64-string-converter:
     title: Base64 string encoder/decoder
     description: Simply encode and decode strings into their base64 representation.
-  toml-to-yaml:
-    title: TOML to YAML
-    description: Parse and convert TOML to YAML.
   math-evaluator:
     title: Math evaluator
     description: >-
@@ -286,7 +283,7 @@ tools:
       Online, feature-rich WYSIWYG HTML editor which generates the source code
       of the content immediately.
   yaml-to-toml:
-    title: YAML to TOML
+    title: YAML 🔁 TOML
     description: Parse and convert YAML to TOML.
   mac-address-generator:
     title: MAC address generator
@@ -344,7 +341,7 @@ tools:
       Convert a number between different bases (decimal, hexadecimal, binary,
       octal, base64, ...)
   yaml-to-json-converter:
-    title: YAML to JSON converter
+    title: YAML 🔁 JSON converter
     description: Simply convert YAML to JSON with this online live converter.
   uuid-generator:
     title: Sole IDs generator

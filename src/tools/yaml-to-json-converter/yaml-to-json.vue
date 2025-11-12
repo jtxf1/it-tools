@@ -37,10 +37,12 @@ function default_click() {
 </script>
 
 <template>
-  <div block mx-auto my-4>
-    <c-button class="isExclusive" @click="default_click()">
-      {{ tooltipText }}
-    </c-button>
+  <div style="flex: 0 0 100%">
+    <div style="margin: 0 auto; max-width: 600px" flex justify-center gap-3>
+      <c-button class="isExclusive" @click="default_click()">
+        {{ tooltipText }}
+      </c-button>
+    </div>
   </div>
   <format-transformer
     v-if="defaultIf"
