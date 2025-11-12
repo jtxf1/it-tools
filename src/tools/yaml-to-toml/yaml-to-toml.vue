@@ -3,7 +3,7 @@ import type { UseValidationRule } from '@/composable/validation'
 import { parse as parseToml, stringify as stringifyToml } from 'iarna-toml-esm'
 import { parse as parseYaml, stringify as stringifyToYaml } from 'yaml'
 import { withDefaultOnError } from '../../utils/defaults'
-import { isValidToml } from '../toml-to-json/toml.services'
+import { isValidToml } from '../json-to-toml/toml.services'
 
 const defaultIf = ref(true)
 const name = ref('YAML')
