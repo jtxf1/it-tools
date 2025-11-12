@@ -9,7 +9,7 @@ import { useTheme } from './c-select.theme'
 const props = withDefaults(
   defineProps<{
     options?: CSelectOption<T>[] | string[]
-    value?: T
+    value?: T | string | number
     placeholder?: string
     size?: 'small' | 'medium' | 'large'
     searchable?: boolean
@@ -62,7 +62,7 @@ whenever(() => isOpen.value, () => {
 })
 
 onClickOutside(elementRef, close)
-whenever(keys.escape, close)
+whenever(keys.escape!, close)
 
 watch(
   value,
@@ -110,7 +110,7 @@ function handleKeydown(event: KeyboardEvent) {
     const valueCanBeSelected = isOpen.value && focusIndex.value !== -1
 
     if (valueCanBeSelected) {
-      selectOption({ option: filteredOptions.value[focusIndex.value] })
+      selectOption({ option: filteredOptions.value[focusIndex.value]! })
     }
     else {
       toggleOpen()

@@ -130,6 +130,9 @@ function blur() {
     inputRef.value.blur?.()
   }
 }
+function clear() {
+  value.value = ''
+}
 
 onMounted(() => {
   if (autofocus.value) {
@@ -141,6 +144,7 @@ defineExpose({
   inputWrapperRef,
   focus,
   blur,
+  clear,
 })
 </script>
 

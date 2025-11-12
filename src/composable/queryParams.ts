@@ -1,3 +1,4 @@
+import type { Ref, UnwrapRef } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
 import { computed } from 'vue'
@@ -41,7 +42,10 @@ function useQueryParam<T>({ name, defaultValue }: { name: string, defaultValue: 
   })
 }
 
-function useQueryParamOrStorage<T>({ name, storageName, defaultValue }: { name: string, storageName: string, defaultValue: T }) {
+// 定义IfAny类型工具
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N
+
+function useQueryParamOrStorage<T>({ name, storageName, defaultValue }: { name: string, storageName: string, defaultValue: T }): [T] extends [Ref<any, any>] ? IfAny<T, Ref<T, T>, T> : Ref<UnwrapRef<T>, T | UnwrapRef<T>> {
   const type = typeof defaultValue
   const transformer = transformers[type as keyof typeof transformers] ?? transformers.string
 

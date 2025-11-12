@@ -49,7 +49,13 @@ function handleUpload(files: FileList | null | undefined) {
     return
   }
 
-  emit('fileUpload', files[0])
+  // 确保至少有一个文件，然后发送第一个文件
+  if (files.length > 0) {
+    const firstFile = files[0]
+    if (firstFile) { // 额外检查确保文件存在
+      emit('fileUpload', firstFile)
+    }
+  }
 }
 </script>
 

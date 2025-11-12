@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test.describe('Tool - TOML to JSON', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/toml-to-json')
+    await page.goto('/json-to-toml')
   })
 
   test('Has correct title', async ({ page }) => {

@@ -39,9 +39,16 @@ watch(
     input.value = newVal // 当inputDefault变化时，更新input的值
   },
 )
-
+function clear() {
+  inputElement.value?.clear()
+}
 // 注意：这里的output应该依赖input的值，而不是inputDefault（否则输入框手动修改后output不会更新）
 const output = computed(() => transformer.value(input.value))
+// 向父组件暴露方法和引用，使其可以访问组件内部的方法和引用
+defineExpose({
+  inputElement,
+  clear, // 清空输入框内容的方法
+})
 </script>
 
 <template>
