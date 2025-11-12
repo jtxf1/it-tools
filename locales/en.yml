@@ -380,11 +380,8 @@ tools:
   text-to-binary:
     title: Text to ASCII binary
     description: Convert text to its ASCII binary representation and vice-versa.
-  xml-to-json:
-    title: XML to JSON
-    description: description
   json-to-xml:
-    title: JSON to XML
+    title: JSON 🔁 XML
     description: description
   markdown-to-html:
     title: markdown to html

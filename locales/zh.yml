@@ -288,11 +288,8 @@ tools:
   text-to-binary:
     title: 文本到 ASCII 二进制
     description: 将文本转换为其 ASCII 二进制表示形式，反之亦然。
-  xml-to-json:
-    title: XML 转 JSON
-    description: 说明
   json-to-xml:
-    title: JSON 转 XML
+    title: JSON 🔁 XML
     description: 说明
   markdown-to-html:
     title: markdown 转 html

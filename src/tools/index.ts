@@ -70,7 +70,6 @@ import { tool as uuidGenerator } from './uuid-generator'
 import { tool as variableNaming } from './variable-naming'
 import { tool as wifiQrCodeGenerator } from './wifi-qr-code-generator'
 import { tool as xmlFormatter } from './xml-formatter'
-import { tool as xmlToJson } from './xml-to-json'
 import { tool as yamlToJson } from './yaml-to-json-converter'
 import { tool as yamlToToml } from './yaml-to-toml'
 
@@ -109,7 +108,6 @@ export const toolsByCategory: ToolCategory[] = [
       jsonToToml,
       jsonToCsv,
       listConverter,
-      xmlToJson,
       jsonToXml,
       markdownToHtml,
     ],
