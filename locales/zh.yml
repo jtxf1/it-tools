@@ -164,9 +164,6 @@ tools:
   url-parser:
     title: Url分析器
     description: 解析url字符串以获取所有不同的部分（协议、来源、参数、端口、用户名密码…）
-  iban-validator-and-parser:
-    title: IBAN验证器和解析器
-    description: 验证和分析IBAN编号。检查IBAN是否有效，并获取国家BBAN，如果它是QR-IBAN和IBAN友好格式。
   user-agent-parser:
     title: 用户代理分析器
     description: 从用户代理字符串中检测和分析浏览器、引擎、操作系统、CPU和设备类型/型号。

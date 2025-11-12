@@ -24,7 +24,6 @@ import { tool as hmacGenerator } from './hmac-generator'
 import { tool as htmlEntities } from './html-entities'
 import { tool as htmlWysiwygEditor } from './html-wysiwyg-editor'
 import { tool as httpStatusCodes } from './http-status-codes'
-import { tool as ibanValidatorAndParser } from './iban-validator-and-parser'
 import { tool as baseConverter } from './integer-base-converter'
 import { tool as ipv4AddressConverter } from './ipv4-address-converter'
 import { tool as ipv4RangeExpander } from './ipv4-range-expander'
@@ -158,7 +157,7 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Data',
-    components: [phoneParserAndFormatter, ibanValidatorAndParser],
+    components: [phoneParserAndFormatter],
   },
 ]
 
