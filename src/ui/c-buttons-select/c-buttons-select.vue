@@ -3,11 +3,13 @@ import type { CLabelProps } from '../c-label/c-label.types'
 import type { CButtonSelectOption } from './c-buttons-select.types'
 import _ from 'lodash'
 
+// 定义按钮尺寸类型
+type ButtonSize = 'small' | 'medium' | 'large'
 const props = withDefaults(
   defineProps<{
     options?: CButtonSelectOption<T>[] | string[] | Record<string, T>
     value?: T
-    size?: 'small' | 'medium' | 'large'
+    size?: ButtonSize
   } & CLabelProps>(),
   {
     options: () => [],
@@ -47,12 +49,12 @@ function selectOption(option: CButtonSelectOption<T>) {
   <c-label v-bind="props">
     <div class="flex gap-2">
       <c-tooltip
-        v-for="option in options" :key="option.value"
+        v-for="option in options" :key="String(option.value)"
         :tooltip="option.tooltip"
       >
         <c-button
           :test-id="option.value"
-          :size="size"
+          :size="size as ButtonSize"
           :type="option.value === value ? 'primary' : 'default'"
           @click="selectOption(option)"
         >

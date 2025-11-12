@@ -7,13 +7,13 @@ const { markdown } = toRefs(props)
 
 marked.use({
   renderer: {
-    link(href, title, text) {
-      return `<a class="text-primary transition decoration-none hover:underline" href="${href}" target="_blank" rel="noopener">${text}</a>`
+    link({ href, title, tokens }) {
+      return `<a class="text-primary transition decoration-none hover:underline" href="${href}" target="_blank" rel="noopener">${title}-${tokens}</a>`
     },
   },
 })
 
-const html = computed(() => DomPurify.sanitize(marked(markdown.value), { ADD_ATTR: ['target'] }))
+const html = computed(() => DomPurify.sanitize(marked(markdown.value).toString(), { ADD_ATTR: ['target'] }))
 </script>
 
 <template>
