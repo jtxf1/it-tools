@@ -294,9 +294,6 @@ tools:
   markdown-to-html:
     title: markdown 转 html
     description: 说明
-  safelink-decoder:
-    title: 安全链解码器
-    description: 说明
   regex-tester:
     title: 正则表达式测试器
     description: 说明

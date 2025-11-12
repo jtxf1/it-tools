@@ -386,9 +386,6 @@ tools:
   markdown-to-html:
     title: markdown to html
     description: description
-  safelink-decoder:
-    title: safelink decoder
-    description: description
   regex-tester:
     title: regex tester
     description: description

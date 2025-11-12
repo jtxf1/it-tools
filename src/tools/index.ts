@@ -52,7 +52,6 @@ import { tool as phoneParserAndFormatter } from './phone-parser-and-formatter'
 import { tool as qrCodeGenerator } from './qr-code-generator'
 import { tool as regexTester } from './regex-tester'
 import { tool as rsaKeyPairGenerator } from './rsa-key-pair-generator'
-import { tool as safelinkDecoder } from './safelink-decoder'
 import { tool as slugifyString } from './slugify-string'
 import { tool as sqlPrettify } from './sql-prettify'
 import { tool as stringObfuscator } from './string-obfuscator'
@@ -129,7 +128,6 @@ export const toolsByCategory: ToolCategory[] = [
       userAgentParser,
       httpStatusCodes,
       jsonDiff,
-      safelinkDecoder,
     ],
   },
   {
