@@ -170,9 +170,6 @@ tools:
   user-agent-parser:
     title: 用户代理分析器
     description: 从用户代理字符串中检测和分析浏览器、引擎、操作系统、CPU和设备类型/型号。
-  numeronym-generator:
-    title: 数字名称生成器
-    description: 数字名是一个用数字构成缩写的词。例如，“i18n”是“国际化”的名词，其中18表示单词中第一个i和最后一个n之间的字母数。
   case-converter:
     title: 大小写转换
     description: 更改字符串的大小写并在不同格式之间进行选择

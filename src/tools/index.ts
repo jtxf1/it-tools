@@ -44,7 +44,6 @@ import { tool as macAddressLookup } from './mac-address-lookup'
 import { tool as markdownToHtml } from './markdown-to-html'
 import { tool as mathEvaluator } from './math-evaluator'
 import { tool as metaTagGenerator } from './meta-tag-generator'
-import { tool as numeronymGenerator } from './numeronym-generator'
 import { tool as otpCodeGeneratorAndValidator } from './otp-code-generator-and-validator'
 import { tool as passwordStrengthAnalyser } from './password-strength-analyser'
 import { tool as percentageCalculator } from './percentage-calculator'
@@ -154,7 +153,6 @@ export const toolsByCategory: ToolCategory[] = [
       emojiPicker,
       stringObfuscator,
       textDiff,
-      numeronymGenerator,
       asciiTextDrawer,
     ],
   },
