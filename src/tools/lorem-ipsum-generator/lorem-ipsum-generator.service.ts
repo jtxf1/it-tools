@@ -205,7 +205,7 @@ export function generateLoremIpsum({
   )
 
   if (startWithLoremIpsum) {
-    paragraphs[0][0] = firstSentence
+    paragraphs[0]![0] = firstSentence
   }
 
   if (asHTML) {

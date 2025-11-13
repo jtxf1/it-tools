@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { OGSchemaType, OGSchemaTypeElementSelect } from './OGSchemaType.type'
+import type { CSelectOption } from '@/ui/c-select/c-select.types'
 import { generateMeta } from '@it-tools/oggen'
 import _ from 'lodash'
 import TextareaCopyable from '@/components/TextareaCopyable.vue'
@@ -77,7 +78,7 @@ const metaTags = computed(() => {
           v-model:value="metadata[key]"
           w-full
           :placeholder="placeholder"
-          :options="(element as OGSchemaTypeElementSelect).options"
+          :options="(element as OGSchemaTypeElementSelect).options as CSelectOption<any>[]"
         />
       </n-input-group>
     </div>

@@ -14,8 +14,8 @@ const [loremIpsumText, refreshLoremIpsum] = computedRefreshable(() =>
   generateLoremIpsum({
     paragraphCount: paragraphs.value,
     asHTML: asHTML.value,
-    sentencePerParagraph: randIntFromInterval(sentences.value[0], sentences.value[1]),
-    wordCount: randIntFromInterval(words.value[0], words.value[1]),
+    sentencePerParagraph: randIntFromInterval(sentences.value[0]!, sentences.value[1]!),
+    wordCount: randIntFromInterval(words.value[0]!, words.value[1]!),
     startWithLoremIpsum: startWithLoremIpsum.value,
   }),
 )

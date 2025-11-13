@@ -119,7 +119,8 @@ export default defineConfig({
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version),
   },
   test: {
-    exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
+    globals: true,
+    exclude: [...configDefaults.exclude, 'node_modules', 'dist', '**/*.e2e.spec.ts'],
   },
   build: {
     cssCodeSplit: true, // 启用 CSS 代码分割

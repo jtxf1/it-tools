@@ -1,21 +1,21 @@
 export { getIPClass }
 
 function getIPClass({ ip }: { ip: string }) {
-  const [firstOctet] = ip.split('.').map(Number)
+  const [firstOctet] = ip.split('.').map(Number) as [number]
 
   if (firstOctet < 128) {
     return 'A'
   }
-  if (firstOctet > 127 && firstOctet < 192) {
+  if (firstOctet < 192) {
     return 'B'
   }
-  if (firstOctet > 191 && firstOctet < 224) {
+  if (firstOctet < 224) {
     return 'C'
   }
-  if (firstOctet > 223 && firstOctet < 240) {
+  if (firstOctet < 240) {
     return 'D'
   }
-  if (firstOctet > 239 && firstOctet < 256) {
+  if (firstOctet < 256) {
     return 'E'
   }
 
