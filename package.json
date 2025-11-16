@@ -105,8 +105,6 @@
     "zod": "latest"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "latest",
-    "@eslint/js": "latest",
     "@iconify-json/mdi": "latest",
     "@intlify/unplugin-vue-i18n": "latest",
     "@playwright/test": "latest",
@@ -119,7 +117,6 @@
     "@types/node-forge": "latest",
     "@types/qrcode": "latest",
     "@types/ua-parser-js": "latest",
-    "@unocss/eslint-config": "latest",
     "@vitejs/plugin-vue": "latest",
     "@vitejs/plugin-vue-jsx": "latest",
     "@vue/compiler-sfc": "latest",
@@ -128,8 +125,6 @@
     "@vue/tsconfig": "latest",
     "consola": "latest",
     "cross-env": "latest",
-    "eslint": "latest",
-    "eslint-plugin-vue": "latest",
     "glob": "latest",
     "globals": "latest",
     "hygen": "latest",
@@ -138,7 +133,6 @@
     "less": "latest",
     "prettier": "latest",
     "typescript": "latest",
-    "typescript-eslint": "latest",
     "unocss": "latest",
     "unocss-preset-scrollbar": "latest",
     "unplugin-icons": "latest",

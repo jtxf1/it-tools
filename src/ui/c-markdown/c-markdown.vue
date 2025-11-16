@@ -17,6 +17,5 @@ const html = computed(() => DomPurify.sanitize(marked(markdown.value).toString()
 </script>
 
 <template>
-  <!-- eslint-disable-next-line vue/no-v-html -->
   <div v-html="html" />
 </template>
