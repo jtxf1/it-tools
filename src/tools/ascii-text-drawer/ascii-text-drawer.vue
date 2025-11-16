@@ -30,7 +30,7 @@ watchEffect(async () => {
       })))
     errored.value = false
   }
-  catch (e: any) {
+  catch {
     errored.value = true
   }
   processing.value = false
@@ -41,27 +41,15 @@ const fonts = ['1Row', '3-D', '3D Diagonal', '3D-ASCII', '3x5', '4Max', '5 Line 
 
 <template>
   <c-card style="max-width: 600px;">
-    <c-input-text
-      v-model:value="input"
-      label="Your text:"
-      placeholder="Your text to draw"
-      raw-text
-      multiline
-      rows="4"
-    />
+    <c-input-text v-model:value="input" label="Your text:" placeholder="Your text to draw" raw-text multiline
+      rows="4" />
 
     <n-divider />
 
     <n-grid cols="4" x-gap="12" w-full>
       <n-gi span="2">
-        <c-select
-          v-model:value="font"
-          label-position="top"
-          label="Font:"
-          :options="fonts"
-          :searchable="true"
-          placeholder="Select font to use"
-        />
+        <c-select v-model:value="font" label-position="top" label="Font:" :options="fonts" :searchable="true"
+          placeholder="Select font to use" />
       </n-gi>
       <n-gi span="2">
         <n-form-item label="Width:" label-placement="top" label-width="100" :show-feedback="false">
@@ -82,11 +70,7 @@ const fonts = ['1Row', '3-D', '3D Diagonal', '3D-ASCII', '3x5', '4Max', '5 Line 
     </c-alert>
 
     <n-form-item v-if="!processing && !errored" label="Ascii Art text:">
-      <TextareaCopyable
-        :value="output"
-        mb-1 mt-1
-        copy-placement="outside"
-      />
+      <TextareaCopyable :value="output" mb-1 mt-1 copy-placement="outside" />
     </n-form-item>
   </c-card>
 </template>

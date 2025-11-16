@@ -8,7 +8,6 @@ import { storeToRefs } from 'pinia'
 import { RouterLink } from 'vue-router'
 import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue'
 import { config } from '@/config'
-import { useTracker } from '@/modules/tracker/tracker.services'
 import { useStyleStore } from '@/stores/style.store'
 import { useToolStore } from '@/tools/tools.store'
 import HeroGradient from '../assets/hero-gradient.svg?component'
@@ -19,8 +18,6 @@ const themeVars = useThemeVars()
 const styleStore = useStyleStore()
 const version = config.app.version
 const commitSha = config.app.lastCommitSha.slice(0, 7)
-
-const { tracker } = useTracker()
 const { t } = useI18n()
 
 const toolStore = useToolStore()
@@ -69,12 +66,8 @@ const tools = computed<ToolCategory[]>(() => [
 
             <template v-if="commitSha && commitSha.length > 0">
               -
-              <c-link
-                target="_blank"
-                rel="noopener"
-                type="primary"
-                :href="`https://github.com/CorentinTh/it-tools/tree/${commitSha}`"
-              >
+              <c-link target="_blank" rel="noopener" type="primary"
+                :href="`https://github.com/CorentinTh/it-tools/tree/${commitSha}`">
                 {{ commitSha }}
               </c-link>
             </template>
@@ -91,12 +84,8 @@ const tools = computed<ToolCategory[]>(() => [
 
     <template #content>
       <div flex items-center justify-center gap-2>
-        <c-button
-          circle
-          variant="text"
-          :aria-label="$t('home.toggleMenu')"
-          @click="styleStore.isMenuCollapsed = !styleStore.isMenuCollapsed"
-        >
+        <c-button circle variant="text" :aria-label="$t('home.toggleMenu')"
+          @click="styleStore.isMenuCollapsed = !styleStore.isMenuCollapsed">
           <NIcon size="25" :component="Menu2" />
         </c-button>
 
@@ -107,7 +96,8 @@ const tools = computed<ToolCategory[]>(() => [
         </c-tooltip>
 
         <c-tooltip :tooltip="$t('home.uiLib')" position="bottom">
-          <c-button v-if="config.app.env === 'development'" to="/c-lib" circle variant="text" :aria-label="$t('home.uiLib')">
+          <c-button v-if="config.app.env === 'development'" to="/c-lib" circle variant="text"
+            :aria-label="$t('home.uiLib')">
             <icon-mdi:brush-variant text-20px />
           </c-button>
         </c-tooltip>

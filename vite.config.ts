@@ -39,6 +39,12 @@ export default defineConfig({
         },
       ],
       vueTemplate: true,
+      eslintrc: {
+        enabled: true,
+        // 生成文件地址和名称
+        filepath: fileURLToPath(new URL('./.eslintrc-auto-import.json', import.meta.url)),
+        globalsPropValue: true,
+      },
     }),
     Icons({ compiler: 'vue3' }),
     vue({

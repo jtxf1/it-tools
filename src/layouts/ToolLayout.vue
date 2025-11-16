@@ -5,7 +5,7 @@ import { useHead } from '@vueuse/head'
 
 import { useRoute } from 'vue-router'
 import FavoriteButton from '@/components/FavoriteButton.vue'
-import BaseLayout from './base.layout.vue'
+import BaseLayout from './BaseLayout.vue'
 
 const route = useRoute()
 
