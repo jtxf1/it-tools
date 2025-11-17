@@ -1,3 +1,4 @@
+import { tool as falseData } from './false-data'
 import type { ToolCategory } from './tools.types'
 import { tool as asciiTextDrawer } from './ascii-text-drawer'
 import { tool as base64FileConverter } from './base64-file-converter'
@@ -157,7 +158,8 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Data',
-    components: [phoneParserAndFormatter],
+    components: [phoneParserAndFormatter,
+      falseData],
   },
 ]
 

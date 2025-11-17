@@ -68,6 +68,9 @@ toolCard:
 search:
   label: Search
 tools:
+  false-data:
+    title: False Data
+    description: False Data description
   categories:
     favorite-tools: Your favorite tools
     crypto: Crypto

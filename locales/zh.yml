@@ -61,6 +61,9 @@ toolCard:
 search:
   label: 搜索
 tools:
+  false-data:
+    title: False Data
+    description: False Data description
   categories:
     favorite-tools: 我的收藏
     crypto: 加密
