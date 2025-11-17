@@ -4,7 +4,7 @@ const modal1 = ref()
 
 <template>
   <div>
-    <c-button @click="() => modal1?.open()">
+    <c-button @click="() => modal1?.open1()">
       Open Modal
     </c-button>
 

@@ -62,8 +62,8 @@ search:
   label: 搜索
 tools:
   false-data:
-    title: False Data
-    description: False Data description
+    title: 虚假数据生成
+    description: 生成虚假手机号 身份证 邮箱等
   categories:
     favorite-tools: 我的收藏
     crypto: 加密
