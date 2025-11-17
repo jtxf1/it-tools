@@ -132,7 +132,7 @@ const normalizedDate = computed(() => {
   try {
     return toDate(inputDate.value)
   }
-  catch (_ignored) {
+  catch {
     return undefined
   }
 })

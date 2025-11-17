@@ -4,6 +4,10 @@ import { Editor, EditorContent } from '@tiptap/vue-3'
 import { tryOnBeforeUnmount, useVModel } from '@vueuse/core'
 import { useThemeVars } from 'naive-ui'
 import MenuBar from './menu-bar.vue'
+// 设置组件名
+defineOptions({
+  name: 'HtmlWysiwygEditor' // ← 替换为你想要的组件名称
+})
 
 const props = defineProps<{ html: string }>()
 const emit = defineEmits(['update:html'])

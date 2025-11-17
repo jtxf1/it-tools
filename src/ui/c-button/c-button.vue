@@ -48,7 +48,7 @@ const tag = computed(() => {
 })
 const appTheme = useAppTheme()
 
-const size = computed(() => theme.value.size[sizeName.value])
+const size1 = computed(() => theme.value.size[sizeName.value])
 </script>
 
 <template>
@@ -68,12 +68,12 @@ const size = computed(() => theme.value.size[sizeName.value])
 .c-button {
   line-height: 1;
   font-family: inherit;
-  font-size: v-bind('size.fontSize');
+  font-size: v-bind('size1.fontSize');
   border: none;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
-  height: v-bind('size.width');
+  height: v-bind('size1.width');
   font-weight: 400;
   color: v-bind('variantTheme.textColor');
   padding: 0 14px;
@@ -93,8 +93,8 @@ const size = computed(() => theme.value.size[sizeName.value])
   }
 
   &.circle {
-    border-radius: v-bind('size.width');
-    width: v-bind('size.width');
+    border-radius: v-bind('size1.width');
+    width: v-bind('size1.width');
     padding: 0;
   }
 

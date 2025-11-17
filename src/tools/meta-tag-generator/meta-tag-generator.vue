@@ -7,7 +7,7 @@ import TextareaCopyable from '@/components/TextareaCopyable.vue'
 import { image, ogSchemas, twitter, website } from './og-schemas'
 
 // Since type guards do not work in template
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const metadata = ref<{ type: string, [k: string]: any }>({
   'type': 'website',
   'twitter:card': 'summary_large_image',

@@ -5,7 +5,7 @@ import _ from 'lodash'
 const props = withDefaults(defineProps<{ data?: Record<string, unknown>[], headers?: HeaderConfiguration, hideHeaders?: boolean, description?: string }>(), { data: () => [], headers: undefined, hideHeaders: false, description: 'Data table' })
 const { data, headers: rawHeaders, hideHeaders } = toRefs(props)
 
-const headers = computed(() => {
+const headers1 = computed(() => {
   if (rawHeaders.value) {
     if (Array.isArray(rawHeaders.value)) {
       return rawHeaders.value.map((value) => {
@@ -42,7 +42,7 @@ const headers = computed(() => {
     <table class="w-full border-collapse text-left text-sm text-gray-500 dark:text-gray-400" role="table" :aria-label="description">
       <thead v-if="!hideHeaders" class="bg-#ffffff uppercase text-gray-700 dark:bg-#333333 dark:text-gray-400" border-b="1px solid dark:transparent #efeff5">
         <tr>
-          <th v-for="header in headers" :key="header.key" scope="col" class="px-6 py-3 text-xs">
+          <th v-for="header in headers1" :key="header.key" scope="col" class="px-6 py-3 text-xs">
             {{ header.label }}
           </th>
         </tr>
@@ -54,7 +54,7 @@ const headers = computed(() => {
             'important:border-b-none': i === data.length - 1,
           }"
         >
-          <td v-for="header in headers" :key="header.key" class="px-6 py-4">
+          <td v-for="header in headers1" :key="header.key" class="px-6 py-4">
             <slot :name="header.key" :row="row" :headers="headers" :value="row[header.key]">
               {{ row[header.key] }}
             </slot>

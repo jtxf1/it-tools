@@ -4,6 +4,7 @@ import { parse as parseToml, stringify as stringifyToml } from 'iarna-toml-esm'
 import { parse as parseYaml, stringify as stringifyToYaml } from 'yaml'
 import { withDefaultOnError } from '../../utils/defaults'
 import { isValidToml } from '../json-to-toml/toml.services'
+import CInputText from '@/ui/c-input-text/c-input-text.vue'
 
 const defaultIf = ref(true)
 const name = ref('YAML')

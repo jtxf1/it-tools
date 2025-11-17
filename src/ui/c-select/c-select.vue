@@ -27,7 +27,7 @@ const emits = defineEmits(['update:value'])
 
 const { options: rawOptions, placeholder, size: sizeName, searchable } = toRefs(props)
 
-const options = computed(() => {
+const options1 = computed(() => {
   return rawOptions.value.map((option: string | CSelectOption<T>) => {
     if (typeof option === 'string') {
       return { label: option, value: option }
@@ -43,11 +43,11 @@ const theme = useTheme()
 const appTheme = useAppTheme()
 
 const isOpen = ref(false)
-const selectedOption = shallowRef<CSelectOption<T> | undefined>(options.value.find((option: CSelectOption<T>) => option.value === value.value))
+const selectedOption = shallowRef<CSelectOption<T> | undefined>(options1.value.find((option: CSelectOption<T>) => option.value === value.value))
 const focusIndex = ref(0)
 const elementRef = ref(null)
 
-const size = computed(() => theme.value.sizes[sizeName.value as 'small' | 'medium' | 'large'])
+const size1 = computed(() => theme.value.sizes[sizeName.value as 'small' | 'medium' | 'large'])
 
 const searchQuery = ref('')
 const searchInputRef = ref()
@@ -67,7 +67,7 @@ whenever(keys.escape!, close)
 watch(
   value,
   (newValue) => {
-    const option = options.value.find((option: CSelectOption<T>) => option.value === newValue)
+    const option = options1.value.find((option: CSelectOption<T>) => option.value === newValue)
     if (option) {
       selectedOption.value = option
     }
@@ -76,7 +76,7 @@ watch(
 
 const { searchResult: filteredOptions } = useFuzzySearch<CSelectOption<T>>({
   search: searchQuery,
-  data: options.value,
+  data: options1.value,
   options: {
     keys: ['label'],
     shouldSort: false,
@@ -125,7 +125,7 @@ function handleKeydown(event: KeyboardEvent) {
     focusIndex.value = clamp({
       value: focusIndex.value + increment,
       min: 0,
-      max: options.value.length - 1,
+      max: options1.value.length - 1,
     })
 
     event.preventDefault()
@@ -209,8 +209,8 @@ function onSearchInput() {
     border-radius: 4px;
     padding: 0 12px;
     font-family: inherit;
-    font-size: v-bind('size.fontSize');
-    height: v-bind('size.height');
+    font-size: v-bind('size1.fontSize');
+    height: v-bind('size1.height');
     transition: border-color 0.2s ease-in-out;
 
     .placeholder, .chevron {

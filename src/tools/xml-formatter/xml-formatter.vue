@@ -32,7 +32,7 @@ const rules: UseValidationRule<string>[] = [
 // 监听isXml的变化
 watch(
   isXml, // 要监听的源
-  (newValue, oldValue) => {
+  (newValue) => {
     collapseContent.value = true
     indentSize.value = 2
     if (newValue) {

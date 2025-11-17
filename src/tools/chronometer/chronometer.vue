@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useRafFn } from '@vueuse/core'
-
 import { formatMs } from './chronometer.service'
+// 设置组件名
+defineOptions({
+  name: 'ChronometerTool' // ← 替换为你想要的组件名称
+})
 
 const isRunning = ref(false)
 const counter = ref(0)

@@ -21,7 +21,7 @@ function close() {
   isOpen.value = false
 }
 
-function open() {
+function open1() {
   isOpen.value = true
 }
 
@@ -31,7 +31,7 @@ function toggle() {
 
 defineExpose({
   close,
-  open,
+  open1,
   toggle,
   isOpen,
 })

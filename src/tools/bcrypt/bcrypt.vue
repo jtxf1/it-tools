@@ -3,6 +3,10 @@ import { compareSync, hashSync } from 'bcryptjs'
 import { useThemeVars } from 'naive-ui'
 import { useCopy } from '@/composable/copy'
 
+// 设置组件名
+defineOptions({
+  name: 'BcryptTool' // ← 替换为你想要的组件名称
+})
 const themeVars = useThemeVars()
 
 const input = ref('')

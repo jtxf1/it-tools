@@ -23,7 +23,7 @@ const emits = defineEmits(['update:value'])
 
 const { options: rawOptions, size } = toRefs(props)
 
-const options = computed<CButtonSelectOption<T>[]>(() => {
+const options1 = computed<CButtonSelectOption<T>[]>(() => {
   if (_.isArray(rawOptions.value)) {
     return rawOptions.value.map((option: string | CButtonSelectOption<T>) => {
       if (typeof option === 'string') {
@@ -49,7 +49,7 @@ function selectOption(option: CButtonSelectOption<T>) {
   <c-label v-bind="props">
     <div class="flex gap-2">
       <c-tooltip
-        v-for="option in options" :key="String(option.value)"
+        v-for="option in options1" :key="String(option.value)"
         :tooltip="option.tooltip"
       >
         <c-button

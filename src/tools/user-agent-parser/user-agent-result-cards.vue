@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { UserAgentResultSection } from './user-agent-parser.types'
+import type { UAParser } from 'ua-parser-js'
 
 const props = defineProps<{
   userAgentInfo?: UAParser.IResult

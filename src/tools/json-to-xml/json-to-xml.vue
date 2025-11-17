@@ -4,6 +4,7 @@ import JSON5 from 'json5'
 import convert from 'xml-js'
 import { withDefaultOnError } from '@/utils/defaults'
 import { isValidXML } from '../xml-formatter/xml-formatter.service'
+import CInputText from '@/ui/c-input-text/c-input-text.vue'
 
 const defaultValue = '{"a":{"_attributes":{"x":"1.234","y":"It\'s"}}}'
 function transformer(value: string) {

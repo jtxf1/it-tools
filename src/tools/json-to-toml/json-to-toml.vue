@@ -4,6 +4,7 @@ import { parse as parseToml, stringify as stringifyToml } from 'iarna-toml-esm'
 import JSON5 from 'json5'
 import { withDefaultOnError } from '../../utils/defaults'
 import { isValidToml } from './toml.services'
+import CInputText from '@/ui/c-input-text/c-input-text.vue'
 
 const defaultIf = ref(true)
 const name = ref('JSON')

@@ -27,7 +27,7 @@ const regexValidation = useValidation({
       message: 'Invalid regex: {0}',
       validator: value => new RegExp(value),
       getErrorMessage: (value) => {
-        const _ = new RegExp(value)
+        new RegExp(value)
         return ''
       },
     },
@@ -57,7 +57,7 @@ const results = computed(() => {
   try {
     return matchRegex(regex.value, text.value, flags)
   }
-  catch (_) {
+  catch {
     return []
   }
 })
@@ -67,7 +67,7 @@ const sample = computed(() => {
     const randexp = new RandExp(new RegExp(regex.value.replace(/\(\?<[^>]*>/g, '(?:')))
     return randexp.gen()
   }
-  catch (_) {
+  catch {
     return ''
   }
 })
@@ -86,7 +86,8 @@ watchEffect(
       try {
         await render(regexValue, svg)
       }
-      catch (_) {
+      catch{
+        // do nothing
       }
       visualizer.appendChild(svg)
     }

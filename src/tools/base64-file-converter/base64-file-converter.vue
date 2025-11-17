@@ -28,8 +28,8 @@ const base64InputValidation = useValidation({
 
 watch(
   base64Input,
-  (newValue, _) => {
-    const { mimeType } = getMimeTypeFromBase64({ base64String: newValue })
+  (newValue) => {
+    getMimeTypeFromBase64({ base64String: newValue })
   },
 )
 
@@ -47,7 +47,7 @@ function previewImage() {
       previewContainer.appendChild(image)
     }
   }
-  catch (_) {
+  catch {
     //
   }
 }
@@ -60,7 +60,7 @@ function downloadFile() {
   try {
     download()
   }
-  catch (_) {
+  catch {
     //
   }
 }

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { AES, enc, Rabbit, RC4, TripleDES } from 'crypto-js'
 import { computedCatch } from '@/composable/computed/catchedComputed'
+// 设置组件名
+defineOptions({
+  name: 'EncryptionTool' // ← 替换为你想要的组件名称
+})
 
 const algos = { AES, TripleDES, Rabbit, RC4 }
 

@@ -29,7 +29,7 @@ function errorlessConvert(...args: Parameters<typeof convertBase>) {
   try {
     return convertBase(...args)
   }
-  catch (err) {
+  catch {
     return ''
   }
 }
