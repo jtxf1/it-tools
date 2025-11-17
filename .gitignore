@@ -29,6 +29,7 @@ coverage
 pnpm-workspace.yaml
 components.d.ts
 pnpm-lock.yaml
+auto-imports.d.ts
 
 .env
 /test-results/
