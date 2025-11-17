@@ -1,39 +1,58 @@
-// 导入 Node.js 文件系统模块，用于异步文件操作
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
-// 导入路径处理模块，用于构建路径
+/* eslint-env node */
+// 导入 Node.js 内置模块，用于文件系统操作和路径处理
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 // 导入 URL 处理模块，用于将 URL 转换为文件路径
 import { fileURLToPath } from 'node:url'
 
-// 获取当前脚本文件的目录路径
-const currentDirname = dirname(fileURLToPath(import.meta.url))
-
-// 定义工具文件夹的路径，相对于当前脚本位置
-const toolsDir = join(currentDirname, '..', 'src', 'tools')
-
-// 从命令行参数获取工具名称
-const toolName = process.argv[2]
-
-// 如果没有提供工具名称，则抛出错误
-if (!toolName) {
-  throw new Error('Please specify a toolname.')
+// 检查文件是否存在
+async function fileExists(path) {
+  try {
+    await access(path)
+    return true
+  } catch {
+    return false
+  }
 }
 
-// 将工具名称转换为驼峰命名法（例如：my-tool -> myTool）
-const toolNameCamelCase = toolName.replace(/-./g, x => x[1].toUpperCase())
-// 将工具名称转换为标题格式（例如：my-tool -> My Tool）
-const toolNameTitleCase = toolName[0].toUpperCase() + toolName.slice(1).replace(/-/g, ' ')
-// 构建工具目录路径
+// 获取当前脚本所在目录（兼容 ES 模块）
+const currentDirname = dirname(fileURLToPath(import.meta.url))
+
+// 定义工具代码存放的根目录：相对于当前脚本向上一级，进入 src/tools
+const toolsDir = join(currentDirname, '..', 'src', 'tools')
+
+// 从命令行参数中读取用户指定的工具名称和类别
+const toolName = process.argv[2]
+const categoryName = process.argv[3] // 新增参数：类别名称
+
+// 如果未提供工具名，则抛出错误提示
+if (!toolName) {
+  console.error('Error: Please specify a tool name.')
+  console.log('Usage: node create-tool.mjs <tool-name> [category-name]')
+  console.log('Example: node create-tool.mjs my-awesome-tool Development')
+  process.exit(1)
+}
+
+// 将 kebab-case（如 my-tool）转换为 camelCase（如 myTool）
+const toolNameCamelCase = toolName.replace(/-([a-z])/g, (x) => x[1].toUpperCase())
+
+// 将 kebab-case 转换为 Title Case（如 My Awesome Tool），用于显示名称
+const toolNameTitleCase = toolName
+  .split('-')
+  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ')
+
+// 构建该工具专属的子目录路径
 const toolDir = join(toolsDir, toolName)
 
-// 创建工具目录
-await mkdir(toolDir)
+// 创建工具目录（递归创建，避免错误）
+await mkdir(toolDir, { recursive: true })
 console.log(`Directory created: ${toolDir}`)
 
 /**
- * 创建工具文件的异步函数
- * @param {string} name - 文件名
- * @param {string} content - 文件内容
+ * 辅助函数：在工具目录下创建一个文件
+ * @param name 文件名（如 index.ts）
+ * @param content 文件内容
  */
 async function createToolFile(name, content) {
   // 构建文件路径
@@ -43,216 +62,175 @@ async function createToolFile(name, content) {
   console.log(`File created: ${filePath}`)
 }
 
-// 创建 Vue 组件文件
-createToolFile(
+// 创建 Vue 组件文件（基础模板）
+await createToolFile(
   `${toolName}.vue`,
-  `
+  `<script setup lang="ts">
+// Add your component logic here
+</script>
+
 <template>
-  <div>
-    Lorem ipsum
+  <div class="${toolName}">
+    <h1>${toolNameTitleCase}</h1>
+    <p>Tool content goes here.</p>
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style lang="less" scoped>
+.${toolName} {
+  padding: 1rem;
+}
 </style>
+
 `,
 )
 
-// 创建工具定义的入口文件
-createToolFile(
+// 创建工具元信息注册文件（index.ts）
+await createToolFile(
   `index.ts`,
-  `
-import { ArrowsShuffle } from '@vicons/tabler';
-import { defineTool } from '../tool';
+  `import { ArrowsShuffle } from '@vicons/tabler'
+import { translate } from '@/plugins/i18n.plugin'
+import { defineTool } from '../tool'
 
 export const tool = defineTool({
-  name: '${toolNameTitleCase}',          // 工具名称（标题格式）
-  path: '/${toolName}',                 // 工具路径
-  description: '',                       // 工具描述（待填写）
-  keywords: ['${toolName.split('-').join('\', \'')}'], // 工具关键词
-  component: () => import('./${toolName}.vue'), // 异步导入 Vue 组件
-  icon: ArrowsShuffle,                  // 工具图标
-  createdAt: new Date('${new Date().toISOString().split('T')[0]}'), // 创建日期
-});
+  name: translate('tools.${toolName}.title'),
+  path: '/${toolName}',
+  description: translate('tools.${toolName}.description'),
+  keywords: ['${toolName.split('-').join("', '")}'],
+  component: () => import('./${toolName}.vue'),
+  icon: ArrowsShuffle,
+  createdAt: new Date('${new Date().toISOString().split('T')[0]}'),
+})
+
 `,
 )
 
-// 创建服务文件（空内容）
-createToolFile(`${toolName}.service.ts`, ``)
+// 创建业务逻辑服务文件（初始为空，供后续实现核心功能）
+await createToolFile(`${toolName}.service.ts`, `// Add your service logic here\n`)
 
-// 创建服务单元测试文件
-createToolFile(
-  `${toolName}.service.test.ts`,
-  `
-import { expect, describe, it } from 'vitest';
-// import { } from './${toolName}.service';
-//
-// describe('${toolName}', () => {
-//
-// })
-`,
-)
-
-// 创建端到端测试文件
-createToolFile(
-  `${toolName}.e2e.spec.ts`,
-  `
-import { test, expect } from '@playwright/test';
-
-test.describe('Tool - ${toolNameTitleCase}', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/${toolName}');
-  });
-
-  test('Has correct title', async ({ page }) => {
-    await expect(page).toHaveTitle('${toolNameTitleCase} - IT Tools');
-  });
-
-  test('', async ({ page }) => {
-
-  });
-});
-  
-`,
-)
-
-// 更新工具索引文件，添加新工具的导入语句
+// 更新 src/tools/index.ts，自动导入新工具
 const toolsIndex = join(toolsDir, 'index.ts')
-// 读取现有索引文件内容并按行分割
-const indexContent = await readFile(toolsIndex, { encoding: 'utf-8' }).then(r => r.split('\n'))
 
-// 在第4行插入新工具的导入语句
-indexContent.splice(3, 0, `import { tool as ${toolNameCamelCase} } from './${toolName}';`)
-// 将更新后的内容写回索引文件
-writeFile(toolsIndex, indexContent.join('\n'))
-console.log(`Added import in: ${toolsIndex}`)
+if (await fileExists(toolsIndex)) {
+  let indexContent = await readFile(toolsIndex, { encoding: 'utf-8' })
 
-// 添加国际化支持
+  // 检查是否已存在该工具的导入
+  if (!indexContent.includes(`import { tool as ${toolNameCamelCase} } from './${toolName}'`)) {
+    // 添加导入语句
+    const importStatement = `import { tool as ${toolNameCamelCase} } from './${toolName}'\n`
+    indexContent = importStatement + indexContent
+
+    // 如果提供了类别名称，将工具添加到对应的类别中
+    if (categoryName) {
+      // 检查类别是否存在
+      const categoryExists = indexContent.includes(`name: '${categoryName}'`)
+
+      if (categoryExists) {
+        // 找到对应类别的 components 数组
+        const categoryPattern = new RegExp(
+          `(\\{\\s*name:\\s*'${categoryName}'[^}]*?components:\\s*\\[)([^\\]]*?)(\\][^}]*?\\})`,
+          's',
+        )
+        const match = indexContent.match(categoryPattern)
+
+        if (match) {
+          let componentsList = match[2]
+          // 检查组件是否已存在于该类别中
+          if (!componentsList.includes(toolNameCamelCase)) {
+            // 添加新组件到数组中
+            if (componentsList.trim() !== '') {
+              componentsList = `${componentsList},\n      ${toolNameCamelCase}`
+            } else {
+              componentsList = `\n       + ${toolNameCamelCase}`
+            }
+
+            // 替换原内容
+            const newContent = indexContent.replace(categoryPattern, `$1${componentsList}$3`)
+            indexContent = newContent
+            console.log(`Added ${toolNameCamelCase} to category '${categoryName}'`)
+          } else {
+            console.log(`${toolNameCamelCase} already exists in category '${categoryName}'`)
+          }
+        } else {
+          console.error(`Error: Could not find category '${categoryName}' in index.ts`)
+        }
+      } else {
+        console.error(`Error: Category '${categoryName}' does not exist`)
+        console.log(
+          'Available categories: Development, Crypto, Converter, Web, Images and videos, Network, Math, Measurement, Text, Data',
+        )
+        process.exit(1)
+      }
+    }
+
+    await writeFile(toolsIndex, indexContent)
+    console.log(`Added import in: ${toolsIndex}`)
+  } else {
+    console.log(`Tool ${toolName} already exists in index.ts`)
+  }
+} else {
+  console.error(`Error: ${toolsIndex} does not exist`)
+  console.log('Please create the tools index file first.')
+  process.exit(1)
+}
+
+// 更新国际化文件
 const localesDir = join(currentDirname, '..', 'locales')
+const locales = ['en.yml', 'zh.yml']
 
-// 更新 en.yml 文件
-try {
-  const enYmlPath = join(localesDir, 'en.yml')
-  let enYmlContent = await readFile(enYmlPath, { encoding: 'utf-8' })
+for (const locale of locales) {
+  const localePath = join(localesDir, locale)
 
-  // 在 tools 部分的最后添加新工具的国际化内容
-  const enYmlLines = enYmlContent.split('\n')
-  let toolsSectionIndex = -1
-  let toolsEndIndex = enYmlLines.length // 默认在文件末尾
+  if (await fileExists(localePath)) {
+    let content = await readFile(localePath, 'utf-8')
 
-  // 找到 tools 部分的位置和结束位置
-  for (let i = 0; i < enYmlLines.length; i++) {
-    if (enYmlLines[i].trim() === '')
-      continue // 跳过空行
-    if (enYmlLines[i].startsWith('tools:')) {
-      toolsSectionIndex = i
-    }
-    // 找到 tools 部分的结束位置（下一个顶级部分或文件末尾）
-    if (toolsSectionIndex !== -1 && i > toolsSectionIndex) {
-      if (enYmlLines[i].trim() && !enYmlLines[i].startsWith('  ') && !enYmlLines[i].startsWith('    ') && !enYmlLines[i].startsWith('#')) {
-        toolsEndIndex = i
-        break
+    // 检查是否已存在该工具的配置
+    if (!content.includes(`  ${toolName}:`)) {
+      // 使用更安全的YAML处理方式
+      const lines = content.split('\n')
+      let toolsIndex = -1
+
+      // 找到 tools: 行的索引
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].trim() === 'tools:') {
+          toolsIndex = i
+          break
+        }
       }
-    }
-  }
 
-  // 查找 tools 部分的实际结束位置
-  if (toolsSectionIndex !== -1) {
-    for (let i = toolsSectionIndex + 1; i < enYmlLines.length; i++) {
-      if (enYmlLines[i].trim() === '')
-        continue // 跳过空行
+      if (toolsIndex !== -1) {
+        // 在 tools: 下添加新工具配置，保持正确的缩进
+        const newConfig = [
+          `  ${toolName}:`,
+          `    title: ${toolNameTitleCase}`,
+          `    description: ${toolNameTitleCase} description`,
+        ]
 
-      // 检查是否是顶级键（非 tools 部分的内容）
-      if (!enYmlLines[i].startsWith('  ') && !enYmlLines[i].startsWith('#')) {
-        toolsEndIndex = i
-        break
+        // 找到 tools 下面第一个非空行，然后插入配置
+        let insertIndex = toolsIndex + 1
+        while (insertIndex < lines.length && lines[insertIndex].trim() === '') {
+          insertIndex++
+        }
+
+        lines.splice(insertIndex, 0, ...newConfig)
+
+        content = lines.join('\n')
+        await writeFile(localePath, content)
+        console.log(`Added ${toolName} configuration to ${locale}`)
+      } else {
+        console.warn(`Warning: Could not find 'tools:' section in ${locale}`)
       }
+    } else {
+      console.log(`${toolName} configuration already exists in ${locale}`)
     }
-  }
-
-  // 如果找到了 tools 部分，在其后添加新工具的国际化内容
-  if (toolsSectionIndex !== -1) {
-    const toolContent = [
-      `  ${toolName}:`,
-      `    title: "${toolNameTitleCase}"`,
-      `    description: "${toolNameTitleCase} description"`,
-      '\n',
-    ]
-
-    enYmlLines.splice(toolsEndIndex, 0, ...toolContent)
-
-    enYmlContent = enYmlLines.join('\n')
-    await writeFile(enYmlPath, enYmlContent)
-    console.log(`Updated en.yml with new tool: ${toolName}`)
-  }
-  else {
-    console.log('Could not find tools section in en.yml')
+  } else {
+    console.warn(`Warning: Locale file ${localePath} does not exist, skipping...`)
   }
 }
-catch (error) {
-  console.error('Error updating en.yml:', error.message)
+
+console.log(`\n✅ Tool "${toolName}" has been created successfully!`)
+if (categoryName) {
+  console.log(`🏷️  Added to category: ${categoryName}`)
 }
-
-// 更新 zh.yml 文件
-try {
-  const zhYmlPath = join(localesDir, 'zh.yml')
-  let zhYmlContent = await readFile(zhYmlPath, { encoding: 'utf-8' })
-
-  // 在 tools 部分的最后添加新工具的国际化内容
-  const zhYmlLines = zhYmlContent.split('\n')
-  let toolsSectionIndex = -1
-  let toolsEndIndex = zhYmlLines.length // 默认在文件末尾
-
-  // 找到 tools 部分的位置和结束位置
-  for (let i = 0; i < zhYmlLines.length; i++) {
-    if (zhYmlLines[i].startsWith('tools:')) {
-      toolsSectionIndex = i
-    }
-    // 找到 tools 部分的结束位置（下一个顶级部分或文件末尾）
-    if (toolsSectionIndex !== -1 && i > toolsSectionIndex) {
-      if (zhYmlLines[i].trim() && !zhYmlLines[i].startsWith('  ') && !zhYmlLines[i].startsWith('    ') && !zhYmlLines[i].startsWith('#')) {
-        toolsEndIndex = i
-        break
-      }
-    }
-  }
-
-  // 查找 tools 部分的实际结束位置
-  if (toolsSectionIndex !== -1) {
-    for (let i = toolsSectionIndex + 1; i < zhYmlLines.length; i++) {
-      if (zhYmlLines[i].trim() === '')
-        continue // 跳过空行
-
-      // 检查是否是顶级键（非 tools 部分的内容）
-      if (!zhYmlLines[i].startsWith('  ') && !zhYmlLines[i].startsWith('#')) {
-        toolsEndIndex = i
-        break
-      }
-    }
-  }
-
-  // 如果找到了 tools 部分，在其后添加新工具的国际化内容
-  if (toolsSectionIndex !== -1) {
-    const toolContent = [
-      `  ${toolName}:`,
-      `    title: ${toolNameTitleCase}`,
-      `    description: ${toolNameTitleCase} description`,
-    ]
-
-    zhYmlLines.splice(toolsEndIndex, 0, ...toolContent)
-
-    zhYmlContent = zhYmlLines.join('\n')
-    await writeFile(zhYmlPath, zhYmlContent)
-    console.log(`Updated zh.yml with new tool: ${toolName}`)
-  }
-  else {
-    console.log('Could not find tools section in zh.yml')
-  }
-}
-catch (error) {
-  console.error('Error updating zh.yml:', error.message)
-}
+console.log(`📁 Tool directory: ${toolDir}`)
+console.log(`📝 Remember to customize the component, service, and translations as needed.`)

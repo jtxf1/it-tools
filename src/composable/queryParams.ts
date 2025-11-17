@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Ref, UnwrapRef } from 'vue'
 import { useStorage } from '@vueuse/core'
 import { useRouteQuery } from '@vueuse/router'
@@ -26,7 +27,7 @@ const transformers = {
   },
 }
 
-function useQueryParam<T>({ name, defaultValue }: { name: string, defaultValue: T }) {
+function useQueryParam<T>({ name, defaultValue }: { name: string; defaultValue: T }) {
   const type = typeof defaultValue
   const transformer = transformers[type as keyof typeof transformers] ?? transformers.string
 
@@ -43,9 +44,17 @@ function useQueryParam<T>({ name, defaultValue }: { name: string, defaultValue: 
 }
 
 // 定义IfAny类型工具
-type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N
+type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N
 
-function useQueryParamOrStorage<T>({ name, storageName, defaultValue }: { name: string, storageName: string, defaultValue: T }): [T] extends [Ref<any, any>] ? IfAny<T, Ref<T, T>, T> : Ref<UnwrapRef<T>, T | UnwrapRef<T>> {
+function useQueryParamOrStorage<T>({
+  name,
+  storageName,
+  defaultValue,
+}: {
+  name: string
+  storageName: string
+  defaultValue: T
+}): [T] extends [Ref<any, any>] ? IfAny<T, Ref<T, T>, T> : Ref<UnwrapRef<T>, T | UnwrapRef<T>> {
   const type = typeof defaultValue
   const transformer = transformers[type as keyof typeof transformers] ?? transformers.string
 
@@ -55,14 +64,20 @@ function useQueryParamOrStorage<T>({ name, storageName, defaultValue }: { name: 
 
   const r = ref(defaultValue)
 
-  watch(r, (value) => {
-    proxy.value = transformer.toQuery(value as never)
-    storageRef.value = value as never
-  }, { deep: true })
+  watch(
+    r,
+    (value) => {
+      proxy.value = transformer.toQuery(value as never)
+      storageRef.value = value as never
+    },
+    { deep: true },
+  )
 
-  r.value = (proxy.value && proxy.value !== proxyDefaultValue
-    ? transformer.fromQuery(proxy.value) as unknown as T
-    : storageRef.value as T) as never
+  r.value = (
+    proxy.value && proxy.value !== proxyDefaultValue
+      ? (transformer.fromQuery(proxy.value) as unknown as T)
+      : (storageRef.value as T)
+  ) as never
 
   return r
 }
