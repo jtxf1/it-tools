@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useStyleStore } from '@/stores/style.store'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
+
+const hideSider = computed(() => route.query['is-tools'] === 'true')
 const styleStore = useStyleStore()
 const { isMenuCollapsed, isSmallScreen } = toRefs(styleStore)
 const siderPosition = computed(() => (isSmallScreen.value ? 'absolute' : 'static'))
@@ -17,12 +21,18 @@ const siderPosition = computed(() => (isSmallScreen.value ? 'absolute' : 'static
       :show-trigger="false"
       :native-scrollbar="false"
       :position="siderPosition"
+      v-if="!hideSider"
     >
       <slot name="sider" />
     </n-layout-sider>
     <n-layout class="content">
       <slot name="content" />
-      <div v-show="isSmallScreen && !isMenuCollapsed" class="overlay" @click="isMenuCollapsed = true" />
+      <div
+        v-show="isSmallScreen && !isMenuCollapsed"
+        v-if="!hideSider"
+        class="overlay"
+        @click="isMenuCollapsed = true"
+      />
     </n-layout>
   </n-layout>
 </template>

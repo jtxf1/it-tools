@@ -5,7 +5,7 @@ import { Home2, Menu2 } from '@vicons/tabler'
 import { NIcon, useThemeVars } from 'naive-ui'
 
 import { storeToRefs } from 'pinia'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import CollapsibleToolMenu from '@/components/CollapsibleToolMenu.vue'
 import { config } from '@/config'
 import { useStyleStore } from '@/stores/style.store'
@@ -13,6 +13,10 @@ import { useToolStore } from '@/tools/tools.store'
 import HeroGradient from '../assets/hero-gradient.svg?component'
 import MenuLayout from '../components/MenuLayout.vue'
 import NavbarButtons from '../components/NavbarButtons.vue'
+
+const route = useRoute()
+
+const hideSider = computed(() => route.query['is-tools'] === 'true')
 
 const themeVars = useThemeVars()
 const styleStore = useStyleStore()
@@ -31,7 +35,7 @@ const tools = computed<ToolCategory[]>(() => [
 
 <template>
   <MenuLayout class="menu-layout" :class="{ isSmallScreen: styleStore.isSmallScreen }">
-    <template #sider>
+    <template #sider v-if="!hideSider">
       <RouterLink to="/" class="hero-wrapper">
         <HeroGradient class="gradient" />
         <div class="text-wrapper">
@@ -83,7 +87,7 @@ const tools = computed<ToolCategory[]>(() => [
     </template>
 
     <template #content>
-      <div flex items-center justify-center gap-2>
+      <div flex items-center justify-center gap-2 v-if="!hideSider">
         <c-button circle variant="text" :aria-label="$t('home.toggleMenu')"
           @click="styleStore.isMenuCollapsed = !styleStore.isMenuCollapsed">
           <NIcon size="25" :component="Menu2" />
@@ -116,17 +120,6 @@ const tools = computed<ToolCategory[]>(() => [
 </template>
 
 <style lang="less" scoped>
-// ::v-deep(.n-layout-scroll-container) {
-//     @percent: 4%;
-//     @position: 25px;
-//     @size: 50px;
-//     @color: #eeeeee25;
-//     background-image: radial-gradient(@color @percent, transparent @percent),
-//         radial-gradient(@color @percent, transparent @percent);
-//     background-position: 0 0, @position @position;
-//     background-size: @size @size;
-// }
-
 .support-button {
   background: rgb(37, 99, 108);
   background: linear-gradient(48deg, rgba(37, 99, 108, 1) 0%, rgba(59, 149, 111, 1) 60%, rgba(20, 160, 88, 1) 100%);
