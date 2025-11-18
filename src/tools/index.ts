@@ -6,7 +6,6 @@ import { tool as base64StringConverter } from './base64-string-converter'
 import { tool as basicAuthGenerator } from './basic-auth-generator'
 import { tool as bcrypt } from './bcrypt'
 import { tool as benchmarkBuilder } from './benchmark-builder'
-import { tool as bip39 } from './bip39-generator'
 import { tool as cameraRecorder } from './camera-recorder'
 import { tool as caseConverter } from './case-converter'
 import { tool as chmodCalculator } from './chmod-calculator'
@@ -88,7 +87,7 @@ export const toolsByCategory: ToolCategory[] = [
   },
   {
     name: 'Crypto',
-    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, cypher, bip39, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser],
+    components: [tokenGenerator, hashText, bcrypt, uuidGenerator, cypher, hmacGenerator, rsaKeyPairGenerator, passwordStrengthAnalyser],
   },
   {
     name: 'Converter',

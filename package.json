@@ -38,7 +38,6 @@
     "release": "node ./scripts/release.mjs"
   },
   "dependencies": {
-    "@it-tools/bip39": "latest",
     "@it-tools/oggen": "latest",
     "@regexper/render": "latest",
     "@sindresorhus/slugify": "latest",

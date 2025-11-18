@@ -185,11 +185,6 @@ tools:
     description: >-
       Computes a hash-based message authentication code (HMAC) using a secret
       key and your favorite hashing function.
-  bip39-generator:
-    title: BIP39 passphrase generator
-    description: >-
-      Generate a BIP39 passphrase from an existing or random mnemonic, or get
-      the mnemonic from the passphrase.
   base64-file-converter:
     title: Base64 file converter
     description: Convert a string, file, or image into its base64 representation.

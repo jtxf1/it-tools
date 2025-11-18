@@ -149,9 +149,6 @@ tools:
   hmac-generator:
     title: Hmac 生成器
     description: 使用密钥和您喜欢的哈希函数计算基于哈希的消息身份验证代码（HMAC）。
-  bip39-generator:
-    title: BIP39密码生成器
-    description: 从现有或随机助记符生成BIP39密码短语，或从密码短语获取助记符。
   base64-file-converter:
     title: Base64 文件转换器
     description: 将字符串、文件或图像转换为其 Base64 表示形式。
