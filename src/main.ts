@@ -13,6 +13,7 @@ import { naive } from './plugins/naive.plugin'
 import { plausible } from './plugins/plausible.plugin'
 import router from './router'
 import 'virtual:uno.css'
+import { main } from '@/utools'
 
 registerSW()
 
@@ -25,5 +26,6 @@ app.use(router)
 app.use(naive)
 app.use(plausible)
 app.use(shadow)
+main()
 
 app.mount('#app')

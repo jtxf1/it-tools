@@ -130,7 +130,7 @@ export default defineConfig({
     minify: 'terser', // 使用 terser 进行更高级的压缩
     terserOptions: {
       compress: {
-        drop_console: true, // 移除 console 语句
+        drop_console: false, // 移除 console 语句
         drop_debugger: true, // 移除 debugger
       },
     },
