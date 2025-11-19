@@ -158,8 +158,7 @@
   "pnpm": {
     "overrides": {
       "glob": "latest",
-      "source-map": "latest",
-      "sourcemap-codec": "latest"
+      "source-map": "latest"
     },
     "ignoredBuiltDependencies": [
       "esbuild"

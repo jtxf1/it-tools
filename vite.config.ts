@@ -136,5 +136,34 @@ export default defineConfig({
     },
     target: 'esnext',
     chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      onwarn(warning, warn) {
+        // 忽略 iarna-toml-esm 包的 eval 警告
+        if (warning.code === 'EVAL' &&
+          warning.id?.includes('iarna-toml-esm/lib/toml-parser.js')) {
+          return;
+        }
+        // 对于其他警告，使用默认处理
+        warn(warning);
+      },
+      output: {
+        manualChunks: {
+          // 将 Vue 相关库打包成单独的 chunk
+          'vue-vendor': ['vue', 'vue-router', 'pinia'],
+          // 将 UI 库打包成单独的 chunk
+          'ui-vendor': ['naive-ui'],
+          // 将工具库打包成单独的 chunk
+          'utils-vendor': ['lodash'],
+        },
+        // 自定义 chunk 的文件名格式
+        chunkFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId;
+          if (facadeModuleId) {
+            return 'js/[name].[hash].js';
+          }
+          return 'js/[name].[hash].js';
+        }
+      },
+    },
   },
 });

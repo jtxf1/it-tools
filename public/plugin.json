@@ -1,12 +1,11 @@
 {
+  "$schema": "https://raw.githubusercontent.com/uTools-Labs/utools-api-types/refs/heads/main/resource/utools.schema.json",
   "logo": "favicon-32x32.png",
   "main": "index.html",
   "features": [
     {
       "code": "it",
-      "cmds": [
-        "it"
-      ],
+      "cmds": ["it"],
       "explain": "it"
     }
   ]

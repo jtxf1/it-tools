@@ -11,8 +11,18 @@
       "path": "./tsconfig.vitest.json"
     }
   ],
-  "exclude": ["node_modules","_templates", ".github", ".vscode", "locales", "public", "scripts", "dist", "src/test/**/*.vue"],
+  "exclude": [
+    "node_modules",
+    "_templates",
+    ".github",
+    ".vscode",
+    "locales",
+    "public",
+    "scripts",
+    "dist",
+    "src/test/**/*.vue"
+  ],
   "compilerOptions": {
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "utools-api-types"]
   }
 }

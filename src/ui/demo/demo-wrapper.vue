@@ -10,8 +10,11 @@ const a = [
   'c-buttons-select',
   'c-card',
   'c-collapse',
+  'c-diff-editor',
   'c-file-upload',
   'c-input-text',
+  'c-key-value-list',
+  'c-label',
   'c-link',
   'c-markdown',
   'c-modal-value',
@@ -27,8 +30,11 @@ const b = [
   'c-buttons-select 选择',
   'c-card 卡片',
   'c-collapse 折叠',
+  'c-diff-editor 文本对比',
   'c-file-upload 文件上传',
   'c-input-text 输入框',
+  'c-list 列表',
+  'c-label 标签',
   'c-link 链接',
   'c-markdown md文档',
   'c-modal-value 弹框按钮',
@@ -44,7 +50,7 @@ const componentName = computed(() => _.startCase(String(route.name).replace(/^c-
 function getSafeIndex(name: RouteRecordName | string) {
   // 处理 undefined 或非 string 类型（如 symbol）
   if (name === undefined || typeof name !== 'string') {
-    return name// 或返回默认值，如 'unknown'
+    return name // 或返回默认值，如 'unknown'
   }
   const c = a.indexOf(name)
   if (c >= 0) {
