@@ -13,19 +13,17 @@ import { naive } from './plugins/naive.plugin'
 import { plausible } from './plugins/plausible.plugin'
 import router from './router'
 import 'virtual:uno.css'
-import { main } from '@/utools'
 
 registerSW()
 
 const app = createApp(App)
-
-app.use(createPinia())
+const pinia = createPinia()
+app.use(pinia)
 app.use(createHead())
 app.use(i18nPlugin)
 app.use(router)
 app.use(naive)
 app.use(plausible)
 app.use(shadow)
-main()
 
 app.mount('#app')

@@ -83,9 +83,9 @@ export const useCommandPaletteStore = defineStore('command-palette', () => {
 
   const filteredSearchResult = computed(() =>
     _.chain(searchResult.value).groupBy('category').mapValues(categoryOptions => _.take(categoryOptions, 5)).value())
-
   return {
     filteredSearchResult,
     searchPrompt,
+    searchOptions,
   }
 })
