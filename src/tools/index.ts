@@ -1,3 +1,4 @@
+import { tool as jsRun } from './js-run'
 import { tool as falseData } from './false-data'
 import type { ToolCategory } from './tools.types'
 import { tool as asciiTextDrawer } from './ascii-text-drawer'
@@ -125,8 +126,7 @@ export const toolsByCategory: ToolCategory[] = [
       htmlWysiwygEditor,
       userAgentParser,
       httpStatusCodes,
-      jsonDiff,
-    ],
+      jsonDiff, jsRun],
   },
   {
     name: 'Images and videos',

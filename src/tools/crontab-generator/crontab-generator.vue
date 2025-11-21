@@ -148,7 +148,8 @@ const cronValidationRules = [
 | | | | ┌──── month (1 - 12) OR jan,feb,mar,apr ...
 | | | | | ┌── day of week (0 - 6, sunday=0) OR sun,mon ...
 | | | | | |
-* * * * * * command</pre>
+* * * * * * command</pre
+    >
 
     <div v-if="styleStore.isSmallScreen">
       <c-card v-for="{ symbol, meaning, example, equivalent } in helpers" :key="symbol" mb-3 important:border-none>
@@ -160,7 +161,9 @@ const cronValidationRules = [
         </div>
         <div>
           Example:
-          <strong><code>{{ example }}</code></strong>
+          <strong
+            ><code>{{ example }}</code></strong
+          >
         </div>
         <div>
           Equivalent: <strong>{{ equivalent }}</strong>

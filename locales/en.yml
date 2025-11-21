@@ -68,6 +68,9 @@ toolCard:
 search:
   label: Search
 tools:
+  js-run:
+    title: Js 运行
+    description: Js 和 TS代码运行
   false-data:
     title: False Data
     description: False Data description

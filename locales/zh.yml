@@ -61,6 +61,9 @@ toolCard:
 search:
   label: 搜索
 tools:
+  js-run:
+    title: Js Run
+    description: Js Run description
   false-data:
     title: 虚假数据生成
     description: 生成虚假手机号 身份证 邮箱等
