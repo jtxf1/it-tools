@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { NButton, NInput, NForm, NFormItem, NRadioGroup, NRadio, NCard } from 'naive-ui'
+import { NButton, NInput, NForm, NRadioGroup, NRadio, NCard } from 'naive-ui'
 
 type LogContent = string | number | boolean | object | null | undefined
 
@@ -160,31 +160,26 @@ const clearCode = () => {
 <template>
   <c-card>
     <div class="mb-4">
+      <n-radio-group v-model:value="formValue.language">
+        <n-radio value="javascript">JavaScript</n-radio>
+        <n-radio value="typescript">TypeScript</n-radio>
+      </n-radio-group>
       <n-button @click="executeCode" type="primary" :loading="isExecuting" class="mr-2"> 执行代码 </n-button>
       <n-button @click="clearOutput" class="mr-2"> 清空输出 </n-button>
       <n-button @click="clearCode"> 清空代码 </n-button>
     </div>
 
     <n-form :model="formValue" label-placement="top">
-      <n-form-item label="语言选择">
-        <n-radio-group v-model:value="formValue.language">
-          <n-radio value="javascript">JavaScript</n-radio>
-          <n-radio value="typescript">TypeScript</n-radio>
-        </n-radio-group>
-      </n-form-item>
-
-      <n-form-item label="代码编辑器">
-        <n-input
-          v-model:value="formValue.code"
-          type="textarea"
-          :autosize="{
-            minRows: 15,
-            maxRows: 15,
-          }"
-          placeholder="请输入要执行的JavaScript或TypeScript代码..."
-          class="font-mono text-sm"
-        />
-      </n-form-item>
+      <n-input
+        v-model:value="formValue.code"
+        type="textarea"
+        :autosize="{
+          minRows: 15,
+          maxRows: 15,
+        }"
+        placeholder="请输入要执行的JavaScript或TypeScript代码..."
+        class="font-mono text-sm"
+      />
     </n-form>
   </c-card>
 
