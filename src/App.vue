@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { NDateLocale } from 'naive-ui'
-import { darkTheme, dateZhCN, NGlobalStyle, NMessageProvider, NNotificationProvider, zhCN } from 'naive-ui'
+import { darkTheme, dateZhCN, NMessageProvider, NNotificationProvider, zhCN } from 'naive-ui'
 import { RouterView, useRoute } from 'vue-router'
 import { layouts } from './layouts'
 import { useStyleStore } from './stores/style.store'
@@ -25,23 +25,18 @@ syncRef(locale, useStorage('locale', locale))
 const router = useRouter()
 
 onMounted(() => {
-  main().then((code) => {
-    console.log('code:', code)
+  main().then(code => {
     if (isValidCode(code)) {
       const commandPaletteStore = useCommandPaletteStore()
-      console.log('searchOptions in utools index:', commandPaletteStore.searchOptions)
       if (commandPaletteStore.searchOptions !== null && commandPaletteStore.searchOptions.length > 0) {
         // 提取所有 keywords 并合并成一个数组
-        const allKeywords = commandPaletteStore.searchOptions.flatMap((tool) => tool.keywords || [])
+        const allKeywords = commandPaletteStore.searchOptions.flatMap(tool => tool.keywords || [])
 
         // 打印结果
-        console.log(allKeywords)
         const option = commandPaletteStore.searchOptions.find(
-          (tool) => Array.isArray(tool.keywords) && tool.keywords.includes(code),
+          tool => Array.isArray(tool.keywords) && tool.keywords.includes(code),
         )
         if (option !== null && option?.to) {
-          console.log('option:', option)
-          console.log('option.to:', option.to)
           router.push(option?.to + '?is-tools=true')
         }
       }

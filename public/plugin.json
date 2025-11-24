@@ -2,6 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/uTools-Labs/utools-api-types/refs/heads/main/resource/utools.schema.json",
   "logo": "favicon-32x32.png",
   "main": "index.html",
+  "preload": "preload.js",
   "development": {
     "main": "http://localhost:5173/index.html"
   },
