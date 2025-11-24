@@ -1,4 +1,4 @@
-import { ArrowsShuffle } from '@vicons/tabler'
+import { BrandJavascript } from '@vicons/tabler'
 import { translate } from '@/plugins/i18n.plugin'
 import { defineTool } from '../tool'
 
@@ -8,6 +8,6 @@ export const tool = defineTool({
   description: translate('tools.js-run.description'),
   keywords: ['js', 'run'],
   component: () => import('./js-run.vue'),
-  icon: ArrowsShuffle,
+  icon: BrandJavascript,
   createdAt: new Date('2025-11-21'),
 })

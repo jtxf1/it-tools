@@ -113,6 +113,16 @@ export default defineConfig({
     Unocss(),
   ],
   base: baseUrl,
+  server: {
+    // 关键配置：允许外部访问
+    host: '0.0.0.0',
+    port: 5173,
+    open: true,
+    // 热更新
+    hmr: true,
+    // 允许跨域
+    cors: true,
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
